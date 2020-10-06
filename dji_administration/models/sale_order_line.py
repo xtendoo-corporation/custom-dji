@@ -9,7 +9,6 @@ import logging
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-
     is_administrator = fields.Boolean(
         compute='_is_admin',
         string="isAdmin",

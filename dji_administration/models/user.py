@@ -7,7 +7,7 @@ from odoo import fields, models
 class Users(models.Model):
     _inherit = "res.users"
 
-    administration = fields.Boolean(
-        string='Administración',
+    administrator = fields.Boolean(
+        string='Administrator',
         default=False
-        )
+    )

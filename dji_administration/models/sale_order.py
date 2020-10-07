@@ -9,13 +9,13 @@ class SaleOrder(models.Model):
 
     is_administrator = fields.Boolean(
         compute='_is_admin',
-        string="isAdmin",
+        string="Is Administrator",
         default=lambda self: self._get_default_admin()
     )
 
     @api.one
     def _is_admin(self):
-        self.is_admin = self.env.user.administrator
+        self.is_administrator = self.env.user.administrator
 
     @api.model
     def _get_default_admin(self):

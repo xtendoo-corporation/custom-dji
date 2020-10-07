@@ -10,11 +10,13 @@
     'depends': [
         'base',
         'sale',
+        'product',
     ],
     'license': 'AGPL-3',
     'data': [
         'views/sale_order_views.xml',
         'views/user_views.xml',
+        'views/product_views.xml',
     ],
     'installable': True,
     'auto_install': True,

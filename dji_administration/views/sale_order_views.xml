@@ -2,12 +2,22 @@
 <odoo>
     <data>
 
+<<<<<<< HEAD
         <record id="sale_order_view_form" model="ir.ui.view">
             <field name="name">sale.order.form</field>
+=======
+        <record id="sale_order_form_ihnerit" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit</field>
+>>>>>>> f91338423ef3c712def8a328859039ac5b2aab58
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale_management.sale_order_view_form"/>
             <field name="arch" type="xml">
+<<<<<<< HEAD
                 <xpath expr="//button[@name=%(sale.action_view_sale_advance_payment_inv)d]" position="replace">
+=======
+
+                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d']" position="replace">
+>>>>>>> f91338423ef3c712def8a328859039ac5b2aab58
                     <field name="is_administrator" invisible="1"/>
                     <button name="%(sale.action_view_sale_advance_payment_inv)d"
                             string="Create Invoice"
@@ -33,27 +43,34 @@
                     <field name="price_unit" attrs="{'readonly': [('is_administrator', '=', False)]}" force_save="1"/>
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree//field[@name='tax_id']" position="replace">
-                    <field name="tax_id" widget="many2many_tags" options="{'no_create': True}" domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" attrs="{'readonly': [('is_administrator', '=', False)]}" force_save="1"/>
+                    <field name="tax_id" widget="many2many_tags" options="{'no_create': True}"
+                           domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]"
+                           attrs="{'readonly': [('is_administrator', '=', False)]}" force_save="1"/>
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree//field[@name='discount']" position="replace">
                     <field name="discount" attrs="{'readonly': [('is_administrator', '=', False)]}" force_save="1"/>
                 </xpath>
 
-               <xpath expr="//page[@name='order_lines']//field[@name='price_unit']" position="replace">
-                     <field name="is_administrator" invisible="1"/>
-                     <field name="price_unit" attrs="{'readonly': [('is_administrator', '=', False)]}" force_save="1"/>
+                <xpath expr="//page[@name='order_lines']//field[@name='price_unit']" position="replace">
+                    <field name="is_administrator" invisible="1"/>
+                    <field name="price_unit" attrs="{'readonly': [('is_administrator', '=', False)]}" force_save="1"/>
                 </xpath>
                 <xpath expr="//page[@name='order_lines']//field[@name='discount']" position="replace">
                     <field name="discount" attrs="{'readonly': [('is_administrator', '=', False)]}" force_save="1"/>
                 </xpath>
                 <xpath expr="//page[@name='order_lines']//field[@name='tax_id']" position="replace">
-                    <field name="tax_id" widget="many2many_tags" options="{'no_create': True}" context="{'search_view_ref': 'account.account_tax_view_search'}" domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" attrs="{'readonly': [('is_administrator', '=', False)]}" force_save="1"/>
+                    <field name="tax_id" widget="many2many_tags" options="{'no_create': True}"
+                           context="{'search_view_ref': 'account.account_tax_view_search'}"
+                           domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]"
+                           attrs="{'readonly': [('is_administrator', '=', False)]}" force_save="1"/>
                 </xpath>
                 <xpath expr="//page[@name='order_lines']//label[@for='customer_lead']" position="replace">
-                    <label for="customer_lead" attrs="{'invisible': [('is_administrator', '=', False)]}" force_save="1"/>
+                    <label for="customer_lead" attrs="{'invisible': [('is_administrator', '=', False)]}"
+                           force_save="1"/>
                 </xpath>
                 <xpath expr="//page[@name='order_lines']//field[@name='customer_lead']" position="replace">
-                    <field name="customer_lead" class="oe_inline" attrs="{'invisible': [('is_administrator', '=', False)]}" force_save="1"/>
+                    <field name="customer_lead" class="oe_inline"
+                           attrs="{'invisible': [('is_administrator', '=', False)]}" force_save="1"/>
                 </xpath>
                 <xpath expr="//page[@name='order_lines']//field[@name='invoice_lines']" position="replace">
                     <field name="invoice_lines" class="oe_inline" invisible="1"/>
@@ -61,6 +78,10 @@
                 <xpath expr="//page[@name='order_lines']//label[@for='invoice_lines']" position="replace">
                     <label for="invoice_lines" invisible="1"/>
                 </xpath>
+
+
+
+
 
             </field>
         </record>

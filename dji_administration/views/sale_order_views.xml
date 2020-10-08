@@ -2,22 +2,12 @@
 <odoo>
     <data>
 
-<<<<<<< HEAD
         <record id="sale_order_view_form" model="ir.ui.view">
             <field name="name">sale.order.form</field>
-=======
-        <record id="sale_order_form_ihnerit" model="ir.ui.view">
-            <field name="name">sale.order.form.inherit</field>
->>>>>>> f91338423ef3c712def8a328859039ac5b2aab58
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale_management.sale_order_view_form"/>
             <field name="arch" type="xml">
-<<<<<<< HEAD
                 <xpath expr="//button[@name=%(sale.action_view_sale_advance_payment_inv)d]" position="replace">
-=======
-
-                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d']" position="replace">
->>>>>>> f91338423ef3c712def8a328859039ac5b2aab58
                     <field name="is_administrator" invisible="1"/>
                     <button name="%(sale.action_view_sale_advance_payment_inv)d"
                             string="Create Invoice"
@@ -78,11 +68,6 @@
                 <xpath expr="//page[@name='order_lines']//label[@for='invoice_lines']" position="replace">
                     <label for="invoice_lines" invisible="1"/>
                 </xpath>
-
-
-
-
-
             </field>
         </record>
 

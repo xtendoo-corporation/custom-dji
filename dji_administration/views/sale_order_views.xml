@@ -7,9 +7,8 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-
-                <field name="is_administrator" invisible="1"/>
                 <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d']" position="replace">
+                    <field name="is_administrator" invisible="1"/>
                     <button name="%(sale.action_view_sale_advance_payment_inv)d"
                             string="Create Invoice"
                             type="action"
@@ -18,8 +17,8 @@
                             ['|',   ('invoice_status', '!=', 'to invoice'),
                                     ('is_administrator', '=', False)]}"/>
                 </xpath>
-
                 <xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="replace">
+                    <field name="is_administrator" invisible="1"/>
                     <field name="price_unit" attrs="{'readonly': [('is_administrator', '=', False)]}" force_save="1"/>
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="replace">

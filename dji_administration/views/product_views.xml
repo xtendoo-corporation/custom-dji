@@ -8,11 +8,11 @@
             <field name="inherit_id" ref="product.product_template_only_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='standard_price']" position="replace">
-                    <field name="is_administrator" invisible="1"/>
-                    <field name="standard_price" attrs="{'invisible': [('is_administrator', '=', False)]}" force_save="1"/>
+                    <field name="is_comercial" invisible="1"/>
+                    <field name="standard_price" attrs="{'invisible': [('is_comercial', '=', True)]}" force_save="1"/>
                 </xpath>
                 <xpath expr="//page[@name='purchase']//field[@name='seller_ids']" position="replace">
-                    <field name="seller_ids" attrs="{'invisible': [('is_administrator', '=', False)]}" force_save="1"/>
+                    <field name="seller_ids" attrs="{'invisible': [('is_comercial', '=', True)]}" force_save="1"/>
                 </xpath>
             </field>
         </record>

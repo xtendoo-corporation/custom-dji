@@ -6,16 +6,20 @@ from odoo import api, models, fields
 class AdministratorMixinRule(models.Model):
     _name = 'administrator.mixin.rule'
 
-    is_administrator = fields.Boolean(
-        compute='_is_admin',
-        string="Is Administrator",
-        default=lambda self: self._get_default_admin()
+    is_comercial = fields.Boolean(
+        compute='_is_comercial',
+        string="Is Comercial",
+        default=lambda self: self._get_default_comercial()
     )
 
     @api.one
-    def _is_admin(self):
-        self.is_administrator = self.env.user.administrator
+    def _is_comercial(self):
+        self.is_comercial = self.env["res.users"].has_group(
+                "dji_administration.comercial_group"
+            )
 
     @api.model
-    def _get_default_admin(self):
-        return self.env.user.administrator
+    def _get_default_comercial(self):
+        return self.env["res.users"].has_group(
+                "dji_administration.comercial_group"
+            )

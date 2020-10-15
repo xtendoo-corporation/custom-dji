@@ -9,7 +9,7 @@
     "company": "Xtendoo",
     "website": "http://www.xtendoo.es",
     "category": "Extra Tools",
-    "depends": ["base", "account", "sale", "web", "stock"],
+    "depends": ["base", "account", "sale", "web", "stock", "stock_move_line_label"],
     "license": "AGPL-3",
     "data": [
         # Cabecera y Pie

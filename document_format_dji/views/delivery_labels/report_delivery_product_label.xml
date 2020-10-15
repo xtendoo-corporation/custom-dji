@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+    <!-- Formato de papel -->
+        <record id="document_format_dji.etiqueta_9_6" model="report.paperformat">
+            <field name="name">Etiqueta 9 x 6</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_right">1.5</field>
+            <field name="margin_left">1.5</field>
+            <field name="page_height">60</field>
+            <field name="page_width">90</field>
+            <field name="orientation">Portrait</field>
+            <field name="header_line">False</field>
+            <field name="header_spacing">500</field>
+            <field name="dpi">90</field>
+        </record>
+    <!-- Formato de papel -->
+    <!-- Informe -->
+        <report id="report_invoice_bluetooh"
+                string="Etiquetas 9 x 6"
+                model="stock.picking"
+                report_type="qweb-pdf"
+                name="document_format_dji.report_delivery_label"/>
+    <!-- Informe -->
+    <!-- Asociar formato a informe -->
+       <!-- <record id="document_format_dji.report_delivery_label" model="ir.actions.report">
+            <field name="paperformat_id" ref="document_format_dji.etiqueta_9_6"/>
+        </record> -->
+    <!-- Asociar formato a etiqueta -->
+    <!-- template de informe-->
+        <template id="document_format_dji.report_delivery_label">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-foreach="o.move_ids_without_package" t-as="line">
+                        <t t-foreach="line.move_line_ids" t-as="line_line">
+                            <t t-set="i" t-value="int(line_line.qty_done)"/>
+                            <t t-foreach="range(i)" t-as="unity">
+                                <t t-call="document_format_dji.report_delivery_label_document"/>
+                            </t>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+    <!-- template de informe -->
+    <!-- template de etiqueta -->
+       <template id="document_format_dji.report_delivery_label_document">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <t t-set="barcode_2" t-value="line_line.product_id.default_code"/>
+                    <t t-set="name_product" t-value="line_line.product_id.barcode"/>
+                    <t t-set="qr_code" t-value="'02' + line_line.product_id.barcode + '10' +  line_line.lot_id.name"/>
+                   <span t-esc="qr_code"/>
+                    <div>
+
+                        <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', quote_plus(qr_code or ''), 600, 600)" style="width:100%;height:12rem;"/>
+                       <!--<img t-att-src="'/report/barcode/?type=%s/%s' % ('QR', quote_plus(qr_code))"/> -->
+
+                    </div>
+                </div>
+            </t>
+        </template>
+    <!-- template de etiqueta -->
+    </data>
+</odoo>

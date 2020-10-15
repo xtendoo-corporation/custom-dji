@@ -20,6 +20,8 @@
         "views/delivery/report_delivery_document.xml",
         # Factura
         "views/invoice/report_invoice_document.xml",
+        # Etiquetas producto desde albarán
+        "views/delivery_labels/report_delivery_product_label.xml",
     ],
     "demo": [],
     "installable": True,

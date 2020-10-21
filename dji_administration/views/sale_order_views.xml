@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][1]" position="replace">
                     <attribute name="groups">account.group_account_invoice</attribute>
-                    <field name="is_commercial"/>
+                    <field name="is_commercial" invisible="1"/>
                     <button name="%(sale.action_view_sale_advance_payment_inv)d"
                             string="Create Invoice"
                             type="action"

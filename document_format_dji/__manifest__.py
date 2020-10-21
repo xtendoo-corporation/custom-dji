@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 {
-    "name": "document_format_dji",
+    "name": "DJI Document Format",
     "summary": """Formatos de documentos Distribuciones Joaquin Infante""",
     "version": "12.0.1.0.0",
     "description": """Formatos de documentos Distribuciones Joaquin Infante""",

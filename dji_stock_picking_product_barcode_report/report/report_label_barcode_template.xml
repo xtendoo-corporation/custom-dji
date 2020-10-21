@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_label_barcode">
+        <t t-call="web.basic_layout">
+            <div class="page text-justify">
+                <t t-foreach="doc.label_qty" t-as="i">
+                    <div class="text-center">
+                        <t t-set="type" t-value="'QR'"/>
+                        <t t-set="barcode" t-value="doc.product_id.barcode"/>
+                        <t t-set="lot" t-value="doc.move_line_id.lot_id"/>
+                        <t t-if="lot">
+                            <t
+                                t-set="value"
+                                t-value="barcode + ';' + lot.name"
+                            />
+                            <img
+                                t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % (type, value, 600, 100)"
+                                style="width:100%;height:120px;margin: 0px 0px 0px 0px"
+                                alt="Barcode"
+                            />
+                        </t>
+                        <t t-else="">
+                            <t t-set="value" t-value="barcode"/>
+                            <img
+                                t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % (type, value, 600, 100)"
+                                style="width:100%;height:70px;margin: 0px 0px -25px 0px"
+                                alt="Barcode"
+                            />
+                            <span
+                                t-esc="barcode"
+                                style="font-size: 6px;"
+                            />
+                        </t>
+                    </div>
+                    <div class="text-center" style="font-size: 9px;">
+                        <span
+                            t-field="doc.product_id.display_name"
+                            style="font-weight: bold"
+                        />
+                        <br/>
+                        <span t-field="doc.product_id.barcode"/>
+                        <span t-if="doc.move_line_id.lot_id">/ Lot:
+                            <span
+                                t-field="doc.move_line_id.lot_id.name"
+                            />
+                        </span>
+                    </div>
+                    <p style="page-break-after:always;"/>
+                </t>
+            </div>
+        </t>
+    </template>
+    <template id="label_barcode_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-if="doc.label_qty > 0">
+                    <t
+                        t-call="dji_stock_picking_product_barcode_report.report_label_barcode"
+                        t-lang="doc.env.user.lang"
+                    />
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

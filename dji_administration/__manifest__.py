@@ -1,5 +1,5 @@
 {
-    'name': 'dji_administration',
+    'name': 'DJI Administration',
     'summary': """Administration settings for DJI""",
     'version': '12.0.1.0.0',
     'description': """Administration settings for DJI""",

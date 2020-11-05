@@ -3,4 +3,4 @@
 #Módulos:  
 #dji_administration -> Particularidades de administración DJI  
 #document_format_dji -> Formatos de impresión  
-#sale_wating_for_product -> Añade smart button a ficha del producto, que muestra un listado de pedidos que están a la espera del producto.
+#sale_wating_for_product -> Añade un smart button al producto, para acceder a un listado de Albaranes(no validados) que están a la espera de ese producto.

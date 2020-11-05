@@ -11,9 +11,13 @@
         <field name="inherit_id" ref="sale.product_template_form_view_sale_order_button"/>
         <field name="arch" type="xml">
             <button name="action_view_sales" position="after">
-                <button class="oe_stat_button" name="%(picking_waiting_in_products.action_product_template_sale_list)d"
-                    type="action" icon="fa-list">
-                  <!--  <field string="Pickings" name="sale_count" widget="statinfo" /> -->
+                <button class="oe_stat_button"
+                        name="%(picking_waiting_in_products.action_product_template_sale_list)d"
+                        type="action"
+                        icon="fa-truck">
+                    <field string="Delivery"
+                           name="picking_count"
+                           widget="statinfo"/>
                 </button>
             </button>
         </field>

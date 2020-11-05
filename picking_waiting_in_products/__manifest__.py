@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 {
-    "name": "sale waiting for product",
+    "name": "picking waiting in product",
     "summary": """Añade un smart button al producto, para acceder a un listado de pedidos que están a la espera de ese producto""",
     "version": "12.0.1.0.0",
     "description": """Añade un smart button al producto, para acceder a un listado de pedidos que están a la espera de ese producto""",
@@ -12,7 +12,7 @@
     "depends": ["sale",],
     "license": "AGPL-3",
     "data": [
-            'views/sale_order_line.xml',
+            'views/stock_picking.xml',
             'views/product_product.xml',
             'views/product_template.xml',
             ]

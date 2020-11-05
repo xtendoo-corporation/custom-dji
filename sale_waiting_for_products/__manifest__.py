@@ -9,13 +9,11 @@
     "company": "Xtendoo",
     "website": "https://xtendoo.es",
     "category": "Extra Tools",
-    "depends": ["base", "product","stock",],
+    "depends": ["sale",],
     "license": "AGPL-3",
     "data": [
             'views/sale_order_line.xml',
             'views/product_product.xml',
             'views/product_template.xml',
-    "demo": [],
-    "installable": True,
-    "auto_install": False,
+            ]
 }

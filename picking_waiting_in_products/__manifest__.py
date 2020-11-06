@@ -3,7 +3,7 @@
 {
     "name": "picking waiting in product",
     "summary": """Añade un smart button al producto, para acceder a un listado de pedidos que están a la espera de ese producto""",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "description": """Añade un smart button al producto, para acceder a un listado de pedidos que están a la espera de ese producto""",
     "author": "DDL",
     "company": "Xtendoo",

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2019 ACSONE SA/NV
+<!-- Copyright 2020 Xtendoo.es
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
@@ -18,7 +18,6 @@
                     <field string="Delivery"
                            name="picking_count"
                            widget="statinfo"/>
-                    <!--<field string="Pickings" name="sale_count" widget="statinfo" /> -->
                 </button>
             </button>
         </field>

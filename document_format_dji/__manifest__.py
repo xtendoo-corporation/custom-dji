@@ -13,7 +13,7 @@
     "license": "AGPL-3",
     "data": [
         # Cabecera y Pie
-        "views/layout/external_layout_clean.xml",
+        "views/layout/external_layout_clean_dji.xml",
         # Ventas
         "views/sale/report_saleorder_document.xml",
         # Albarán

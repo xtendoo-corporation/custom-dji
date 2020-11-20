@@ -1,26 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <data inherit_id="sale.report_saleorder_document">
 
     <xpath expr="//div[@t-field='doc.partner_id']" position="replace">
+
         <div/>
+
     </xpath>
 
     <xpath expr="/t/t/t/p" position="replace">
+
         <div/>
+
     </xpath>
 
     <xpath expr="//div[@t-field='doc.partner_shipping_id']" position="replace">
+
         <div/>
+
     </xpath>
 
     <xpath expr="//div[@t-field='doc.partner_invoice_id']" position="replace">
+
         <div/>
+
     </xpath>
 
     <xpath expr="//div[@class='page']" position="replace">
+
         <div style="width:50%; float:left;">
             <ul class="list-unstyled">
-
                 <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
                     <li t-if="doc.state in ['draft','sent']">
                         <b>Presupuesto:</b>
@@ -107,7 +115,9 @@
             </t>
         </t>
         <div class="page">
+
             <div class="oe_structure"/>
+
 
             <!-- Is there a discount on at least one line? -->
             <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>
@@ -141,6 +151,7 @@
                         <span>Total</span>
                     </div>
 
+
                 </div>
 
                 <!-- Fin cabecera -->
@@ -149,7 +160,6 @@
 
                 <t t-set="current_subtotal" t-value="0"/>
                 <t t-foreach="doc.order_line" t-as="line">
-
                     <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"
                        groups="account.group_show_line_subtotals_tax_excluded"/>
                     <t t-set="current_subtotal" t-value="current_subtotal + line.price_total"
@@ -167,6 +177,7 @@
                             </div>
                         </t>
 
+
                         <!-- Fin si es nota -->
                         <!-- Si no es nota -->
                         <t t-if="line.product_id">
@@ -178,7 +189,7 @@
 
                             <!-- Fin codigo -->
 
-                            <!-- Descripción -->
+                            <!-- descripción -->
 
                             <div class="text-left" style="float:left;width:45%;">
                                 <t t-set="descripcion" t-value="line.name.find(']') +1"/>
@@ -203,6 +214,7 @@
                             </div>
 
                             <!-- Fin precio unidad -->
+
 
                             <!-- IVA -->
 
@@ -245,6 +257,7 @@
             <!-- Totales -->
 
             <div style="width:30%;float:right;clear:both">
+
 
                 <!-- Subtotal -->
 
@@ -303,6 +316,7 @@
 
                 <div style="height:2px;background-color:black;clear:both;"/>
             </div>
+
 
             <!-- Fin totales -->
 

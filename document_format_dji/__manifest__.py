@@ -3,13 +3,13 @@
 {
     "name": "document_format_dji",
     "summary": """Formatos de documentos Distribuciones Joaquin Infante""",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "description": """Formatos de documentos Distribuciones Joaquin Infante""",
     "author": "DDL",
     "company": "Xtendoo",
     "website": "http://www.xtendoo.es",
     "category": "Extra Tools",
-    "depends": ["base", "account", "sale", "web", "stock", "stock_move_line_label"],
+    "depends": ["base", "account", "sale", "web", "stock"],
     "license": "AGPL-3",
     "data": [
         # Cabecera y Pie

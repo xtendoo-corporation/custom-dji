@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <data inherit_id="sale.report_saleorder_document">
 
     <xpath expr="//div[@t-field='doc.partner_id']" position="replace">

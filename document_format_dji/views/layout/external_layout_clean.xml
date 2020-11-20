@@ -18,10 +18,8 @@
                         <div class="col-5 offset-1" name="company_address"
                              style="color:black; display:inline; width:50%">
                             <div style="width:100%; display:block; float:left">
-                                <span>
-                                </span>
+                                <span/>
                                 <ul class="list-unstyled">
-
                                     <li>
                                         <div t-if="company.street" style="display:inline-block">
                                             <span t-field="company.street"/>

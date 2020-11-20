@@ -1,16 +1,18 @@
 <?xml version="1.0"?>
 <odoo>
 
-<data inherit_id="web.external_layout_clean">
+    <data>
+
+        <template id="document_format_dji.external_layout_clean_dji" inherit_id="web.external_layout_clean">
 
             <!-- Header -->
 
             <xpath expr="//div[@class='o_clean_header']" position="replace">
 
-
                 <div>
                     <div class="col-6" style="display:block; width:22%;float:left;">
-                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo" style="width:100%;max-height:200px;"/>
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"
+                             style="width:100%;max-height:200px;"/>
                     </div>
                     <div style="width:70%; display:block;float:left;margin-top:20px;">
                         <strong>
@@ -19,7 +21,8 @@
                             </div>
                         </strong>
                         <hr style="heigth:5px; color:black; margin: 3px"/>
-                        <div class="col-5 offset-1" name="company_address" style="color:black; display:inline; width:50%">
+                        <div class="col-5 offset-1" name="company_address"
+                             style="color:black; display:inline; width:50%">
                             <div style="width:100%; display:block; float:left">
                                 <span>
                                 </span>
@@ -30,7 +33,8 @@
                                             <span t-field="company.street"/>
                                         </div>
                                         <div t-if="company.street2" style="display:inline-block">
-                                            <span>,</span><span t-field="company.street2"/>
+                                            <span>,</span>
+                                            <span t-field="company.street2"/>
                                         </div>
                                     </li>
 
@@ -38,9 +42,11 @@
                                         <div t-if="company.zip" style="display:inline">
                                             <span t-field="company.zip"/>
                                         </div>
-                                        <div t-if="company.city" style="display:inline"><span t-field="company.city"/>
+                                        <div t-if="company.city" style="display:inline">
+                                            <span t-field="company.city"/>
                                         </div>
-                                        <div t-if="company.state_id" style="display:inline"><span
+                                        <div t-if="company.state_id" style="display:inline">
+                                            <span
                                                 t-field="company.state_id"/>
                                         </div>
                                     </li>
@@ -67,36 +73,34 @@
 
             <xpath expr="//div[@class='row mt8']" position="replace">
 
-                            <div style="width:100%; display:block; float:center">
-                                <span>
-                                </span>
-                                <ul class="list-unstyled">
+                <div style="width:100%; display:block; float:center">
+                    <span>
+                    </span>
+                    <ul class="list-unstyled">
 
-                                    <li>
-                                        <div t-if="company.company_registry" style="display:inline">
-                                            <span t-field="company.company_registry"/>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div t-if="company.partner_id.phone" style="display:inline; align:center">
-                                            <span t-field="company.partner_id.phone"/>
-                                        </div>
-                                    </li>
-                                     <li>
-                                        <div t-if="company.email" style="display:inline">
-                                            <span t-field="company.email"/>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div t-if="company.website" style="display:inline">
-                                            <span t-field="company.website"/>
-                                        </div>
-                                    </li>
-                                </ul>
+                        <li>
+                            <div t-if="company.company_registry" style="display:inline">
+                                <span t-field="company.company_registry"/>
                             </div>
+                        </li>
 
-
+                        <li>
+                            <div t-if="company.partner_id.phone" style="display:inline; align:center">
+                                <span t-field="company.partner_id.phone"/>
+                            </div>
+                        </li>
+                        <li>
+                            <div t-if="company.email" style="display:inline">
+                                <span t-field="company.email"/>
+                            </div>
+                        </li>
+                        <li>
+                            <div t-if="company.website" style="display:inline">
+                                <span t-field="company.website"/>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
 
                 <div style="width:95%; float:left; font-size:0.5em">
@@ -112,6 +116,8 @@
 
             <!-- Fin footer -->
 
-        </data>
+        </template>
+
+    </data>
 
 </odoo>

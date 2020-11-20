@@ -1,11 +1,8 @@
 <?xml version="1.0"?>
 <odoo>
-
     <data>
 
         <template id="document_format_dji.external_layout_clean_dji" inherit_id="web.external_layout_clean">
-
-            <!-- Header -->
 
             <xpath expr="//div[@class='o_clean_header']" position="replace">
 

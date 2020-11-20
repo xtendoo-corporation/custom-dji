@@ -2,9 +2,7 @@
 <odoo>
     <data>
         <template id="document_format_dji.external_layout_clean_dji" inherit_id="web.external_layout_clean">
-
             <xpath expr="//div[@class='o_clean_header']" position="replace">
-
                 <div>
                     <div class="col-6" style="display:block; width:22%;float:left;">
                         <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"

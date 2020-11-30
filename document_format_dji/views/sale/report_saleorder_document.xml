@@ -87,7 +87,7 @@
                         </li>
 
                         <li t-if="doc.partner_id.vat">
-                            CIF:
+                            NIF:
                             <span t-field="doc.partner_id.vat"/>
                         </li>
 
@@ -113,7 +113,6 @@
                 <div class="page">
 
                     <div class="oe_structure"/>
-
 
                     <!-- Is there a discount on at least one line? -->
                     <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>

@@ -10,13 +10,13 @@
                     <t t-set="docState" t-value="o.type"/>
                 </t>
 
-                <div></div>
+                <div/>
 
             </xpath>
 
             <xpath expr="//div[@class='page']" position="replace">
 
-                <t t-set="esRect" t-value="o.type"></t>
+                <t t-set="esRect" t-value="o.type"/>
 
                 <div style="width:50%; float:left;margin-top:35px;">
                     <ul class="list-unstyled">
@@ -250,7 +250,6 @@
 
                                 <!-- Fin valor neto -->
 
-
                             </div>
 
                             <!-- fin si no es nota -->
@@ -280,10 +279,11 @@
                     <!-- Fin separador -->
 
                     <!-- Totales -->
+
                     <div style="width:40%;float:right;clear:both">
 
-
                         <!-- Subtotal -->
+
                         <div style="clear:both;">
                             <div style="width:60%;float:left">
                                 <span>Subtotal</span>

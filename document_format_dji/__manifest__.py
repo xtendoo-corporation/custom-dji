@@ -11,9 +11,10 @@
     "category": "Extra Tools",
     "depends": ["base", "account", "sale", "web", "stock"],
     "license": "AGPL-3",
+    "depends": ["stock"],
     "data": [
         # Cabecera y Pie
-        "views/layout/external_layout_clean_dji.xml",
+        # "views/layout/external_layout_clean_dji.xml",
         # Ventas
         "views/sale/report_saleorder_document.xml",
         # Albarán

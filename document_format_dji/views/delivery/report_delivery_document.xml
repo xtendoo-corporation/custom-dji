@@ -6,35 +6,25 @@
             </xpath>
             <!-- Fin quitar dirección defecto odoo -->
             <xpath expr="//div[@class='page']" position="replace">
-<!--                <div t-field="doc.partner_invoice_id"-->
-<!--                             t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>-->
-<!--                        <t t-if="o.partner_shipping_id != doc.partner_invoice_id">-->
-<!--                            <strong>Dirección de envio:</strong>-->
-<!--                            <div t-field="doc.partner_shipping_id"-->
-<!--                                 t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>-->
-<!--                        </t>-->
-<!--                    </t>-->
                 <!--  Primera columna (Datos doc) -->
+<!--                <div t-if="company.partner_id.phone" style="display:inline; align:center">-->
+<!--                    <span t-field="company.partner_id.phone"/>-->
+<!--                </div>-->
                 <div style="float:left; width:50%;">
-                    <div>
-                        <span style="width:25%;"><b>Albarán: </b></span>
-                        <span style="width:75%;" t-field="o.name"/>
-                    </div>
-                    <div>
-                        <span style="width:25%;"><b>Fecha: </b></span>
-                        <span style="width:75%;" t-field="o.date_done" t-options="{'format': 'MM-dd-yyyy'}"/>
-                    </div>
-                    <div t-if="o.origin">
-                        <span style="width:25%;"><b>Pedido: </b></span>
-                        <span style="width:75%;" t-field="o.origin"/>
-                    </div>
-                    <div t-if="o.origin">
-                        <span style="width:25%;"><b>Comercial: </b></span>
-<!--                        <span t-field="doc.user_id"/>-->
-
-
-                        <span style="width:75%;" t-field="o.user_id"/>
-                    </div>
+                    <ul class="list-unstyled">
+                        <li>
+                            <span style="width:25%;"><b>Albarán: </b></span>
+                            <span style="width:75%;" t-field="o.name"/>
+                        </li>
+                        <li>
+                            <span style="width:25%;"><b>Fecha: </b></span>
+                            <span style="width:75%;" t-field="o.date_done" t-options="{'format': 'MM-dd-yyyy'}"/>
+                        </li>
+                        <li t-if="o.origin">
+                            <span style="width:25%;"><b>Pedido: </b></span>
+                            <span style="width:75%;" t-field="o.origin"/>
+                        </li>
+                    </ul>
                 </div>
                 <!--  Fin primera columna (Datos doc)  -->
                 <!-- Segunda columna (Datos cliente) -->
@@ -330,7 +320,8 @@
                     </t>
                     <div style="float:right;">
                         <b>
-                            <span t-esc="'%.2f'%importe_total_doc"/>
+                            <span t-esc="importe_total_doc"
+                                  t-options="{'widget': 'monetary', 'display_currency': o.sale_id.pricelist_id.currency_id}"/>
                         </b>
                     </div>
                     <div style="height:2px;background-color:black;clear:both;"/>

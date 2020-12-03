@@ -119,6 +119,10 @@
 
                     <div style="width:100%;clear:both;">
                         <!--Cabecera -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
                         <div style="border-bottom:2px solid black;border-top:2px solid black;height:25px;">
 
                             <div class="text-left" style="font-weight:bolder; color:#4f4b4b;width:13%;float:left;">
@@ -149,10 +153,13 @@
                             <div class="text-right" style="font-weight:bolder; color:#4f4b4b;text-align:right;float:left;width:12%;">
                                 <span>Total</span>
                             </div>
-
-
                         </div>
-
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="sale_tbody">
+                <tr>
+                    <td>
                         <!-- Fin cabecera -->
 
                         <!-- Lineas -->
@@ -246,7 +253,10 @@
                             </div>
 
                         </t>
-
+                    </td>
+                    </tr>
+            </tbody>
+        </table>
 
                         <!-- Fin lineas -->
 

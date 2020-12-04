@@ -20,8 +20,6 @@
                     </div>
                     <div t-if="o.origin">
                         <span style="width:25%;"><b>Comercial: </b></span>
-<!--                        <span t-field="doc.user_id"/>-->
-
 
                         <span style="width:75%;" t-field="o.user_id"/>
                     </div>

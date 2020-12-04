@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="report_saleorder_line">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-set="docids" t-value="docids"/>
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <!-- Quotations -->
+                    <table class="table table-condensed" style="border: none;">
+                        <thead>
+                            <tr style="line-height:10px; margin: 0px 0px 0px 0px;">
+                                <th style="width: 30%">Producto</th>
+                                <th style="width: 30%" class="text-right">Unidades</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="lines" t-value="get_saleorder_lines(docids)"/>
+                            <t t-foreach="lines" t-as="line">
+                                <tr style="line-height:10px; margin: 0px 0px 0px 0px; border: none;">
+                                    <td style="border: none;">
+                                        <span t-esc="line['product_name']"/>
+                                    </td>
+                                    <td style="border: none;" align="right">
+                                        <span t-esc="line['product_qty']"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                        <tfoot>
+                            <tr style="line-height:10px; margin: 0px 0px 0px 0px;">
+                                <td/>
+                                <td/>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <report
+        id="action_report_saleorder_line"
+        string="Quotation / Order Line Accumulate"
+        model="sale.order"
+        report_type="qweb-pdf"
+        file="document_format_dji.report_saleorder_line"
+        name="document_format_dji.report_saleorder_line"
+        print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)"
+    />
+
+</odoo>

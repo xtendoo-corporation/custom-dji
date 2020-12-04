@@ -3,8 +3,13 @@
         <template id="document_format_dji.report_delivery_document_dji" inherit_id="stock.report_delivery_document">
             <!-- Quitar direccion defecto odoo -->
             <xpath expr="//t[@name='partner_header']" position="replace">
+            </xpath>
             <!-- Fin quitar dirección defecto odoo -->
+            <xpath expr="//div[@class='page']" position="replace">
                 <!--  Primera columna (Datos doc) -->
+<!--                <div t-if="company.partner_id.phone" style="display:inline; align:center">-->
+<!--                    <span t-field="company.partner_id.phone"/>-->
+<!--                </div>-->
                 <div style="float:left; width:50%;">
                     <div>
                         <span style="width:25%;"><b>Albarán: </b></span>
@@ -23,6 +28,7 @@
 
                         <span style="width:75%;" t-field="o.user_id"/>
                     </div>
+
                 </div>
                 <!--  Fin primera columna (Datos doc)  -->
                 <!-- Segunda columna (Datos cliente) -->
@@ -318,7 +324,8 @@
                     </t>
                     <div style="float:right;">
                         <b>
-                            <span t-esc="'%.2f'%importe_total_doc"/>
+                            <span t-esc="importe_total_doc"
+                                  t-options="{'widget': 'monetary', 'display_currency': o.sale_id.pricelist_id.currency_id}"/>
                         </b>
                     </div>
                     <div style="height:2px;background-color:black;clear:both;"/>

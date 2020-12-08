@@ -19,11 +19,16 @@ class ReportSaleOrderLine(models.AbstractModel):
             [('order_id', 'in', docids)],
             ['product_id', 'product_uom_qty'],
             ['product_id'],
-            lazy=False
+            lazy=False,
         )
         for line in lines:
             product = self.env['product.product'].browse(line['product_id'][0])
-            records.append({'product_name': product.name, 'product_qty': line['product_uom_qty']})
+            records.append({'product_name': product.name,
+                            'product_classification_sequence': product.product_classification_id.sequence,
+                            'product_classification_name': product.product_classification_id.name,
+                            'product_qty': line['product_uom_qty']})
+        records.sort(key=lambda x: x['product_classification_sequence'])
         return records
+
 
 

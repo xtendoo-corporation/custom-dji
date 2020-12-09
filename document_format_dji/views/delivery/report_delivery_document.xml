@@ -11,20 +11,24 @@
 <!--                    <span t-field="company.partner_id.phone"/>-->
 <!--                </div>-->
                 <div style="float:left; width:50%;">
-                    <ul class="list-unstyled">
-                        <li>
-                            <span style="width:25%;"><b>Albarán: </b></span>
-                            <span style="width:75%;" t-field="o.name"/>
-                        </li>
-                        <li>
-                            <span style="width:25%;"><b>Fecha: </b></span>
-                            <span style="width:75%;" t-field="o.date_done" t-options="{'format': 'MM-dd-yyyy'}"/>
-                        </li>
-                        <li t-if="o.origin">
-                            <span style="width:25%;"><b>Pedido: </b></span>
-                            <span style="width:75%;" t-field="o.origin"/>
-                        </li>
-                    </ul>
+                    <div>
+                        <span style="width:25%;"><b>Albarán: </b></span>
+                        <span style="width:75%;" t-field="o.name"/>
+                    </div>
+                    <div>
+                        <span style="width:25%;"><b>Fecha: </b></span>
+                        <span style="width:75%;" t-field="o.date_done" t-options="{'format': 'MM-dd-yyyy'}"/>
+                    </div>
+                    <div t-if="o.origin">
+                        <span style="width:25%;"><b>Pedido: </b></span>
+                        <span style="width:75%;" t-field="o.origin"/>
+                    </div>
+                    <div t-if="o.origin">
+                        <span style="width:25%;"><b>Comercial: </b></span>
+
+                        <span style="width:75%;" t-field="o.user_id"/>
+                    </div>
+
                 </div>
                 <!--  Fin primera columna (Datos doc)  -->
                 <!-- Segunda columna (Datos cliente) -->

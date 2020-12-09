@@ -13,6 +13,7 @@
     "license": "AGPL-3",
     "depends": ["stock"],
     "data": [
+        "reports/report_saleorder_accumulate.xml",
         # Cabecera y Pie
         # "views/layout/external_layout_clean_dji.xml",
         # Ventas

@@ -1,6 +1,7 @@
 <odoo>
     <data>
-        <template id="document_format_dji.report_delivery_document_dji" inherit_id="stock.report_delivery_document">
+        <template id="document_format_dji.report_delivery_document_dji"
+                  inherit_id="stock.report_delivery_document">
             <!-- Quitar direccion defecto odoo -->
             <xpath expr="//t[@name='partner_header']" position="replace">
             </xpath>
@@ -112,9 +113,6 @@
                         </tr>
                     </thead>
                     <!-- Fin cabecera -->
-                    <!--                    </div>-->
-
-                    <!--                </div>-->
 
                     <tbody class="sale_tbody">
                         <!-- Fin datos documento -->
@@ -266,8 +264,6 @@
                                     </tr>
                                 </t>
                             </t>
-
-
                         </div>
                     </tbody>
                 </table>
@@ -367,25 +363,31 @@
                                   t-options="{'widget': 'monetary', 'display_currency': o.sale_id.pricelist_id.currency_id}"/>
                         </b>
                     </div>
-                    <div style="height:2px;background-color:black;clear:both;"/>
+                    <div style="height:2px; background-color:black; clear:both;"/>
                 </div>
                 <!--  Fin Desglose  -->
 
-                <!--  Firma  -->
-                <div t-if="'signature' in o.fields_get() and doc.signature" class="mt32 ml16 mr16" name="signature">
-                    <div class="offset-8">
-                        <strong>Firma</strong>
+                <!-- Firma-->
+                <p/>
+                <div t-if="'digital_signature' in o.fields_get() and o.digital_signature"
+                     style="clear:both; float:center;"
+                     name="digital_signature">
+                    <div style="height:20px;"/>
+                    <div class="text-center">
+                        <span t-field="o.name_receiver"/>
                     </div>
-                    <div class="offset-8">
-                        <img t-att-src="image_data_uri(doc.signature)" style="max-height: 4cm; max-width: 8cm;"/>
+                    <div class="text-center">
+                        <span t-field="o.vat_receiver"/>
                     </div>
-                    <div class="offset-8 text-center">
-                        <p t-field="doc.signed_by"/>
+                    <div class="text-center">
+                        <img t-att-src="image_data_uri(o.digital_signature)"
+                             style="max-height: 4cm; max-width: 8cm;"/>
                     </div>
                 </div>
-                <!--  Fin Firma  -->
+                <!-- Fin firma-->
 
             </xpath>
+
         </template>
     </data>
 </odoo>

@@ -2,22 +2,22 @@
 <odoo>
     <data>
 
-        <template id="report.style" name="style">
+        <template id="report_saleorder_style" name="style">
             <style type="text/css">
                 table {
-                    border:none;
+                border:none;
                 }
                 body {
-                    color: #000 !important;
+                color: #000 !important;
                 }
                 .border-black td {
-                    border-top: 1px solid black !important;
+                border-top: 1px solid black !important;
                 }
                 .table-condensed > thead > tr > th {
-                    border-bottom: 1px solid black !important;
+                border-bottom: 1px solid black !important;
                 }
                 .zero_min_height {
-                    min-height: 0px !important;
+                min-height: 0px !important;
                 }
             </style>
         </template>
@@ -138,55 +138,62 @@
 
                     <div style="width:100%;clear:both;">
                         <!--Cabecera -->
-                    <table class="table" style="border:none;">
-                        <thead>
-                            <tr>
-                                <th style="font-weight:bolder; text-transform:none; padding:0px;margin:0px; !important">
-<!--                                    <div style="border-bottom:2px solid red;border-top:2px solid red;height:25px;">-->
+                        <table class="table" style="border:none;">
+                            <thead>
+                                <tr>
+                                    <th style="font-weight:bolder; text-transform:none; padding:0px;margin:0px; !important">
+                                        <!--                                    <div style="border-bottom:2px solid red;border-top:2px solid red;height:25px;">-->
 
-                                        <div class="text-left" style="font-weight:bolder; color:#4f4b4b;width:13%;float:left;">
+                                        <div class="text-left"
+                                             style="font-weight:bolder; color:#4f4b4b;width:13%;float:left;">
                                             <span>Código</span>
                                         </div>
 
-                                        <div class="text-left" style="font-weight:bolder; color:#4f4b4b;float:left;width:35%;">
+                                        <div class="text-left"
+                                             style="font-weight:bolder; color:#4f4b4b;float:left;width:35%;">
                                             <span>Descripción</span>
                                         </div>
 
-                                        <div class="text-right" style="font-weight:bolder; color:#4f4b4b;float:left;text-align:right;width:10%;">
+                                        <div class="text-right"
+                                             style="font-weight:bolder; color:#4f4b4b;float:left;text-align:right;width:10%;">
                                             <span>Unds.</span>
                                         </div>
 
-                                        <div class="text-right" style="font-weight:bolder; color:#4f4b4b;float:left;text-align:right;width:10%;">
+                                        <div class="text-right"
+                                             style="font-weight:bolder; color:#4f4b4b;float:left;text-align:right;width:10%;">
                                             <span>Importe</span>
                                         </div>
 
-                                        <div class="text-right" style="font-weight:bolder; color:#4f4b4b;float:left;text-align:right;width:10%;">
+                                        <div class="text-right"
+                                             style="font-weight:bolder; color:#4f4b4b;float:left;text-align:right;width:10%;">
                                             <span>Desc(%)</span>
                                         </div>
 
-                                        <div class="text-right" style="font-weight:bolder; color:#4f4b4b;float:left;text-align:right;width:10%;">
+                                        <div class="text-right"
+                                             style="font-weight:bolder; color:#4f4b4b;float:left;text-align:right;width:10%;">
                                             <span>%IVA</span>
                                         </div>
 
 
-                                        <div class="text-right" style="font-weight:bolder; color:#4f4b4b;text-align:right;float:left;width:12%;">
+                                        <div class="text-right"
+                                             style="font-weight:bolder; color:#4f4b4b;text-align:right;float:left;width:12%;">
                                             <span>Total</span>
                                         </div>
-<!--                                    </div>-->
+                                        <!--                                    </div>-->
 
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="sale_tbody">
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="sale_tbody">
 
-                            <!-- Fin cabecera -->
+                                <!-- Fin cabecera -->
 
-                            <!-- Lineas -->
+                                <!-- Lineas -->
 
-                            <t t-set="current_subtotal" t-value="0"/>
-                            <t t-foreach="doc.order_line" t-as="line">
-                                <tr>
-                                    <td style="padding:0px;margin:0px;">
+                                <t t-set="current_subtotal" t-value="0"/>
+                                <t t-foreach="doc.order_line" t-as="line">
+                                    <tr>
+                                        <td style="padding:0px;margin:0px;">
                                             <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"
                                                groups="account.group_show_line_subtotals_tax_excluded"/>
                                             <t t-set="current_subtotal" t-value="current_subtotal + line.price_total"
@@ -228,7 +235,8 @@
 
                                                     <!-- UDS -->
 
-                                                    <div class="text-right" style="float:left;text-align:right;width:10%;">
+                                                    <div class="text-right"
+                                                         style="float:left;text-align:right;width:10%;">
                                                         <span t-esc="round(line.product_uom_qty,2)"/>
                                                     </div>
 
@@ -236,21 +244,24 @@
 
                                                     <!-- Precio por unidad -->
 
-                                                    <div class="text-right" style="float:left;text-align:right;width:10%;">
+                                                    <div class="text-right"
+                                                         style="float:left;text-align:right;width:10%;">
                                                         <span t-field="line.price_unit"/>
                                                     </div>
 
                                                     <!-- Fin precio unidad -->
 
                                                     <!-- Descuento -->
-                                                    <div class="text-right" style="float:left;text-align:right;width:10%;">
+                                                    <div class="text-right"
+                                                         style="float:left;text-align:right;width:10%;">
                                                         <span t-field="line.discount"/>
                                                     </div>
                                                     <!-- Fin Descuento -->
 
                                                     <!-- IVA -->
 
-                                                    <div class="text-right" style="float:left;text-align:right;width:10%;">
+                                                    <div class="text-right"
+                                                         style="float:left;text-align:right;width:10%;">
                                                         <t t-set="iva" t-value="line.tax_id.amount"/>
                                                         <span t-esc="int(iva)"
                                                               t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
@@ -259,7 +270,8 @@
                                                     <!-- Fin IVA -->
                                                     <!--  Valor Neto -->
 
-                                                    <div class="text-right" style="float:left;text-align:right;width:12%;">
+                                                    <div class="text-right"
+                                                         style="float:left;text-align:right;width:12%;">
                                                         <span t-field="line.price_subtotal"
                                                               groups="account.group_show_line_subtotals_tax_excluded"/>
                                                     </div>
@@ -272,17 +284,17 @@
                                                 </t>
 
                                             </div>
-                                    </td>
-                                </tr>
-                            </t>
-                        </tbody>
-                    </table>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
 
                         <!-- Fin lineas -->
 
                         <!-- Separador -->
 
-<!--                        <div style="height:2px;background-color:red;clear:both;"/>-->
+                        <!--                        <div style="height:2px;background-color:red;clear:both;"/>-->
 
                         <!-- Fin separador -->
 
@@ -314,8 +326,10 @@
                                         <div style="">
                                             <span t-esc="amount_by_group[0]"/>
                                             <span>en</span>
-                                            <t t-esc="amount_by_group[2]" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
-                                            <span t-esc="amount_by_group[1]" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                            <t t-esc="amount_by_group[2]"
+                                               t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                            <span t-esc="amount_by_group[1]"
+                                                  t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
                                         </div>
                                     </t>
                                     <t t-else="">
@@ -323,10 +337,12 @@
                                             <div style="width:60%;float:left;">
                                                 <span t-esc="amount_by_group[0]"/>
                                                 <span>en</span>
-                                                <span t-esc="amount_by_group[2]" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                                <span t-esc="amount_by_group[2]"
+                                                      t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
                                             </div>
                                             <div style="width:40%;float:left;text-align:right">
-                                                <span t-esc="amount_by_group[1]" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                                <span t-esc="amount_by_group[1]"
+                                                      t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
                                             </div>
                                         </t>
                                         <t t-else="">

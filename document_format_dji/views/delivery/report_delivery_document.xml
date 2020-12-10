@@ -7,20 +7,26 @@
             <!-- Fin quitar dirección defecto odoo -->
             <xpath expr="//div[@class='page']" position="replace">
                 <!--  Primera columna (Datos doc) -->
-<!--                <div t-if="company.partner_id.phone" style="display:inline; align:center">-->
-<!--                    <span t-field="company.partner_id.phone"/>-->
-<!--                </div>-->
+                <!--                <div t-if="company.partner_id.phone" style="display:inline; align:center">-->
+                <!--                    <span t-field="company.partner_id.phone"/>-->
+                <!--                </div>-->
                 <div style="float:left; width:50%;">
                     <div>
-                        <span style="width:25%;"><b>Albarán: </b></span>
+                        <span style="width:25%;">
+                            <b>Albarán:</b>
+                        </span>
                         <span style="width:75%;" t-field="o.name"/>
                     </div>
                     <div>
-                        <span style="width:25%;"><b>Fecha: </b></span>
+                        <span style="width:25%;">
+                            <b>Fecha:</b>
+                        </span>
                         <span style="width:75%;" t-field="o.date_done" t-options="{'format': 'MM-dd-yyyy'}"/>
                     </div>
                     <div t-if="o.origin">
-                        <span style="width:25%;"><b>Pedido: </b></span>
+                        <span style="width:25%;">
+                            <b>Pedido:</b>
+                        </span>
                         <span style="width:75%;" t-field="o.origin"/>
                     </div>
 
@@ -50,202 +56,222 @@
                         </t>
                     </div>
                     <div t-if="o.partner_id.vat">
-                        <span style="width:20%;">NIF: </span>
+                        <span style="width:20%;">NIF:</span>
                         <span style="width:80%;" t-field="o.partner_id.vat"/>
                     </div>
                     <!--  Fin segunda columna (Datos client)  -->
                 </div>
                 <!-- Fin datos documento -->
                 <!-- Separador -->
-<!--                <div style="width:100%;clear:both;margin-top:90%;">-->
-<!--                    <div style="border-bottom:2px solid black;border-top:2px solid black;height:25px;">-->
-                    <!-- Fin separador -->
-        <table class="table" style="border:none;">
-            <thead>
-                <tr>
-                    <th style="font-weight:bolder; text-transform:none; padding:0px;margin:0px; !important">
-                    <!--cabecera -->
-                        <div>
-                            <t t-set="importeTotal" t-value="0"/>
-                            <t t-set="importeTotalwithGD" t-value="0"/>
-                            <t t-set="importeIva21" t-value="0"/>
-                            <t t-set="importeRec52" t-value="0"/>
-                            <t t-set="importeIva21Total" t-value="0"/>
-                            <t t-set="importeRec52Total" t-value="0"/>
-                            <t t-set="importeIva10" t-value="0"/>
-                            <t t-set="importeRec14" t-value="0"/>
-                            <t t-set="importeIva10Total" t-value="0"/>
-                            <t t-set="importeRec14Total" t-value="0"/>
-                            <t t-set="importeIva4" t-value="0"/>
-                            <t t-set="importeRec05" t-value="0"/>
-                            <t t-set="importeIva4Total" t-value="0"/>
-                            <t t-set="importeRec05Total" t-value="0"/>
-                            <div style="width:13%;float:left;">
-                                <span>Código</span>
-                            </div>
-                            <div style="width:35%;float:left;">
-                                <span>Descripción</span>
-                            </div>
-                            <div style="width:10%;float:left;text-align:right;">
-                                <span>Unds.</span>
-                            </div>
-                            <div style="width:10%;float:left;text-align:right;">
-                                <span>Importe</span>
-                            </div>
-                            <div style="width:10%;float:left;text-align:right;">
-                                <span>Desc(%)</span>
-                            </div>
-                            <div style="width:10%;float:left;text-align:right;">
-                                <span>%IVA</span>
-                            </div>
-                            <div style="width:12%;float:left;text-align:right;">
-                                <span>Total</span>
-                            </div>
-                        </div>
-                    </th>
-                </tr>
-            </thead>
+                <!--                <div style="width:100%;clear:both;margin-top:90%;">-->
+                <!--                    <div style="border-bottom:2px solid black;border-top:2px solid black;height:25px;">-->
+                <!-- Fin separador -->
+                <table class="table" style="border:none;">
+                    <thead>
+                        <tr>
+                            <th style="font-weight:bolder; text-transform:none; padding:0px;margin:0px; !important">
+                                <!--cabecera -->
+                                <div>
+                                    <t t-set="importeTotal" t-value="0"/>
+                                    <t t-set="importeTotalwithGD" t-value="0"/>
+                                    <t t-set="importeIva21" t-value="0"/>
+                                    <t t-set="importeRec52" t-value="0"/>
+                                    <t t-set="importeIva21Total" t-value="0"/>
+                                    <t t-set="importeRec52Total" t-value="0"/>
+                                    <t t-set="importeIva10" t-value="0"/>
+                                    <t t-set="importeRec14" t-value="0"/>
+                                    <t t-set="importeIva10Total" t-value="0"/>
+                                    <t t-set="importeRec14Total" t-value="0"/>
+                                    <t t-set="importeIva4" t-value="0"/>
+                                    <t t-set="importeRec05" t-value="0"/>
+                                    <t t-set="importeIva4Total" t-value="0"/>
+                                    <t t-set="importeRec05Total" t-value="0"/>
+                                    <div style="width:13%;float:left;">
+                                        <span>Código</span>
+                                    </div>
+                                    <div style="width:35%;float:left;">
+                                        <span>Descripción</span>
+                                    </div>
+                                    <div style="width:10%;float:left;text-align:right;">
+                                        <span>Unds.</span>
+                                    </div>
+                                    <div style="width:10%;float:left;text-align:right;">
+                                        <span>Importe</span>
+                                    </div>
+                                    <div style="width:10%;float:left;text-align:right;">
+                                        <span>Desc(%)</span>
+                                    </div>
+                                    <div style="width:10%;float:left;text-align:right;">
+                                        <span>%IVA</span>
+                                    </div>
+                                    <div style="width:12%;float:left;text-align:right;">
+                                        <span>Total</span>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
                     <!-- Fin cabecera -->
-<!--                    </div>-->
+                    <!--                    </div>-->
 
-<!--                </div>-->
+                    <!--                </div>-->
 
-            <tbody class="sale_tbody">
-                <!-- Fin datos documento -->
-                <!--Lineas -->
-                <div>
-                    <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')"/>
-                    <t t-set="importeTotal" t-value="0"/>
-                    <t t-foreach="o.move_ids_without_package.sorted(key=lambda m: m.product_id.id)" t-as="move">
-                        <t t-foreach="move.move_line_ids.sorted(key=lambda ml: ml.location_id.id)" t-as="move_line">
-                            <tr>
-                                <td style="padding:0px;margin:0px;">
-                                    <div style="clear:both;font-size:0.9em;">
-                                    <!-- Código -->
+                    <tbody class="sale_tbody">
+                        <!-- Fin datos documento -->
+                        <!--Lineas -->
+                        <div>
+                            <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')"/>
+                            <t t-set="importeTotal" t-value="0"/>
+                            <t t-foreach="o.move_ids_without_package.sorted(key=lambda m: m.product_id.id)" t-as="move">
+                                <t t-foreach="move.move_line_ids.sorted(key=lambda ml: ml.location_id.id)"
+                                   t-as="move_line">
+                                    <tr>
+                                        <td style="padding:0px;margin:0px;">
+                                            <div style="clear:both;font-size:0.9em;">
+                                                <!-- Código -->
 
-                                        <div style="width:13%;float:left;">
-                                            <span t-field="move_line.product_id.default_code"></span>
-                                        </div>
+                                                <div style="width:13%;float:left;">
+                                                    <span t-field="move_line.product_id.default_code"></span>
+                                                </div>
 
-                                        <!-- Fin codigo -->
+                                                <!-- Fin codigo -->
 
-                                        <!-- descripción -->
+                                                <!-- descripción -->
 
-                                        <div style="width:35%;float:left;">
-                                            <span t-field="move_line.product_id.name"></span>
-                                        </div>
+                                                <div style="width:35%;float:left;">
+                                                    <span t-field="move_line.product_id.name"></span>
+                                                </div>
 
-                                        <!-- Fin descripción -->
+                                                <!-- Fin descripción -->
 
-                                        <!-- UDS -->
+                                                <!-- UDS -->
 
-                                        <div style="width:10%;float:left;text-align:right;">
-                                            <span t-field="move_line.move_id.quantity_done"></span>
-                                        </div>
+                                                <div style="width:10%;float:left;text-align:right;">
+                                                    <span t-field="move_line.move_id.quantity_done"></span>
+                                                </div>
 
-                                        <!-- Fin UDS -->
+                                                <!-- Fin UDS -->
 
-                                        <!-- Importe -->
+                                                <!-- Importe -->
 
-                                        <div style="width:10%;float:left;text-align:right;">
-                                            <span t-esc="move_line.move_id.sale_line_id.price_unit"
-                                                  t-options="{'widget': 'monetary', 'display_currency': o.sale_id.pricelist_id.currency_id}"/>
-                                        </div>
+                                                <div style="width:10%;float:left;text-align:right;">
+                                                    <span t-esc="move_line.move_id.sale_line_id.price_unit"
+                                                          t-options="{'widget': 'monetary', 'display_currency': o.sale_id.pricelist_id.currency_id}"/>
+                                                </div>
 
-                                        <!-- Fin Importe -->
+                                                <!-- Fin Importe -->
 
-                                        <!-- Descuento -->º
+                                                <!-- Descuento -->º
 
-                                        <div class="text-right" style="float:left;text-align:right;width:10%;">
+                                                <div class="text-right" style="float:left;text-align:right;width:10%;">
                                                     <span t-field="move_line.move_id.sale_line_id.discount"/>
-                                        </div>
+                                                </div>
 
-                                        <!-- Fin Descuento -->
+                                                <!-- Fin Descuento -->
 
-                                        <!-- Iva -->
+                                                <!-- Iva -->
 
-                                        <div class="text-right" style="float:left;text-align:right;width:10%;">
-                                            <t t-set="iva" t-value="move_line.move_id.sale_line_id.tax_id.amount"/>
-                                            <span t-esc="int(iva)"
-                                                  t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
-                                        </div>
+                                                <div class="text-right" style="float:left;text-align:right;width:10%;">
+                                                    <t t-set="iva"
+                                                       t-value="move_line.move_id.sale_line_id.tax_id.amount"/>
+                                                    <span t-esc="int(iva)"
+                                                          t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                </div>
 
-                                        <!-- Fin Iva -->
+                                                <!-- Fin Iva -->
 
-                                        <div style="width:12%;float:left;text-align:right;">
-                                            <t t-set="total_linea"
-                                               t-value="move_line.move_id.quantity_done * move_line.move_id.sale_line_id.price_unit * ((100 - move_line.move_id.sale_line_id.discount) / 100)"/>
-                                            <span t-esc="total_linea"
-                                                  t-options="{'widget': 'monetary', 'display_currency': o.sale_id.pricelist_id.currency_id}"/>
-                                            <t t-set="importeTotal" t-value="importeTotal + round( total_linea, 2 )"/>
-                                            <!--  IVA  -->
-                                            <div class="text-right" style="float:left;width:5%;">
-                                                <t t-if="move_line.move_id.sale_line_id">
-                                                    <t t-foreach="move_line.move_id.sale_line_id.tax_id" t-as="tax">
-                                                        <t t-set="tax_name" t-value="tax.name"/>
-                                                        <t t-set="isIVA" t-value="tax_name.find('IVA')"/>
-                                                        <!--  acumulacion de las cantidad de cada iva ventas  -->
-                                                        <t t-if="tax.amount == 21.0">
-                                                            <t t-set="importeIva21" t-value="importeIva21 +(importeTotal*0.21 )"/>
-                                                            <t t-set="importeIva21Total" t-value="importeIva21Total + importeTotal"/>
+                                                <div style="width:12%;float:left;text-align:right;">
+                                                    <t t-set="total_linea"
+                                                       t-value="move_line.move_id.quantity_done * move_line.move_id.sale_line_id.price_unit * ((100 - move_line.move_id.sale_line_id.discount) / 100)"/>
+                                                    <span t-esc="total_linea"
+                                                          t-options="{'widget': 'monetary', 'display_currency': o.sale_id.pricelist_id.currency_id}"/>
+                                                    <t t-set="importeTotal"
+                                                       t-value="importeTotal + round( total_linea, 2 )"/>
+                                                    <!--  IVA  -->
+                                                    <div class="text-right" style="float:left;width:5%;">
+                                                        <t t-if="move_line.move_id.sale_line_id">
+                                                            <t t-foreach="move_line.move_id.sale_line_id.tax_id"
+                                                               t-as="tax">
+                                                                <t t-set="tax_name" t-value="tax.name"/>
+                                                                <t t-set="isIVA" t-value="tax_name.find('IVA')"/>
+                                                                <!--  acumulacion de las cantidad de cada iva ventas  -->
+                                                                <t t-if="tax.amount == 21.0">
+                                                                    <t t-set="importeIva21"
+                                                                       t-value="importeIva21 +(importeTotal*0.21 )"/>
+                                                                    <t t-set="importeIva21Total"
+                                                                       t-value="importeIva21Total + importeTotal"/>
+                                                                </t>
+                                                                <t t-if="tax.amount == 5.2">
+                                                                    <t t-set="importeRec52"
+                                                                       t-value="importeRec52 + importeTotal *0.052"/>
+                                                                </t>
+                                                                <t t-if="tax.amount == 10.0">
+                                                                    <t t-set="importeIva10"
+                                                                       t-value="importeIva10 +(importeTotal*0.10 )"/>
+                                                                    <t t-set="importeIva10Total"
+                                                                       t-value="importeIva10Total + importeTotal"/>
+                                                                </t>
+                                                                <t t-if="tax.amount == 1.4">
+                                                                    <t t-set="importeRec14"
+                                                                       t-value="importeRec14 + importeTotal *0.014"/>
+                                                                </t>
+                                                                <t t-if="tax.amount == 4.0">
+                                                                    <t t-set="importeIva4"
+                                                                       t-value="importeIva4 +(importeTotal*0.04 )"/>
+                                                                    <t t-set="importeIva4Total"
+                                                                       t-value="importeIva4Total + importeTotal"/>
+                                                                </t>
+                                                                <t t-if="tax.amount == 0.50">
+                                                                    <t t-set="importeRec05"
+                                                                       t-value="importeRec05 + importeTotal *0.005"/>
+                                                                </t>
+                                                                <!--  fin acumulaciones de las cantidades de iva ventas  -->
+                                                            </t>
                                                         </t>
-                                                        <t t-if="tax.amount == 5.2">
-                                                            <t t-set="importeRec52" t-value="importeRec52 + importeTotal *0.052"/>
+                                                        <t t-if="move_line.move_id.purchase_line_id">
+                                                            <t t-foreach="move_line.move_id.purchase_line_id.taxes_id"
+                                                               t-as="tax">
+                                                                <t t-set="tax_name" t-value="tax.name"/>
+                                                                <t t-set="isIVA" t-value="tax_name.find('IVA')"/>
+                                                                <!--  acumulacion de las cantidad de cada iva compras  -->
+                                                                <t t-if="tax.amount == 21.0">
+                                                                    <t t-set="importeIva21"
+                                                                       t-value="importeIva21 +(total_linea*0.21 )"/>
+                                                                    <t t-set="importeIva21Total"
+                                                                       t-value="importeIva21Total + total_linea"/>
+                                                                </t>
+                                                                <t t-if="tax.amount == 10.0">
+                                                                    <t t-set="importeIva10"
+                                                                       t-value="importeIva10 +(total_linea*0.10 )"/>
+                                                                    <t t-set="importeIva10Total"
+                                                                       t-value="importeIva10Total + total_linea"/>
+                                                                </t>
+                                                                <t t-if="tax.amount == 4.0">
+                                                                    <t t-set="importeIva4"
+                                                                       t-value="importeIva4 +(total_linea*0.04 )"/>
+                                                                    <t t-set="importeIva4Total"
+                                                                       t-value="importeIva4Total + total_linea"/>
+                                                                </t>
+                                                                <!--  fin acumulaciones de las cantuidades de iva compras  -->
+                                                            </t>
                                                         </t>
-                                                        <t t-if="tax.amount == 10.0">
-                                                            <t t-set="importeIva10" t-value="importeIva10 +(importeTotal*0.10 )"/>
-                                                            <t t-set="importeIva10Total" t-value="importeIva10Total + importeTotal"/>
-                                                        </t>
-                                                        <t t-if="tax.amount == 1.4">
-                                                            <t t-set="importeRec14" t-value="importeRec14 + importeTotal *0.014"/>
-                                                        </t>
-                                                        <t t-if="tax.amount == 4.0">
-                                                            <t t-set="importeIva4" t-value="importeIva4 +(importeTotal*0.04 )"/>
-                                                            <t t-set="importeIva4Total" t-value="importeIva4Total + importeTotal"/>
-                                                        </t>
-                                                        <t t-if="tax.amount == 0.50">
-                                                            <t t-set="importeRec05" t-value="importeRec05 + importeTotal *0.005"/>
-                                                        </t>
-                                                        <!--  fin acumulaciones de las cantidades de iva ventas  -->
-                                                    </t>
-                                                </t>
-                                            <t t-if="move_line.move_id.purchase_line_id">
-                                                <t t-foreach="move_line.move_id.purchase_line_id.taxes_id" t-as="tax">
-                                                    <t t-set="tax_name" t-value="tax.name"/>
-                                                    <t t-set="isIVA" t-value="tax_name.find('IVA')"/>
-                                                    <!--  acumulacion de las cantidad de cada iva compras  -->
-                                                    <t t-if="tax.amount == 21.0">
-                                                        <t t-set="importeIva21" t-value="importeIva21 +(total_linea*0.21 )"/>
-                                                        <t t-set="importeIva21Total" t-value="importeIva21Total + total_linea"/>
-                                                    </t>
-                                                    <t t-if="tax.amount == 10.0">
-                                                        <t t-set="importeIva10" t-value="importeIva10 +(total_linea*0.10 )"/>
-                                                        <t t-set="importeIva10Total" t-value="importeIva10Total + total_linea"/>
-                                                    </t>
-                                                    <t t-if="tax.amount == 4.0">
-                                                        <t t-set="importeIva4" t-value="importeIva4 +(total_linea*0.04 )"/>
-                                                        <t t-set="importeIva4Total" t-value="importeIva4Total + total_linea"/>
-                                                    </t>
-                                                    <!--  fin acumulaciones de las cantuidades de iva compras  -->
-                                                </t>
-                                            </t>
-                                        </div>
-                                        <!--  <div t-else="" style="width:55px;;display:block; float:left;">
-                                                    <span style="color:white">aaa</span>
-                                            </div>  -->
-                                        <!--  Fin IVA  -->
-                                    </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </t>
-                    </t>
+                                                    </div>
+                                                    <!--  <div t-else="" style="width:55px;;display:block; float:left;">
+                                                                <span style="color:white">aaa</span>
+                                                        </div>  -->
+                                                    <!--  Fin IVA  -->
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
 
 
-                </div>
-                </tbody>
-            </table>
-<!--            <div style="height:2px;background-color:black;clear:both;"/>-->
+                        </div>
+                    </tbody>
+                </table>
+                <!--            <div style="height:2px;background-color:black;clear:both;"/>-->
                 <!-- Fin Lineas -->
                 <!--  calculo del total  -->
                 <t t-set="importeTotalIva" t-value="0.00"/>
@@ -283,31 +309,31 @@
                     <!--  Fin base imponible  -->
                     <!--  desglose de Impuestos  -->
                     <t t-foreach="o.sale_id.amount_by_group" t-as="amount_by_group">
-                    <t t-if="amount_by_group[3] == 1 and o.sale_id.amount_untaxed == amount_by_group[2]">
-                        <div>
-                            <span t-esc="amount_by_group[0]"/>
-                            <span>en</span>
-                            <t t-esc="amount_by_group[2]"
-                               t-options="{'widget': 'monetary', 'display_currency': o.sale_id.pricelist_id.currency_id}"/>
-                            <span t-esc="amount_by_group[1]"
-                                  t-options="{'widget': 'monetary', 'display_currency': o.sale_id.pricelist_id.currency_id}"/>
-                        </div>
-                    </t>
-                    <t t-else="">
-                        <t t-if="amount_by_group[1] != 0.0">
-                            <div style="width:60%;float:left;">
+                        <t t-if="amount_by_group[3] == 1 and o.sale_id.amount_untaxed == amount_by_group[2]">
+                            <div>
                                 <span t-esc="amount_by_group[0]"/>
                                 <span>en</span>
-                                <span t-esc="amount_by_group[2]"
-                                      t-options="{'widget': 'monetary', 'display_currency': o.sale_id.pricelist_id.currency_id}"/>
-                            </div>
-                            <div style="width:40%;float:left;text-align:right;">
+                                <t t-esc="amount_by_group[2]"
+                                   t-options="{'widget': 'monetary', 'display_currency': o.sale_id.pricelist_id.currency_id}"/>
                                 <span t-esc="amount_by_group[1]"
                                       t-options="{'widget': 'monetary', 'display_currency': o.sale_id.pricelist_id.currency_id}"/>
                             </div>
                         </t>
-                        <t t-else=""/>
-                    </t>
+                        <t t-else="">
+                            <t t-if="amount_by_group[1] != 0.0">
+                                <div style="width:60%;float:left;">
+                                    <span t-esc="amount_by_group[0]"/>
+                                    <span>en</span>
+                                    <span t-esc="amount_by_group[2]"
+                                          t-options="{'widget': 'monetary', 'display_currency': o.sale_id.pricelist_id.currency_id}"/>
+                                </div>
+                                <div style="width:40%;float:left;text-align:right;">
+                                    <span t-esc="amount_by_group[1]"
+                                          t-options="{'widget': 'monetary', 'display_currency': o.sale_id.pricelist_id.currency_id}"/>
+                                </div>
+                            </t>
+                            <t t-else=""/>
+                        </t>
                     </t>
                     <!--  Fin desglose impuestos  -->
                     <!--  Total  -->
@@ -343,7 +369,22 @@
                     </div>
                     <div style="height:2px;background-color:black;clear:both;"/>
                 </div>
-            <!--  Fin Desglose  -->
+                <!--  Fin Desglose  -->
+
+                <!--  Firma  -->
+                <div t-if="'signature' in o.fields_get() and doc.signature" class="mt32 ml16 mr16" name="signature">
+                    <div class="offset-8">
+                        <strong>Firma</strong>
+                    </div>
+                    <div class="offset-8">
+                        <img t-att-src="image_data_uri(doc.signature)" style="max-height: 4cm; max-width: 8cm;"/>
+                    </div>
+                    <div class="offset-8 text-center">
+                        <p t-field="doc.signed_by"/>
+                    </div>
+                </div>
+                <!--  Fin Firma  -->
+
             </xpath>
         </template>
     </data>

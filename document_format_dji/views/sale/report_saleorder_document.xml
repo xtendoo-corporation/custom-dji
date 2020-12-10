@@ -74,7 +74,6 @@
                         </li>
 
                         <div name="payment_term">
-
                             <li t-if="doc.payment_term_id">
                                 <b>Terminos de pago:</b>
                                 <span t-field="doc.payment_term_id"/>
@@ -142,7 +141,6 @@
                             <thead>
                                 <tr>
                                     <th style="font-weight:bolder; text-transform:none; padding:0px;margin:0px; !important">
-                                        <!--                                    <div style="border-bottom:2px solid red;border-top:2px solid red;height:25px;">-->
 
                                         <div class="text-left"
                                              style="font-weight:bolder; color:#4f4b4b;width:13%;float:left;">
@@ -179,11 +177,11 @@
                                              style="font-weight:bolder; color:#4f4b4b;text-align:right;float:left;width:12%;">
                                             <span>Total</span>
                                         </div>
-                                        <!--                                    </div>-->
 
                                     </th>
                                 </tr>
                             </thead>
+
                             <tbody class="sale_tbody">
 
                                 <!-- Fin cabecera -->
@@ -201,7 +199,6 @@
                                             <div style="clear:both;font-size:0.9em;">
 
                                                 <!--Si es nota -->
-
                                                 <t t-if="not line.product_id">
 
                                                     <div class="text-left" style="width:100%;">
@@ -210,20 +207,14 @@
                                                         </b>
                                                     </div>
                                                 </t>
-
-
                                                 <!-- Fin si es nota -->
+
                                                 <!-- Si no es nota -->
                                                 <t t-if="line.product_id">
-                                                    <!-- Código -->
 
                                                     <div class="text-left" style="width:13%;float:left;">
                                                         <span t-field="line.product_id.default_code"/>
                                                     </div>
-
-                                                    <!-- Fin codigo -->
-
-                                                    <!-- descripción -->
 
                                                     <div class="text-left" style="float:left;width:35%;">
                                                         <t t-set="descripcion" t-value="line.name.find(']') +1"/>
@@ -231,34 +222,20 @@
                                                         <span t-esc="linea"/>
                                                     </div>
 
-                                                    <!-- Fin descripción -->
-
-                                                    <!-- UDS -->
-
                                                     <div class="text-right"
                                                          style="float:left;text-align:right;width:10%;">
                                                         <span t-esc="round(line.product_uom_qty,2)"/>
                                                     </div>
-
-                                                    <!-- Fin UDS -->
-
-                                                    <!-- Precio por unidad -->
 
                                                     <div class="text-right"
                                                          style="float:left;text-align:right;width:10%;">
                                                         <span t-field="line.price_unit"/>
                                                     </div>
 
-                                                    <!-- Fin precio unidad -->
-
-                                                    <!-- Descuento -->
                                                     <div class="text-right"
                                                          style="float:left;text-align:right;width:10%;">
                                                         <span t-field="line.discount"/>
                                                     </div>
-                                                    <!-- Fin Descuento -->
-
-                                                    <!-- IVA -->
 
                                                     <div class="text-right"
                                                          style="float:left;text-align:right;width:10%;">
@@ -267,19 +244,11 @@
                                                               t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
                                                     </div>
 
-                                                    <!-- Fin IVA -->
-                                                    <!--  Valor Neto -->
-
                                                     <div class="text-right"
                                                          style="float:left;text-align:right;width:12%;">
                                                         <span t-field="line.price_subtotal"
                                                               groups="account.group_show_line_subtotals_tax_excluded"/>
                                                     </div>
-
-                                                    <!-- Fin valor neto -->
-
-
-                                                    <!-- Fin si no es nota -->
 
                                                 </t>
 
@@ -292,18 +261,11 @@
 
                         <!-- Fin lineas -->
 
-                        <!-- Separador -->
-
-                        <!--                        <div style="height:2px;background-color:red;clear:both;"/>-->
-
-                        <!-- Fin separador -->
-
                     </div>
 
                     <!-- Totales -->
 
                     <div style="width:40%;float:right;clear:both">
-
 
                         <!-- Subtotal -->
 
@@ -367,7 +329,6 @@
 
                         <div style="height:2px;background-color:black;clear:both;"/>
                     </div>
-
 
                     <!-- Fin totales -->
 

@@ -82,6 +82,7 @@
                 </xpath>
             </field>
         </record>
+
         <!--  Ocultar margen en ventas  -->
         <record id="view_order_form_inherit_without_margin" model="ir.ui.view">
             <field name="name">view.order.form.inherit.without.margin</field>
@@ -96,7 +97,7 @@
         <!--  Fin Ocultar margen en ventas  -->
         <!-- buscar mas... (ventas) -->
         <record model="ir.ui.view" id="product_template_tree_view_inherit">
-            <field name="name"> product.template.tree.view.inherit</field>
+            <field name="name">product.template.tree.view.inherit</field>
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_product_tree_view"/>
             <field name="arch" type="xml">
@@ -109,8 +110,8 @@
         <!-- Seleccionar producto desde tablet (js) -->
         <!-- se añade con un replace, proque al ser java script, el campo no existe antes de darle al boton de añadir lineas,
         por lo que no deja cambairle los atributos-->
-         <record model="ir.ui.view" id="sale_order_tree_view_inherit_margin">
-            <field name="name"> sale.order.tree.view.inherit.margin</field>
+        <record model="ir.ui.view" id="sale_order_tree_view_inherit_margin">
+            <field name="name">sale.order.tree.view.inherit.margin</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale_margin.sale_margin_sale_order_line_form"/>
             <field name="arch" type="xml">
@@ -120,6 +121,17 @@
             </field>
         </record>
         <!-- Fin seleccionar producto desde tablet (js) -->
+
+        <record id="view_order_tree" model="ir.ui.view">
+            <field name="name">sale.order.tree.inherit.sale</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="city" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
 
     </data>
 </odoo>

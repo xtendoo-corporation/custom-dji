@@ -18,37 +18,37 @@ msgstr ""
 #. module: dji_administration
 #: model:ir.model.fields,field_description:dji_administration.field_sale_order__city
 msgid "City"
-msgstr "Población"
+msgstr ""
 
 #. module: dji_administration
 #: model:res.groups,name:dji_administration.commercial_group
 msgid "Comerciales"
-msgstr "Comerciales"
+msgstr ""
 
 #. module: dji_administration
 #: model_terms:ir.ui.view,arch_db:dji_administration.sale_order_view_form
 msgid "Create Invoice"
-msgstr "Factura Creada"
+msgstr ""
 
 #. module: dji_administration
 #: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__create_uid
 msgid "Created by"
-msgstr "Creado por"
+msgstr ""
 
 #. module: dji_administration
 #: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__create_date
 msgid "Created on"
-msgstr "Creado en"
+msgstr ""
 
 #. module: dji_administration
 #: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__display_name
 msgid "Display Name"
-msgstr "Nombre Mostrado"
+msgstr ""
 
 #. module: dji_administration
 #: model:res.groups,comment:dji_administration.commercial_group
 msgid "Grupo de comerciales "
-msgstr "Grupo de comerciales"
+msgstr ""
 
 #. module: dji_administration
 #: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__id
@@ -62,47 +62,47 @@ msgstr ""
 #: model:ir.model.fields,field_description:dji_administration.field_sale_order__is_commercial
 #: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__is_commercial
 msgid "Is Commercial"
-msgstr "Es Comercial"
+msgstr ""
 
 #. module: dji_administration
 #: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule____last_update
 msgid "Last Modified on"
-msgstr "Última Modificación en"
+msgstr ""
 
 #. module: dji_administration
 #: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__write_uid
 msgid "Last Updated by"
-msgstr "Última Modificación por"
+msgstr ""
 
 #. module: dji_administration
 #: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__write_date
 msgid "Last Updated on"
-msgstr "Última Modificación en"
+msgstr ""
 
 #. module: dji_administration
 #: model:ir.model,name:dji_administration.model_product_template
 msgid "Product Template"
-msgstr "Plantilla de producto"
+msgstr ""
 
 #. module: dji_administration
 #: model:ir.model,name:dji_administration.model_sale_order
 msgid "Sales Order"
-msgstr "Pedido de venta"
+msgstr ""
 
 #. module: dji_administration
 #: model:ir.model,name:dji_administration.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "Línea de pedido de venta"
+msgstr ""
 
 #. module: dji_administration
 #: model:res.groups,name:dji_administration.show_margins
 msgid "Show Margins"
-msgstr "Mostrar Margen"
+msgstr ""
 
 #. module: dji_administration
 #: model:res.groups,name:dji_administration.show_cost_price
 msgid "Show cost price"
-msgstr "Mostrar precio costo"
+msgstr ""
 
 #. module: dji_administration
 #: model:ir.model,name:dji_administration.model_administrator_mixin_rule

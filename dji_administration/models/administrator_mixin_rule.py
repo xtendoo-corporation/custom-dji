@@ -19,3 +19,5 @@ class AdministratorMixinRule(models.Model):
         return self.env["res.users"].has_group(
                 "dji_administration.commercial_group"
             )
+
+

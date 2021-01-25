@@ -17,7 +17,8 @@
     'data': [
         'views/sale_order_views.xml',
         'security/security_group.xml',
-        'views/product_views.xml'
+        'views/product_views.xml',
+        'views/account_move_views.xml',
     ],
     'installable': True,
     'auto_install': True,

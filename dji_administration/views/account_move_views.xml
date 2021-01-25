@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--  Payments  -->
+        <record model="ir.ui.view" id="register_payment_form_button">
+            <field name="name">register.payment.form.button</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_invoice_register_payment']" position="attributes">
+                    <attribute name="groups">dji_administration.register_payments</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--Fin Payments-->
+    </data>
+</odoo>

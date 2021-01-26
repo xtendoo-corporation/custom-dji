@@ -37,9 +37,6 @@
                 <xpath expr="//field[@name='standard_price']" position="attributes">
                     <attribute name="groups">dji_administration.show_cost_price</attribute>
                 </xpath>
-<!--                <xpath expr="//button[@name='376']" position="attributes">-->
-<!--                    <attribute name="groups">dji_administration.show_cost_price</attribute>-->
-<!--                </xpath>-->
             </field>
         </record>
         <!--  Fin productos  -->

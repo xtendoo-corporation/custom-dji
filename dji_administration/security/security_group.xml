@@ -11,6 +11,8 @@
         <record id="admin_group" model="res.groups">
             <field name="name">Administradores</field>
             <field name="comment">Grupo de administración</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="menu_access" eval="[(4, 140)]"/>
         </record>
         <!-- Fin Administradores -->
         <!--  Coste  -->

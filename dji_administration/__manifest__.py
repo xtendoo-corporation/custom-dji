@@ -12,6 +12,7 @@
         'sale',
         'product',
         'sale_margin',
+        'sale_order_line_margin_percent',
     ],
     'license': 'AGPL-3',
     'data': [

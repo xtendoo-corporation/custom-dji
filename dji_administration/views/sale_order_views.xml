@@ -117,9 +117,39 @@
                 <xpath expr="//page[@name='order_lines']//field[@name='purchase_price']" position="replace">
                     <field name="purchase_price" attrs="{'invisible': [('is_commercial', '=', True)]}" force_save="1"/>
                 </xpath>
+                 <xpath expr="//field[@name='order_line']/tree//field[@name='purchase_price']" position="attributes">
+                    <attribute name="groups">dji_administration.show_cost_price</attribute>
+                </xpath>
             </field>
         </record>
         <!-- Fin seleccionar producto desde tablet (js) -->
 
+        <!-- Vista de sale_order_line_margin_percent-->
+        <record id="view_order_form_margin" model="ir.ui.view">
+            <field name="name">sale.order.line.tree.inherit.margin</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_order_line_margin_percent.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='margin']" position="attributes">
+                    <attribute name="groups">dji_administration.show_margins</attribute>
+                </xpath>
+                <xpath expr="//field[@name='margin_percent']" position="attributes">
+                    <attribute name="groups">dji_administration.show_margins</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_order_form_margin_amount" model="ir.ui.view">
+            <field name="name">sale.order.line.tree.inherit.margin.amount</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_order_margin_percent.view_sale_order_margin_percent_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='percent']" position="attributes">
+                    <attribute name="groups">dji_administration.show_margins</attribute>
+                </xpath>
+               
+            </field>
+        </record>
+        <!-- Fin vista de sale_order_line_margin_percent-->
     </data>
 </odoo>

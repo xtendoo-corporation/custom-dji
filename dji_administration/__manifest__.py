@@ -3,7 +3,7 @@
     'summary': """Administration settings for DJI""",
     'version': '13.0.1.0.0',
     'description': """Administration settings for DJI""",
-    'author': 'Javier Lagares',
+    'author': 'DLL-Xtendoo',
     'company': 'Xtendoo',
     'website': 'http://xtendoo.es',
     'category': 'Admin Tools',

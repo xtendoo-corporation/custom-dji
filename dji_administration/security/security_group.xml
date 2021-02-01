@@ -75,6 +75,18 @@
             <field name="perm_read" eval="True"/>
         </record>  
         <!-- Fin Regla para asientos contables sin filtrar a Administradores -->
+        <!-- Regla para que no se puedan crear ni editar clientes a comerciales-->
+        <record id="no_create_no_edit_contacts" model="ir.rule">
+            <field name="name">Contactos: no crear ni editar</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="domain_force">[('user_id', '=', 'XXX')]</field>
+            <field name="groups" eval="[(4, ref('dji_administration.commercial_group'))]"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_read" eval="False"/>
+        </record>
+        <!-- Fin Regla para que no se puedan crear ni editar clientes a comerciales-->
         <!-- Fin Reglas de registro -->
     </data>
 </odoo>

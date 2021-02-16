@@ -13,7 +13,7 @@
             <field name="comment">Grupo de administración</field>
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
             <field name="menu_access" eval="[(4, ref('website.menu_website_configuration')),(4, ref('crm.crm_menu_root'))]"/>
-        </record> 
+        </record>
         <!-- Fin Administradores -->
         <!-- eliminar WEBSITE de grupo interno-->
         <record id="website.menu_website_configuration" model="ir.ui.menu">
@@ -70,10 +70,10 @@
             <field name="perm_unlink" eval="True"/>
             <field name="perm_write" eval="True"/>
             <field name="perm_read" eval="False"/>
-        </record>  
+        </record>
         <!--Comerciales no pueden crear ni edtiar contactos -->
         <!-- Eliminar la regla de all journal entries para asientos contables-->
-        <delete model="ir.rule" id="account.account_move_see_all"/>
+        <!-- <delete model="ir.rule" id="account.account_move_see_all"/> -->
         <!-- Fin Eliminar la regla de all journal entries para asientos contables-->
         <!-- Regla para asientos contables filtrado a comerciales-->
         <record id="own_invoices" model="ir.rule">
@@ -85,7 +85,7 @@
             <field name="perm_unlink" eval="False"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_read" eval="True"/>
-        </record>  
+        </record>
         <!-- Fin Regla para asientos contables filtrado a comerciales-->
         <!-- Regla para asientos contables sin filtrar a Administradores -->
         <record id="all_invoices" model="ir.rule">
@@ -97,7 +97,7 @@
             <field name="perm_unlink" eval="False"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_read" eval="True"/>
-        </record>  
+        </record>
         <!-- Fin Regla para asientos contables sin filtrar a Administradores -->
         <!-- Regla para que no se puedan crear ni editar clientes a comerciales-->
         <record id="no_create_no_edit_contacts" model="ir.rule">

@@ -5,6 +5,7 @@ from odoo import api, models, fields
 
 class AdministratorMixinRule(models.Model):
     _name = 'administrator.mixin.rule'
+    _description = 'Administrator Mixin Rule'
 
     is_commercial = fields.Boolean(
         compute='_is_commercial',

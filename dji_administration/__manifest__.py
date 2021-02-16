@@ -11,6 +11,8 @@
         'base',
         'sale',
         'product',
+        'website',
+        'crm',
         'sale_margin',
         'sale_order_line_margin_percent',
         'sale_order_margin_percent',

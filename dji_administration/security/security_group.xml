@@ -121,7 +121,7 @@
          <record id="payment_term_enrique" model="ir.rule">
             <field name="name">Modos de pago enrique</field>
             <field name="model_id" ref="account.model_account_journal"/>
-            <field name="domain_force">[('name','not in',('Efectivo Jose Antonio','Efectivo Vicente','Efectivo Jose Antonio','Efectivo oficina','Efectivo','Banco','La Caixa Remesas','Banco Santander Remesas','Banco Santander Transferencia','La Caixa Transferencia','Banco Santander Domiciliaciones Proveedores','La Caixa Domiciliaciones Proveedores'))]</field>
+            <field name="domain_force">['|',('name','in',('Efectivo Enrique','Cheques / Pagarés')),('type','in',('sale','purchase','general'))]</field>
             <field name="groups" eval="[(4, ref('dji_administration.enrique_payments'))]"/>
             <field name="perm_create" eval="True"/>
             <field name="perm_unlink" eval="True"/>

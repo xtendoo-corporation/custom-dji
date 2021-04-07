@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Comercial joseli -->
+        <record id="joseli_payments" model="res.groups">
+            <field name="name">Joseli</field>
+        </record>
+
+         <record id="payment_term_joseli" model="ir.rule">
+            <field name="name">Modos de pago Joseli</field>
+            <field name="model_id" ref="account.model_account_journal"/>
+            <field name="domain_force">['|',('name','in',('Efectivo Joseli','Efectivo Joseli Contado')),('type','in',('sale','purchase','general'))]</field>
+            <field name="groups" eval="[(4, ref('sylonuba_commercials_security.joseli_payments'))]"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_read" eval="True"/>
+        </record>
+        <!-- Fin Comercial joseli -->
+        <!-- Comercial Juan Jose -->
+        <record id="domingo_payments" model="res.groups">
+            <field name="name">Domingo</field>
+        </record>
+
+         <record id="payment_term_domingo" model="ir.rule">
+            <field name="name">Modos de pago Domingo</field>
+            <field name="model_id" ref="account.model_account_journal"/>
+            <field name="domain_force">['|',('name','in',('Efectivo Domingo','Efectivo Domingo Contado')),('type','in',('sale','purchase','general'))]</field>
+            <field name="groups" eval="[(4, ref('sylonuba_commercials_security.domingo_payments'))]"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_read" eval="True"/>
+        </record>
+        <!-- Fin Comercial Juan Jose -->
+    </data>
+</odoo>

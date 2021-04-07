@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Comercial Enrique -->
+        <record id="enrique_payments" model="res.groups">
+            <field name="name">Enrique</field>
+        </record>
+
+         <record id="payment_term_enrique" model="ir.rule">
+            <field name="name">Modos de pago enrique</field>
+            <field name="model_id" ref="account.model_account_journal"/>
+            <field name="domain_force">['|',('name','in',('Efectivo Enrique','Cheques / Pagarés')),('type','in',('sale','purchase','general'))]</field>
+            <field name="groups" eval="[(4, ref('dji_commercials_security.enrique_payments'))]"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_read" eval="True"/>
+        </record>
+        <!-- Fin Comercial Enrique -->
+        <!-- Comercial Jose Antonio -->
+        <record id="jantonio_payments" model="res.groups">
+            <field name="name">Jose Antonio</field>
+        </record>
+
+         <record id="payment_term_jantonio" model="ir.rule">
+            <field name="name">Modos de pago Jose Antonio</field>
+            <field name="model_id" ref="account.model_account_journal"/>
+            <field name="domain_force">['|',('name','in',('Efectivo Jose Antonio','Cheques / Pagarés')),('type','in',('sale','purchase','general'))]</field>
+            <field name="groups" eval="[(4, ref('dji_commercials_security.jantonio_payments'))]"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_read" eval="True"/>
+        </record>
+        <!-- Fin Comercial Jose Antonio -->
+        <!-- Comercial Vicente -->
+        <record id="vicente_payments" model="res.groups">
+            <field name="name">Vicente</field>
+        </record>
+
+         <record id="payment_term_vicente" model="ir.rule">
+            <field name="name">Modos de pago Vicente</field>
+            <field name="model_id" ref="account.model_account_journal"/>
+            <field name="domain_force">['|',('name','in',('Efectivo Vicente','Cheques / Pagarés')),('type','in',('sale','purchase','general'))]</field>
+            <field name="groups" eval="[(4, ref('dji_commercials_security.vicente_payments'))]"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_read" eval="True"/>
+        </record>
+        <!-- Fin Comercial Vicente -->
+    </data>
+</odoo>

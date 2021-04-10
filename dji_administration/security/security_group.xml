@@ -1,121 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- Comerciales -->
         <record id="commercial_group" model="res.groups">
             <field name="name">Comerciales</field>
             <field name="comment">Grupo de comerciales</field>
         </record>
-        <!-- Fin Comerciales -->
-        <!-- Administradores
-        <record id="admin_group" model="res.groups">
-            <field name="name">Administradores</field>
-            <field name="comment">Grupo de administración</field>
-            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-            <field name="menu_access"
-                   eval="[(4, ref('website.menu_website_configuration')),(4, ref('crm.crm_menu_root'))]"/>
-        </record>
-        Fin Administradores -->
-        <!-- eliminar WEBSITE de grupo interno-->
+
         <record id="website.menu_website_configuration" model="ir.ui.menu">
             <field name="groups_id" eval="[(3,ref('base.group_user'))]"/>
         </record>
-        <!-- Fin eliminar WEBSITE de grupo interno-->
-        <!-- eliminar CRM de grupo ventas solo mostrar documentos propios-->
+
         <record id="crm.crm_menu_root" model="ir.ui.menu">
             <field name="groups_id" eval="[(3,ref('sales_team.group_sale_salesman'))]"/>
         </record>
-        <!-- Fin eliminar CRM de grupo ventas solo mostrar documentos propios-->
-        <!-- eliminar Contabilidad de grupo facturacion-->
+
         <record id="account.account_invoicing_menu" model="ir.ui.menu">
             <field name="groups_id" eval="[(3,ref('account.group_account_invoice'))]"/>
         </record>
-        <!-- Fin eliminar Contabilidad de grupo facturacion-->
-        <!-- eliminar informes de grupo facturacion-->
+
         <record id="account.account_reports_management_menu" model="ir.ui.menu">
             <field name="groups_id" eval="[(3,ref('account.group_account_invoice'))]"/>
         </record>
-        <!-- Fin eliminar Informes de grupo facturacion-->
-        <!-- eliminar Cuentas bancarias de grupo facturacion-->
+
         <record id="account.menu_action_account_invoice_bank_journal_form" model="ir.ui.menu">
             <field name="groups_id" eval="[(3,ref('account.group_account_invoice'))]"/>
         </record>
-        <!-- Fin eliminar Cuentas bancarias de grupo facturacion-->
-        <!--  Coste  -->
+
         <record id="show_cost_price" model="res.groups">
             <field name="name">Show cost price</field>
             <field name="users" eval="[(4, ref('base.user_root'))]"/>
         </record>
-        <!--  Fin Coste  -->
-        <!--  Margen   -->
+
         <record id="show_margins" model="res.groups">
             <field name="name">Show Margins</field>
             <field name="users" eval="[(4, ref('base.user_root'))]"/>
         </record>
-        <!--  Fin Margen  -->
-        <!--  Registrar Pagos   -->
+
         <record id="register_payments" model="res.groups">
             <field name="name">Register Payments</field>
             <field name="users" eval="[(4, ref('base.user_root'))]"/>
             <field name="menu_access"
                    eval="[(4, ref('account.product_product_menu_sellable')),(4, ref('account.menu_action_account_invoice_bank_journal_form')),(4, ref('account.menu_action_move_out_receipt_type')),(4, ref('account_banking_mandate.mandate_menu')),(4, ref('account.menu_action_account_payments_receivable'))]"/>
         </record>
-        <!--  Registrar Pagos  -->
-        <!-- Reglas de registro -->
-        <!--Comerciales no pueden crear ni edtiar contactos -->
-        <record id="no_create_no_edit_contacts" model="ir.rule">
-            <field name="name">Contactos: no crear ni editar</field>
-            <field name="model_id" ref="base.model_res_partner"/>
-            <field name="domain_force">[('user_id', '=', 'XXX')]</field>
+
+        <record id="commercials_no_create_invoices" model="ir.rule">
+            <field name="name">No crear facturas a comerciales</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="domain_force">[('type', '!=', 'entry'), '|', ('invoice_user_id', '=', 0)]</field>
             <field name="groups" eval="[(4, ref('dji_administration.commercial_group'))]"/>
             <field name="perm_create" eval="True"/>
             <field name="perm_unlink" eval="True"/>
             <field name="perm_write" eval="True"/>
             <field name="perm_read" eval="False"/>
         </record>
-        <!--Comerciales no pueden crear ni edtiar contactos -->
-        <!-- Eliminar la regla de all journal entries para asientos contables-->
-        <!-- <delete model="ir.rule" id="account.account_move_see_all"/> -->
-        <!-- Fin Eliminar la regla de all journal entries para asientos contables-->
-        <!-- Regla para asientos contables filtrado a comerciales-->
+
         <record id="own_invoices" model="ir.rule">
             <field name="name">Facturas Propias</field>
             <field name="model_id" ref="edi_account.model_account_move"/>
-            <field name="domain_force">[('type', 'in', ('entry', 'out_invoice', 'out_refund', 'in_invoice', 'in_refund')), '|',
+            <field name="domain_force">[('type', 'in', ('entry', 'out_invoice', 'out_refund', 'in_invoice',
+                'in_refund')), '|',
                 ('invoice_user_id', '=', user.id), ('invoice_user_id', '=', False)]
             </field>
-            <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>
-            <field name="perm_create" eval="False"/>
-            <field name="perm_unlink" eval="False"/>
-            <field name="perm_write" eval="False"/>
-            <field name="perm_read" eval="True"/>
-        </record>
-        <!-- Fin Regla para asientos contables filtrado a comerciales-->
-        <!-- Regla para asientos contables sin filtrar a Administradores -->
-        <record id="all_invoices" model="ir.rule">
-            <field name="name">Todas las Facturas</field>
-            <field name="model_id" ref="edi_account.model_account_move"/>
-            <field name="domain_force">[(1, '=', 1)]</field>
-            <field name="groups" eval="[(4, ref('account.group_account_manager'))]"/>
-            <field name="perm_create" eval="False"/>
-            <field name="perm_unlink" eval="False"/>
-            <field name="perm_write" eval="False"/>
-            <field name="perm_read" eval="True"/>
-        </record>
-        <!-- Fin Regla para asientos contables sin filtrar a Administradores -->
-        <!-- Regla para que no se puedan crear ni editar clientes a comerciales-->
-        <record id="no_create_no_edit_contacts" model="ir.rule">
-            <field name="name">Contactos: no crear ni editar</field>
-            <field name="model_id" ref="base.model_res_partner"/>
-            <field name="domain_force">[('user_id', '=', 'XXX')]</field>
             <field name="groups" eval="[(4, ref('dji_administration.commercial_group'))]"/>
-            <field name="perm_create" eval="True"/>
-            <field name="perm_unlink" eval="True"/>
-            <field name="perm_write" eval="True"/>
-            <field name="perm_read" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_read" eval="True"/>
         </record>
-        <!-- Fin Regla para que no se puedan crear ni editar clientes a comerciales-->
-        <!-- Fin Reglas de registro -->
+
+        <record id="own_payment" model="ir.rule">
+            <field name="name">Pagos Propios</field>
+            <field name="model_id" ref="account.model_account_payment"/>
+            <field name="domain_force">['|',('create_uid', '=', user.id),('create_uid', '=', False)]</field>
+            <field name="groups" eval="[(4, ref('dji_administration.commercial_group'))]"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_read" eval="True"/>
+        </record>
 
         <!-- Facturación / Contabilidad/Clientes/Órdenes de cobro -->
         <record id="account_payment_order.account_payment_order_inbound_menu" model="ir.ui.menu">

@@ -147,9 +147,25 @@
                 <xpath expr="//field[@name='percent']" position="attributes">
                     <attribute name="groups">dji_administration.show_margins</attribute>
                 </xpath>
-               
+
             </field>
         </record>
         <!-- Fin vista de sale_order_line_margin_percent-->
     </data>
+
+<!--    <record id="account_commercial_view_invoice_tree" model="ir.ui.view">-->
+<!--        <field name="name">account_commercial_view_invoice_tree</field>-->
+<!--        <field name="model">account.move</field>-->
+<!--        <field name="mode">primary</field>-->
+<!--        <field name="inherit_id" ref="account.view_invoice_tree"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree position="attributes">-->
+<!--                <attribute name="create">False</attribute>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
 </odoo>
+
+
+

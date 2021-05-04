@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
+        <!-- commission Free-->
+         <record model="ir.ui.view" id="dji_administration.show_cost_price_form_product_template_commission">
+            <field name="name">show_cost_price_form_product_template_commission</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='commission_free']" position="before">
+                    <field name="is_admin" invisible="1"/>
+                </xpath>
+                 <xpath expr="//field[@name='commission_free']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                </xpath>
+            </field>
+         </record>
+        <!-- fin Commission free -->
+        <!-- can_be_expensed-->
+         <record model="ir.ui.view" id="dji_administration.show_cost_price_form_product_template_expensed">
+            <field name="name">show_cost_price_form_product_template_expensed</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='can_be_expensed']" position="before">
+                    <field name="is_admin" invisible="1"/>
+                </xpath>
+                 <xpath expr="//field[@name='can_be_expensed']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                </xpath>
+            </field>
+         </record>
+        <!-- Fin can_be_expensed -->
         <!-- Cost price -->
         <!--  Productos  -->
-        <record model="ir.ui.view" id="show_cost_price_form_product_template">
+        <record model="ir.ui.view" id="dji_administration.show_cost_price_form_product_template">
             <field name="name">show_cost_price_form_product_template</field>
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_only_form_view"/>
@@ -14,6 +44,65 @@
                 <xpath expr="//field[@name='standard_price']" position="attributes">
                     <attribute name="groups">dji_administration.show_cost_price</attribute>
                 </xpath>
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="is_admin" invisible="1"/>
+                </xpath>
+                <!--  no editar name  -->
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                </xpath>
+                <!--  Fin no editar name -->
+                <!--  no editar categ_id  -->
+                <xpath expr="//field[@name='categ_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                </xpath>
+                <!--  Fin no editar categ_id -->
+                <!--  no editar type  -->
+                <xpath expr="//field[@name='type']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                </xpath>
+                <!--  Fin no editar type -->
+                <!--  no editar company_id  -->
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                </xpath>
+                <!--  Fin no editar internal_notes -->
+                <!--  no editar company_id  -->
+                <xpath expr="//group/field[@name='description']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                </xpath>
+                <!--  Fin no editar internal_notes -->
+                <!--  no editar sale_ok  -->
+                <xpath expr="//div/field[@name='sale_ok']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                </xpath>
+                <!--  Fin no editar sale_ok -->
+                <!--  no editar purchase_ok  -->
+                <xpath expr="//div/field[@name='purchase_ok']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                </xpath>
+                <!--  Fin no editar purchase_ok -->
+                  <!--  no editar commisison free  -->
+                <!--<xpath expr="//div/field[@name='purchase_ok']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                </xpath>-->
+                <!--  Fin no editar commisison free -->
+                <!--  No ver costes  -->
+                <xpath expr="//label[@for='standard_price']" position="attributes">
+                    <attribute name="groups">dji_administration.show_cost_price</attribute>
+                </xpath>
+                <xpath expr="//div[@name='standard_price_uom']" position="replace">
+                    <div name="standard_price_uom" groups="dji_administration.show_cost_price">
+                        <field name="standard_price" widget="monetary" options="{'currency_field': 'cost_currency_id'}"/>
+                    </div>
+                </xpath>
+                <!--  Fin no ver costes  -->
+                <!--  No editar pvp -->
+                <xpath expr="//field[@name='list_price']" position="replace">
+                    <field name="can_edit_price" invisible="1"/>
+                    <field name="list_price" string="Sales Price" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}" attrs="{'readonly': [('can_edit_price', '=', False)]}"/>
+                </xpath>
+                <!--  Fin no editar pvp -->
             </field>
         </record>
         <record model="ir.ui.view" id="show_cost_price_tree_product_template">
@@ -41,6 +130,100 @@
         </record>
         <!--  Fin productos  -->
         <!--  Fin cost price -->
-
+        <record id="dji_administration.product_product_common_form_inherit_no_edit" model="ir.ui.view">
+            <field name="name">product.product.common.form.inherit.no.edit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='barcode']" position="before">
+                    <field name="is_admin" invisible="1"/>
+                </xpath>
+            <!--  no editar barcode  -->
+                <xpath expr="//field[@name='barcode']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                </xpath>
+            <!--  Fin no editar barcode -->
+            <!--  no editar default_code  -->
+                <xpath expr="//field[@name='default_code']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                </xpath>
+            <!--  Fin no editar default_code -->
+            </field>
+        </record>
+        <!--  No editar impuesto  -->
+        <record id="dji_administration.product_template_form_view_inherit_tax" model="ir.ui.view">
+            <field name="name">product.template.form.view.inherit.tax</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="account.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='taxes_id']" position="before">
+                    <field name="can_edit_tax" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='taxes_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_tax', '=', False)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--  Fin no editar impuesto  -->
+        <!--   Purchase Page   -->
+        <record model="ir.ui.view" id="dji_administration.show_purchase_page_form_product_product">
+            <field name="name">show.purchase.page.form.product.product</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="purchase.view_product_supplier_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='purchase']" position="attributes">
+                    <attribute name="groups">dji_administration.show_purchase_page</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--   Fin purchase page   -->
+        <!--   Inventory Page   -->
+        <record model="ir.ui.view" id="dji_administration.show_inventory_page_form_product_product">
+            <field name="name">show.inventory.page.form.product.product</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='inventory']" position="attributes">
+                    <attribute name="groups">dji_administration.show_inventory_page</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--   Fin Inventory page   -->
+        <!--   Accounting Page   -->
+        <record model="ir.ui.view" id="dji_administration.show_accounting_page_form_product_product">
+            <field name="name">show.accounting.page.form.product.product</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="account.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='invoicing']" position="attributes">
+                    <attribute name="groups">dji_administration.show_accounting_page</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--   Fin Accounting page   -->
+        <!--   Inventory Page   -->
+        <record model="ir.ui.view" id="dji_administration.show_sale_page_form_product_product">
+            <field name="name">show.sale.page.form.product.product</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='sales']" position="attributes">
+                    <attribute name="groups">dji_administration.show_sale_page</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--   Fin Inventory page   -->
+        <!--   E-Commerce Page   -->
+        <record model="ir.ui.view" id="dji_administration.show_ecommerce_page_form_product_product">
+            <field name="name">show.ecommerce.page.form.product.product</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='shop']" position="attributes">
+                    <attribute name="groups">dji_administration.show_ecommerce_page</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--   Fin E-Commerce page   -->
     </data>
 </odoo>

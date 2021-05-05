@@ -21,12 +21,6 @@
                 <xpath expr="//field[@name='name']" position="after">
                     <field name="is_admin" invisible="1"/>
                 </xpath>
-               <!-- <xpath expr="//field[@name='margin']" position="replace">
-                    <field name="margin" groups="dji_administration.show_margins"/>
-                </xpath> -->
-                <!--<xpath expr="//field[@name='invoice_line_ids']//field[@name='purchase_price']" position="replace">
-                    <field name="purchase_price" groups="dji_administration.show_cost_price"/>
-                </xpath>-->
                 <xpath expr="//field[@name='invoice_line_ids']//field[@name='price_unit']" position="replace">
                     <field name="can_edit_price" invisible="1"/>
                     <field name="price_unit" attrs="{'readonly': [('can_edit_price', '=', False)]}"/>

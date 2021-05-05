@@ -28,7 +28,18 @@
         <!--  Grupo de admins  -->
         <record id="administration_group" model="res.groups">
             <field name="name">Administrators</field>
-            <field name="comment">Administrators Group: * Permission to edit in products: - Name - Category - Type - Company - Internal Notes - Sale ok - Purchase ok - Barcode - Default code </field>
+            <field name="comment">Administrators Group:
+                                   * Permission to edit in products:
+                                      - Name
+                                      - Category
+                                      - Type
+                                      - Company
+                                      - Internal Notes
+                                      - Sale ok
+                                      - Purchase ok
+                                      - Barcode
+                                      - Default code
+            </field>
         </record>
         <!--  Fin Grupo de admins  -->
         <!-- Registrar pagos -->

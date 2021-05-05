@@ -1,14 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* dji_administration
+# 	* dji_administration
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-07 08:28+0000\n"
-"PO-Revision-Date: 2020-10-07 08:28+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2021-05-05 09:26+0000\n"
+"PO-Revision-Date: 2021-05-05 09:26+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,25 +16,356 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: dji_administration
-#: model_terms:ir.ui.view,arch_db:dji_administration.view_users_form_create_invoice
-msgid "Administration Roles"
-msgstr "Permisos de Administradción"
+#: model:res.groups,name:dji_administration.administration_group
+msgid "Administrators"
+msgstr "Administradores"
 
 #. module: dji_administration
-#: model:ir.model.fields,field_description:dji_administration.field_res_users__administrator
-#: model_terms:ir.ui.view,arch_db:dji_administration.view_users_form_create_invoice
-msgid "Administrator"
-msgstr "Administrador"
+#: model:res.groups,comment:dji_administration.administration_group
+msgid ""
+"Administrators Group:\n"
+"                                   * Permission to edit in products:\n"
+"                                      - Name\n"
+"                                      - Category\n"
+"                                      - Type\n"
+"                                      - Company\n"
+"                                      - Internal Notes\n"
+"                                      - Sale ok\n"
+"                                      - Purchase ok\n"
+"                                      - Barcode\n"
+"                                      - Default code\n"
+"            "
+msgstr "Grupo de administradores:\n"
+"                                   * Permiso para editar en productos:\n"
+"                                      - Nombre\n"
+"                                      - Categoria\n"
+"                                      - Tipo\n"
+"                                      - Empresa\n"
+"                                      - Notas Internas\n"
+"                                      - Puede ser vendido\n"
+"                                      - Puede ser comprado\n"
+"                                      - Código de barras\n"
+"                                      - Código interno\n""
+"           "
 
 #. module: dji_administration
-#: model:ir.model.fields,field_description:dji_administration.field_sale_order__is_administrator
-#: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__is_administrator
-msgid "Is Administrator"
-msgstr "Es Administrador"
+#: model:ir.model.fields,field_description:dji_administration.field_account_move__can_cancel_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_account_move_line__can_cancel_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__can_cancel_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_product_product__can_cancel_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_product_template__can_cancel_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order__can_cancel_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__can_cancel_invoice
+msgid "Can cancel Invoice"
+msgstr ""
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_account_move__can_create_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_account_move_line__can_create_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__can_create_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_product_product__can_create_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_product_template__can_create_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order__can_create_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__can_create_invoice
+msgid "Can create Invoice"
+msgstr ""
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_account_move__can_create_refund_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_account_move_line__can_create_refund_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__can_create_refund_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_product_product__can_create_refund_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_product_template__can_create_refund_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order__can_create_refund_invoice
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__can_create_refund_invoice
+msgid "Can create refund Invoice"
+msgstr ""
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_account_move__can_edit_tax
+#: model:ir.model.fields,field_description:dji_administration.field_account_move_line__can_edit_tax
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__can_edit_tax
+#: model:ir.model.fields,field_description:dji_administration.field_product_product__can_edit_tax
+#: model:ir.model.fields,field_description:dji_administration.field_product_template__can_edit_tax
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order__can_edit_tax
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__can_edit_tax
+msgid "Can edit Tax"
+msgstr ""
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_account_move__can_edit_account
+#: model:ir.model.fields,field_description:dji_administration.field_account_move_line__can_edit_account
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__can_edit_account
+#: model:ir.model.fields,field_description:dji_administration.field_product_product__can_edit_account
+#: model:ir.model.fields,field_description:dji_administration.field_product_template__can_edit_account
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order__can_edit_account
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__can_edit_account
+msgid "Can edit account"
+msgstr ""
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_account_move__can_edit_discounts
+#: model:ir.model.fields,field_description:dji_administration.field_account_move_line__can_edit_discounts
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__can_edit_discounts
+#: model:ir.model.fields,field_description:dji_administration.field_product_product__can_edit_discounts
+#: model:ir.model.fields,field_description:dji_administration.field_product_template__can_edit_discounts
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order__can_edit_discounts
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__can_edit_discounts
+msgid "Can edit discounts"
+msgstr ""
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_account_move__can_edit_price
+#: model:ir.model.fields,field_description:dji_administration.field_account_move_line__can_edit_price
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__can_edit_price
+#: model:ir.model.fields,field_description:dji_administration.field_product_product__can_edit_price
+#: model:ir.model.fields,field_description:dji_administration.field_product_template__can_edit_price
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order__can_edit_price
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__can_edit_price
+msgid "Can edit price"
+msgstr ""
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_account_move__can_edit_product_desc
+#: model:ir.model.fields,field_description:dji_administration.field_account_move_line__can_edit_product_desc
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__can_edit_product_desc
+#: model:ir.model.fields,field_description:dji_administration.field_product_product__can_edit_product_desc
+#: model:ir.model.fields,field_description:dji_administration.field_product_template__can_edit_product_desc
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order__can_edit_product_desc
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__can_edit_product_desc
+msgid "Can edit product_desc"
+msgstr ""
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_account_move__can_edit_product_id
+#: model:ir.model.fields,field_description:dji_administration.field_account_move_line__can_edit_product_id
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__can_edit_product_id
+#: model:ir.model.fields,field_description:dji_administration.field_product_product__can_edit_product_id
+#: model:ir.model.fields,field_description:dji_administration.field_product_template__can_edit_product_id
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order__can_edit_product_id
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__can_edit_product_id
+msgid "Can edit product_id"
+msgstr ""
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_account_move__can_edit_quantity
+#: model:ir.model.fields,field_description:dji_administration.field_account_move_line__can_edit_quantity
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__can_edit_quantity
+#: model:ir.model.fields,field_description:dji_administration.field_product_product__can_edit_quantity
+#: model:ir.model.fields,field_description:dji_administration.field_product_template__can_edit_quantity
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order__can_edit_quantity
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__can_edit_quantity
+msgid "Can edit quantity"
+msgstr ""
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.cancel_invoice
+msgid "Cancel invoice"
+msgstr "Cancelar Factura"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.commercial_group
+msgid "Comerciales"
+msgstr "Comerciales"
+
+#. module: dji_administration
+#: model_terms:ir.ui.view,arch_db:dji_administration.saleorder_form_ihnerit
+msgid "Create Invoice"
+msgstr "Crear Factura"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.create_invoice
+msgid "Create invoice"
+msgstr "Crear Factura"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.create_refund_invoice
+msgid "Create refund invoice"
+msgstr "Crear FActura Rectificativa"
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.edit_account
+msgid "Edit accounts invoice"
+msgstr "Editar cuenta en factura"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.edit_discounts
+msgid "Edit discounts"
+msgstr "Editar descuentos"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.edit_product_desc
+msgid "Edit product description in invoice"
+msgstr "Editar descripción de producto en factura"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.edit_product_id
+msgid "Edit product in invoice"
+msgstr "Editar producto en factura"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.edit_quantity
+msgid "Edit quantity invoice"
+msgstr "Editar cantidad en factura"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.edit_sale_price
+msgid "Edit sale price"
+msgstr "Editar precio de venta"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.edit_tax
+msgid "Edit tax"
+msgstr "Editar impuestos"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.commercial_group
+msgid "Grupo de comerciales"
+msgstr "Grupo de comerciales"
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__id
+msgid "ID"
+msgstr "ID"
+
+#. module: dji_administration
+#: model:ir.model,name:dji_administration.model_account_move
+msgid "Journal Entries"
+msgstr "Asientos contables"
+
+#. module: dji_administration
+#: model:ir.model,name:dji_administration.model_account_move_line
+msgid "Journal Item"
+msgstr "Apunte contable"
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule____last_update
+msgid "Last Modified on"
+msgstr "Ultima modificación en"
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__write_uid
+msgid "Last Updated by"
+msgstr "Ultima actualización en"
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.cancel_invoice
+msgid "Permission to cancel invoices"
+msgstr "Permiso para cancelar facturas"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.create_invoice
+msgid "Permission to create invoices"
+msgstr "Permiso para crear facturas"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.create_refund_invoice
+msgid "Permission to create refund invoices"
+msgstr "Permiso para crear facturas rectificativas"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.edit_account
+msgid "Permission to edit account in invoice"
+msgstr "Permiso para editar cuenta en factura"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.edit_discounts
+msgid "Permission to edit discounts"
+msgstr ""
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.edit_product_desc
+msgid "Permission to edit product description in invoice"
+msgstr "Permiso para editar descripción del producto en factura"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.edit_product_id
+msgid "Permission to edit product in invoice"
+msgstr "Permiso para ecitar producto en factura"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.edit_quantity
+msgid "Permission to edit quantity in invoice"
+msgstr "Permiso para editar cantidad en factura"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.edit_sale_price
+msgid "Permission to edit sale price"
+msgstr "Permiso para editar precio de venta"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.edit_tax
+msgid "Permission to edit taxes"
+msgstr "Permiso para editar impuestos"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.show_ecommerce_page
+msgid "Permission to view E-Commerce page"
+msgstr "Permiso para ver pestaña E-commerce"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.show_accounting_page
+msgid "Permission to view accounting page"
+msgstr "Permiso para ver pestaña facturación"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.show_cost_price
+msgid "Permission to view costs"
+msgstr "Permiso para ver costes"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.show_inventory_page
+msgid "Permission to view inventory page"
+msgstr "Permiso para ver pestaña inventario"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.show_margins
+msgid "Permission to view margins"
+msgstr "Permiso para ver márgenes"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.show_purchase_page
+msgid "Permission to view purchase page"
+msgstr "Permiso para ver pestaña compras"
+
+#. module: dji_administration
+#: model:res.groups,comment:dji_administration.show_sale_page
+msgid "Permission to view sale page"
+msgstr "Permiso para ver pestaña ventas"
+
+#. module: dji_administration
+#: model:ir.model,name:dji_administration.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.register_payments
+msgid "Register Payments"
+msgstr "Registrar Pagos"
 
 #. module: dji_administration
 #: model:ir.model,name:dji_administration.model_sale_order
-msgid "Sale Order"
+msgid "Sales Order"
 msgstr "Pedido de venta"
 
 #. module: dji_administration
@@ -43,9 +374,35 @@ msgid "Sales Order Line"
 msgstr "Línea de pedido de venta"
 
 #. module: dji_administration
-#: model:ir.model,name:dji_administration.model_res_users
-msgid "Users"
-msgstr "Usuarios"
+#: model_terms:ir.ui.view,arch_db:dji_administration.show_cost_price_form_product_template
+msgid "Sales Price"
+msgstr ""
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.show_accounting_page
+msgid "Show Accounting Page"
+msgstr "Mostrar pestaña facturación"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.show_ecommerce_page
+msgid "Show E-Commerce Page"
+msgstr "Mostrar pestaña E-commerce"
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_account_move__show_ecommerce_page
+#: model:ir.model.fields,field_description:dji_administration.field_account_move_line__show_ecommerce_page
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__show_ecommerce_page
+#: model:ir.model.fields,field_description:dji_administration.field_product_product__show_ecommerce_page
+#: model:ir.model.fields,field_description:dji_administration.field_product_template__show_ecommerce_page
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order__show_ecommerce_page
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__show_ecommerce_page
+msgid "Show Ecommerce Page"
+msgstr "Mostrar pestaña E-commerce"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.show_inventory_page
+msgid "Show Inventory Page"
+msgstr "Mostrar pestaña inventario"
 
 #. module: dji_administration
 #: model:res.groups,name:dji_administration.show_margins
@@ -53,11 +410,32 @@ msgid "Show Margins"
 msgstr "Mostrar Márgenes"
 
 #. module: dji_administration
+#: model:res.groups,name:dji_administration.show_purchase_page
+msgid "Show Purcahse Page"
+msgstr "Mostrar pestaña de compras"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.show_sale_page
+msgid "Show Sale Page"
+msgstr ""
+
+#. module: dji_administration
 #: model:res.groups,name:dji_administration.show_cost_price
 msgid "Show cost price"
 msgstr "Mostrar precio de coste"
 
 #. module: dji_administration
-#: model:res.groups,name:dji_administration.register_payments
-msgid "Register Payments"
-msgstr "Registrar Pagos"
+#: model:ir.model,name:dji_administration.model_administrator_mixin_rule
+msgid "administrator.mixin.rule"
+msgstr ""
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_account_move__is_admin
+#: model:ir.model.fields,field_description:dji_administration.field_account_move_line__is_admin
+#: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__is_admin
+#: model:ir.model.fields,field_description:dji_administration.field_product_product__is_admin
+#: model:ir.model.fields,field_description:dji_administration.field_product_template__is_admin
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order__is_admin
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__is_admin
+msgid "isAdmin"
+msgstr ""

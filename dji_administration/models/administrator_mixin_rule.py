@@ -4,6 +4,7 @@ from odoo import api, models, fields, _
 
 class AdministratorMixinRule(models.Model):
     _name = 'administrator.mixin.rule'
+    _description = 'Administrator mixin rule'
 
     is_admin = fields.Boolean(
         compute='_is_admin',

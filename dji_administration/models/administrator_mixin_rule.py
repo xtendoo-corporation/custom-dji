@@ -12,6 +12,12 @@ class AdministratorMixinRule(models.Model):
         default=lambda self: self._get_default_admin()
     )
 
+    is_commercial = fields.Boolean(
+        string="Check user ia a commercial",
+        help="Don't use this field only for older company",
+        default=False,
+    )
+
     def _is_admin(self):
         self.is_admin = self.env["res.users"].has_group(
             "dji_administration.administration_group"

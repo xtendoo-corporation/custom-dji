@@ -181,7 +181,7 @@ msgstr "Crear Factura"
 #. module: dji_administration
 #: model:res.groups,name:dji_administration.create_refund_invoice
 msgid "Create refund invoice"
-msgstr "Crear FActura Rectificativa"
+msgstr "Crear Factura Rectificativa"
 
 #. module: dji_administration
 #: model:ir.model.fields,field_description:dji_administration.field_administrator_mixin_rule__create_uid

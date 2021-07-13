@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <!-- Grupo -->
+            <record model="ir.module.category" id="group_commercials_security">
+                <field name="name">Sylonuba Comerciales</field>
+                <field name="sequence">60</field>
+            </record>
         <!-- Comercial Jose Gonzalez -->
         <record id="jose_gonzalez_payments" model="res.groups">
             <field name="name">Jose Gonzalez</field>
+           <field name="category_id" ref="group_commercials_security"/>
         </record>
 
          <record id="payment_term_joseli" model="ir.rule">
@@ -20,6 +26,7 @@
         <!-- Comercial Domingo -->
         <record id="domingo_payments" model="res.groups">
             <field name="name">Domingo</field>
+            <field name="category_id" ref="group_commercials_security"/>
         </record>
 
          <record id="payment_term_domingo" model="ir.rule">

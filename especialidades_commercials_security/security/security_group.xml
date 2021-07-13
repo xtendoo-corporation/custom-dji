@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+          <!-- Grupo -->
+            <record model="ir.module.category" id="group_commercials_security">
+                <field name="name">Especialidades Comerciales</field>
+                <field name="sequence">60</field>
+            </record>
         <!-- Comercial Juan Jose -->
         <record id="jjose_payments" model="res.groups">
             <field name="name">Juan Jose</field>
+            <field name="category_id" ref="group_commercials_security"/>
         </record>
 
          <record id="payment_term_jjose" model="ir.rule">
@@ -20,6 +26,7 @@
         <!-- Comercial Juan Jose -->
         <record id="marcos_payments" model="res.groups">
             <field name="name">Marcos</field>
+            <field name="category_id" ref="group_commercials_security"/>
         </record>
 
          <record id="payment_term_marcos" model="ir.rule">

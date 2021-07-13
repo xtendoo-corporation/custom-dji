@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+         <!-- Grupo -->
+            <record model="ir.module.category" id="group_commercials_security">
+                <field name="name">Distribuciones Joaquín Infante Comerciales</field>
+                <field name="sequence">60</field>
+            </record>
         <!-- Comercial Enrique -->
         <record id="enrique_payments" model="res.groups">
             <field name="name">Enrique</field>
+            <field name="category_id" ref="group_commercials_security"/>
         </record>
 
          <record id="payment_term_enrique" model="ir.rule">
@@ -20,6 +26,7 @@
         <!-- Comercial Jose Antonio -->
         <record id="jantonio_payments" model="res.groups">
             <field name="name">Jose Antonio</field>
+            <field name="category_id" ref="group_commercials_security"/>
         </record>
 
          <record id="payment_term_jantonio" model="ir.rule">
@@ -36,6 +43,7 @@
         <!-- Comercial Vicente -->
         <record id="vicente_payments" model="res.groups">
             <field name="name">Vicente</field>
+            <field name="category_id" ref="group_commercials_security"/>
         </record>
 
          <record id="payment_term_vicente" model="ir.rule">

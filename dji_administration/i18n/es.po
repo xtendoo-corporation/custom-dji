@@ -417,7 +417,7 @@ msgstr "Mostrar pestaña de compras"
 #. module: dji_administration
 #: model:res.groups,name:dji_administration.show_sale_page
 msgid "Show Sale Page"
-msgstr ""
+msgstr "Mostrar pestaña de ventas"
 
 #. module: dji_administration
 #: model:res.groups,name:dji_administration.show_cost_price

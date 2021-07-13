@@ -17,7 +17,7 @@
          </record>
         <!-- fin Commission free -->
         <!-- can_be_expensed-->
-         <record model="ir.ui.view" id="dji_administration.show_cost_price_form_product_template_expensed">
+        <!-- <record model="ir.ui.view" id="dji_administration.show_cost_price_form_product_template_expensed">
             <field name="name">show_cost_price_form_product_template_expensed</field>
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_only_form_view"/>
@@ -29,7 +29,7 @@
                     <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
                 </xpath>
             </field>
-         </record>
+         </record>-->
         <!-- Fin can_be_expensed -->
         <!-- Cost price -->
         <!--  Productos  -->

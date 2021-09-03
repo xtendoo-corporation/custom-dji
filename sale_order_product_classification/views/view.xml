@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="sale_order_product_classification.sale_order_classification" model="ir.ui.view">
+        <field name="name">sale.order.classification</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree" />
+        <field name="type">tree</field>
+        <field name="field_parent">child_ids</field>
+        <field name="arch" type="xml">
+            <field name="expected_date" position="before">
+                <field
+                    name="classification_ids"
+                    widget="many2many_tags"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="sale_order_product_classification.sale_order_classification_form" model="ir.ui.view">
+        <field name="name">sale.order.classification.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <field name="payment_term_id" position="before">
+                <field
+                    name="classification_ids"
+                    widget="many2many_tags"
+                />
+            </field>
+        </field>
+    </record>
+
+      <record id="sale_order_product_classification.sale_order_filter" model="ir.ui.view">
+        <field name="name">sale.order.classification.search</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter" />
+        <field name="arch" type="xml">
+            <field name='order_line' position="after">
+                <field name="classification_ids" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

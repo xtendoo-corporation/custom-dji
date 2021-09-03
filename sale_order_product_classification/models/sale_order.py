@@ -9,16 +9,19 @@ import logging
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    classification_ids = fields.Many2many(
+    classification_ids = fields.Char(
         compute="_compute_sale_order_classification",
         string="Classification",
-        comodel_name="product.classification",
+        store = "True"
     )
 
     def _compute_sale_order_classification(self):
         for so in self:
-            ids = []
-            for line in so.order_line:
-                if not ids.count(line.product_id.product_tmpl_id.product_classification_id.id):
-                    ids.append(line.product_id.product_tmpl_id.product_classification_id.id)
-            so.write({'classification_ids': [(6,0,ids)]})
+            ids = ''
+            for line in so.order_line.filtered(lambda l: l.product_id.product_tmpl_id.product_classification_id.id != False):
+                print(line.product_id.product_tmpl_id.product_classification_id)
+                if ids.find(line.product_id.product_tmpl_id.product_classification_id.name) < 0:
+                    if ids != '':
+                        ids += ', '
+                    ids +=line.product_id.product_tmpl_id.product_classification_id.name
+            so.classification_ids = ids

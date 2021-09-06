@@ -195,7 +195,7 @@ class AdministratorMixinRule(models.Model):
     )
 
     def _show_ecommerce_page(self):
-        self._show_ecommerce_page = self.env["res.users"].has_group(
+        self.show_ecommerce_page = self.env["res.users"].has_group(
             "dji_administration.show_ecommerce_page"
         )
 

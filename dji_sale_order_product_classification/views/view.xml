@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record id="sale_order_product_classification.sale_order_classification" model="ir.ui.view">
+    <record id="dji_sale_order_product_classification.sale_order_classification" model="ir.ui.view">
         <field name="name">sale.order.classification</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_quotation_tree" />
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='expected_date']" position="before">
-                <field name="classification_ids" />
+                <field name="classification_str"/>
             </xpath>
         </field>
     </record>
 
-    <record id="sale_order_product_classification.sale_order_classification_form" model="ir.ui.view">
+    <record id="dji_sale_order_product_classification.sale_order_classification_form" model="ir.ui.view">
         <field name="name">sale.order.classification.form</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="type">form</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_term_id']" position="before">
-                <field name="classification_ids" />
+                <field name="classification_str"/>
             </xpath>
         </field>
     </record>
 
-    <record id="sale_order_product_classification.sale_order_filter" model="ir.ui.view">
+    <record id="dji_sale_order_product_classification.sale_order_filter" model="ir.ui.view">
         <field name="name">sale.order.classification.search</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_sales_order_filter" />
         <field name="arch" type="xml">
             <field name='order_line' position="after">
-                <field name="classification_ids" domain="[['classification_ids','=',self]]"/>
+                <field name="classification_str"/>
             </field>
         </field>
     </record>
 
-    <record id="sale_order_product_classification.sale_order_search" model="ir.ui.view">
+    <record id="dji_sale_order_product_classification.sale_order_search" model="ir.ui.view">
         <field name="name">sale.order.classification.filter</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation" />
         <field name="arch" type="xml">
             <xpath expr="//filter[@name='filter_create_date']" position="after">
-                <filter string="Ambiente" name="filter_ambient_class" domain="[['classification_ids','=','AMBIENTE']]"/>
+                <filter string="Ambiente" name="filter_ambient_class" domain="[['classification_str','=','AMBIENTE']]"/>
             </xpath>
            <xpath expr="//filter[@name='filter_create_date']" position="after">
-                <filter string="Refrigerado" name="filter_cooled_class" domain="[['classification_ids','=','REFRIGERADO']]"/>
+                <filter string="Refrigerado" name="filter_cooled_class" domain="[['classification_str','=','REFRIGERADO']]"/>
             </xpath>
              <xpath expr="//filter[@name='filter_create_date']" position="after">
                  <separator/>
-                <filter string="Congelado" name="filter_frozen_class" domain="[['classification_ids','=','CONGELADO']]"/>
+                <filter string="Congelado" name="filter_frozen_class" domain="[['classification_str','=','CONGELADO']]"/>
             </xpath>
         </field>
     </record>

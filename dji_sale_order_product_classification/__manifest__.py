@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Sale order product classification",
-    "summary": """Sale order product clasification""",
+    "name": "DJI Sale order product classification",
+    "summary": """DJI Sale order product classification""",
     "version": "13.0.1.0.0",
-    "description": """Sale order product classification""",
+    "description": """DJI Sale order product classification""",
     "author": "Dani Domínguez",
     "company": "Xtendoo",
     "website": "https://xtendoo.es/",

@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+         <template id="show_button_send_mail_in_pic.show_button_send_mail_in_pic_view"
+              inherit_id="stock_picking_send_by_mail.view_picking_form">
+             <xpath expr="//button[@name='action_picking_send']" position="replace">
+                 <button name="action_picking_send" string="Send by Email" attrs="{'invisible': False]}" type="object" groups="base.group_user"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

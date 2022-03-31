@@ -15,3 +15,13 @@ class SaleOrder(models.Model):
                 raise ValidationError(
                     _('No puede confirmar un pedido con precio 0.00 en alguna linea'))
         return res
+
+    def _write(self, value):
+        for line in self.order_line:
+            if line.price_unit == 0.00:
+                raise ValidationError(
+                    _('No puede guardar un pedido con precio 0.00 en alguna linea'))
+            print("*" * 80)
+            print("values", value)
+            print("*" * 80)
+        return super(SaleOrder, self)._write(value)

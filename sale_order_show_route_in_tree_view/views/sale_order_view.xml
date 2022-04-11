@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--margin-->
+        <record id="dji_administration.saleorder_form_ihnerit_margins" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.margins</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="route_id"></field>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

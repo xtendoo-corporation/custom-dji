@@ -17,8 +17,9 @@ class SaleOrder(models.Model):
         return res
 
     def _write(self, value):
-        for line in self.order_line:
-            if line.price_unit == 0.00 and line.product_id and self.state != 'draft':
-                raise ValidationError(
-                    _('No puede guardar un pedido con precio 0.00 en alguna linea'))
+        for sale in self:
+            for line in sale.order_line:
+                if line.price_unit == 0.00 and line.product_id and sale.state != 'draft':
+                    raise ValidationError(
+                        _('No puede guardar un pedido con precio 0.00 en alguna linea'))
         return super(SaleOrder, self)._write(value)

@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="dji_update_cost_view" model="ir.ui.view">
+        <field name="name">DJI Update Cost</field>
+        <field name="model">dji.update.cost</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="DJI Update Cost">
+                <h2>DJI Update Cost</h2>
+                <footer>
+                    <button
+                        name="product_update_cost"
+                        string="DJI Update Cost"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button
+                        string="Cancelar"
+                        class="btn-secondary"
+                        special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="dji_update_cost_action" model="ir.actions.act_window">
+        <field name="name">DJI Update Cost</field>
+        <field name="res_model">dji.update.cost</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

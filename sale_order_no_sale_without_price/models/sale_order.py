@@ -10,16 +10,15 @@ class SaleOrder(models.Model):
 
     def _action_confirm(self):
         res = super(SaleOrder, self)._action_confirm()
-        for line in self.order_line:
-            if line.price_unit == 0.00 and line.product_id and self.state != 'draft':
+        for sale in self.filtered(lambda s: sale.state != 'draft'):
+            if sale.order_line.filtered(lambda l: l.price_unit == 0.00 and l.product_id):
                 raise ValidationError(
                     _('No puede confirmar un pedido con precio 0.00 en alguna linea'))
         return res
 
     def _write(self, value):
-        for sale in self:
-            for line in sale.order_line:
-                if line.price_unit == 0.00 and line.product_id and sale.state != 'draft':
-                    raise ValidationError(
-                        _('No puede guardar un pedido con precio 0.00 en alguna linea'))
+        for sale in self.filtered(lambda s: sale.state != 'draft'):
+            if sale.order_line.filtered(lambda l: l.price_unit == 0.00 and l.product_id):
+                raise ValidationError(
+                    _('No puede guardar un pedido con precio 0.00 en alguna linea'))
         return super(SaleOrder, self)._write(value)

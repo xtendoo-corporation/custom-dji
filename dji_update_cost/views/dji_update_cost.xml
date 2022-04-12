@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Darío Cruz - Xtendoo.es
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <menuitem
+        id="dji_update_cost_manuitem"
+        name="DJI Update Cost"
+        parent="base.menu_custom"
+        action="dji_update_cost_action"
+     />
+</odoo>

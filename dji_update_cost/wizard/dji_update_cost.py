@@ -36,9 +36,4 @@ class DJIUpdateCost(models.TransientModel):
 
     def product_update_cost(self):
         self.ensure_one()
-
-        print("*" * 80)
-        print("product_update_cost:")
-        print("*" * 80)
-
         self._dji_update_cost()

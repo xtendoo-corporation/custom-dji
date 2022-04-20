@@ -11,6 +11,11 @@ class ProductTemplate(models.Model):
     @api.onchange('standard_price')
     def onchange_standard_price(self):
         product = self.env['product.product'].search([('product_tmpl_id', '=', self.id)])
+        print("*" * 80)
+        print("En product template")
+        print(self.standard_price)
+        print(product.standard_price)
+        print("*" * 80)
         if self.standard_price != product.standard_price:
             product.standard_price = self.standard_price
 
@@ -22,5 +27,10 @@ class ProductProduct(models.Model):
     @api.onchange('standard_price')
     def onchange_standard_price(self):
         product_template = self.env['product.template'].search([('id', '=', self.id)])
+        print("*" * 80)
+        print("En product product")
+        print(product_template.standard_price)
+        print(self.standard_price)
+        print("*" * 80)
         if product_template.standard_price != self.standard_price:
             product_template.standard_price = self.standard_price

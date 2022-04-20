@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <!--margin-->
-        <record id="dji_administration.saleorder_form_ihnerit_margins" model="ir.ui.view">
+        <record id="saleorder_form_ihnerit_margins" model="ir.ui.view">
             <field name="name">sale.order.form.inherit.margins</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_quotation_tree"/>

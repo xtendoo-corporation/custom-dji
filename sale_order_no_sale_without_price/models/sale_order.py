@@ -19,6 +19,7 @@ class SaleOrder(models.Model):
     def _write(self, value):
         for sale in self.filtered(lambda s: s.state != 'draft'):
             if sale.order_line.filtered(lambda l: l.price_unit == 0.00 and l.product_id):
+                print("sale order line", sale.order_line.order_id)
                 raise ValidationError(
                     _('No puede guardar un pedido con precio 0.00 en alguna linea'))
         return super(SaleOrder, self)._write(value)

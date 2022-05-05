@@ -1,7 +1,7 @@
 # -- coding: utf-8 --
 
 from odoo import api, models, fields,_
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 
 
 class SaleOrder(models.Model):
@@ -20,6 +20,6 @@ class SaleOrder(models.Model):
         for sale in self.filtered(lambda s: s.state != 'draft'):
             if sale.order_line.filtered(lambda l: l.price_unit == 0.00 and l.product_id):
                 print("sale order line", sale.order_line.order_id)
-                raise ValidationError(
+                raise UserError(
                     _('No puede guardar un pedido con precio 0.00 en alguna linea'))
         return super(SaleOrder, self)._write(value)

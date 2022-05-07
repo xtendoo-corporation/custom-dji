@@ -8,6 +8,7 @@ class SaleOrder(models.Model):
 
     @api.depends('picking_ids.state')
     def _compute_picking_state_done(self):
+        self.is_picking_state_done = False
         for sale in self:
             sale.is_picking_state_done = bool(sale.picking_ids.filtered(lambda p: p.state == 'done'))
 

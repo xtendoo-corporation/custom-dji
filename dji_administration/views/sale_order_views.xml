@@ -128,5 +128,18 @@
         </record>
         <!--    Fin buscar mas... (ventas)    -->
 
+        <!-- Tipo en vista de pedidos -->
+       <record id="view_order_tree" model="ir.ui.view">
+            <field name="name">sale.order.type.view.list</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                    <field name="is_picking_state_done"/>
+                </field>
+            </field>
+        </record>
+
     </data>
 </odoo>

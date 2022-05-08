@@ -136,7 +136,7 @@
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <field name="state" position="before">
-                    <field name="is_picking_state_done"/>
+                    <field name="is_picking_state_done" optional="hide"/>
                 </field>
             </field>
         </record>

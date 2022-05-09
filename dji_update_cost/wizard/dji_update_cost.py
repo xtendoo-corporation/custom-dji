@@ -9,9 +9,7 @@ class DJIUpdateCost(models.TransientModel):
     def _dji_update_cost(self):
         products = self.env["product.template"].search([("type", "=", "product")])
         for product in products:
-
             print("product:", product.name)
-
             po = ( self.env["purchase.order"]
                     .sudo()
                     .search(
@@ -36,13 +34,12 @@ class DJIUpdateCost(models.TransientModel):
                     )
                 )
                 if po_line:
-
                     print("price:", po_line.price_unit)
-
-                    product.standard_price = po_line.price_unit
+                    if po_line.discount:
+                        product.standard_price = po_line.price_unit * (1 - po_line.discount / 100)
+                    else:
+                        product.standard_price = po_line.price_unit
 
     def product_update_cost(self):
         self.ensure_one()
-        print("*"*80)
         self._dji_update_cost()
-        print("*"*80)

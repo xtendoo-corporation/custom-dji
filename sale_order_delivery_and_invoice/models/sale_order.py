@@ -19,6 +19,3 @@ class SaleOrder(models.Model):
         invoices = self._create_invoices()
         for invoice in invoices:
             invoice.action_post()
-            print("-"*120)
-            print("VALIDACION DE LA FACTURA REALIZADA")
-            print("-"*120)

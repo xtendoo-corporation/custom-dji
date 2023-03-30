@@ -1,7 +1,7 @@
 {
-    'name': 'dji_administration',
+    'name': 'Dji Administration',
     'summary': """Administration settings for DJI""",
-    'version': '13.0.1.0.0',
+    'version': '14.0.1.0.0',
     'description': """Administration settings for DJI""",
     'author': 'Dani Domínguez',
     'company': 'Xtendoo',

@@ -1,11 +1,11 @@
 {
-    'name': 'Dji Administration',
+    'name': 'Custom DJI Administration',
     'summary': """Administration settings for DJI""",
     'version': '14.0.1.0.0',
     'description': """Administration settings for DJI""",
     'author': 'Dani Domínguez',
     'company': 'Xtendoo',
-    'website': 'http://xtendoo.es',
+    'website': 'https://xtendoo.es',
     'category': 'Admin Tools',
     'depends': [
         'base',

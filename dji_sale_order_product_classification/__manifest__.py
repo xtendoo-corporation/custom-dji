@@ -9,9 +9,9 @@
     "website": "https://xtendoo.es/",
     "category": "Extra Tools",
     "depends": [
-                "sale",
-                "xtendoo_product_classification"
-                ],
+        "sale",
+        "xtendoo_product_classification"
+    ],
     "data": [
         "views/view.xml",
     ],

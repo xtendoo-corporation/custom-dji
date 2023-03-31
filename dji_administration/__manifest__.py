@@ -14,9 +14,10 @@
         'website',
         'crm',
         'sale_margin',
-        'sale_order_line_margin_percent',
-        'sale_order_margin_percent',
         'account',
+        'stock',
+        'account_invoice_margin',
+        'sale_order_line_margin_percent',
     ],
     'license': 'AGPL-3',
     'data': [

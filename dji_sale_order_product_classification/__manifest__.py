@@ -2,7 +2,7 @@
 {
     "name": "DJI Sale order product classification",
     "summary": """DJI Sale order product classification""",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "description": """DJI Sale order product classification""",
     "author": "Dani Domínguez",
     "company": "Xtendoo",

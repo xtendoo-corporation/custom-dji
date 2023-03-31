@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_bank_statement_import
-# 
+#
 # Translators:
 # Martin Trigaux, 2018
 # Jesús Alan Ramos Rodríguez <alan.ramos@jarsa.com.mx>, 2018
@@ -13,10 +13,10 @@
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2020
 # Gelo Joga Landoo <gj@landoo.es>, 2020
 # Andres Ordonez <aor@odoo.com>, 2020
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~11.5\n"
+"Project-Id-Version: Odoo Server 14.05\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 13:17+0000\n"
 "PO-Revision-Date: 2018-08-24 09:15+0000\n"

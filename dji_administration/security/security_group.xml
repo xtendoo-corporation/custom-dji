@@ -1,47 +1,47 @@
 <odoo>
     <data>
-         <!-- Grupo Administration-->
-            <record model="ir.module.category" id="group_administration_security">
-                <field name="name">Permisos de Administración</field>
-                <field name="description">Administrators Group:
-                                   * Permission to edit in products:
-                                      - Name
-                                      - Category
-                                      - Type
-                                      - Company
-                                      - Internal Notes
-                                      - Sale ok
-                                      - Purchase ok
-                                      - Barcode
-                                      - Default code
+        <!-- Grupo Administration-->
+        <record model="ir.module.category" id="group_administration_security">
+            <field name="name">Permisos de Administración</field>
+            <field name="description">Administrators Group:
+                * Permission to edit in products:
+                - Name
+                - Category
+                - Type
+                - Company
+                - Internal Notes
+                - Sale ok
+                - Purchase ok
+                - Barcode
+                - Default code
             </field>
-                <field name="sequence">60</field>
-            </record>
+            <field name="sequence">60</field>
+        </record>
         <!--Grupo Administration-->
         <!-- Grupo Facturacion-->
-            <record model="ir.module.category" id="group_invoice_security">
-                <field name="name">Permisos de Facturación</field>
-                <field name="description">Permisos especiales para el módulo de Facturación</field>
-                <field name="sequence">60</field>
-            </record>
+        <record model="ir.module.category" id="group_invoice_security">
+            <field name="name">Permisos de Facturación</field>
+            <field name="description">Permisos especiales para el módulo de Facturación</field>
+            <field name="sequence">60</field>
+        </record>
         <!--Grupo Facturacion-->
-         <!-- Grupo Producto-->
-            <record model="ir.module.category" id="group_product_security">
-                <field name="name">Permisos en productos</field>
-                <field name="description">Permisos especiales para el módulo de productos</field>
-                <field name="sequence">60</field>
-            </record>
+        <!-- Grupo Producto-->
+        <record model="ir.module.category" id="group_product_security">
+            <field name="name">Permisos en productos</field>
+            <field name="description">Permisos especiales para el módulo de productos</field>
+            <field name="sequence">60</field>
+        </record>
         <!--Grupo Product-->
-         <!-- Grupo Otros-->
-            <record model="ir.module.category" id="group_others_security">
-                <field name="name">Otros permisos especiales</field>
-                <field name="description">Permisos especiales varios</field>
-                <field name="sequence">60</field>
-            </record>
+        <!-- Grupo Otros-->
+        <record model="ir.module.category" id="group_others_security">
+            <field name="name">Otros permisos especiales</field>
+            <field name="description">Permisos especiales varios</field>
+            <field name="sequence">60</field>
+        </record>
         <!--Grupo Otros-->
-         <record id="commercial_group" model="res.groups">
+        <record id="commercial_group" model="res.groups">
             <field name="name">Comerciales</field>
-             <field name="category_id" ref="group_administration_security"/>
+            <field name="category_id" ref="group_administration_security"/>
             <field name="comment">Grupo de comerciales</field>
         </record>
 
@@ -61,25 +61,25 @@
             <field name="groups_id" eval="[(3,ref('account.group_account_invoice'))]"/>
         </record>
 
-        <record id="account.menu_action_account_invoice_bank_journal_form" model="ir.ui.menu">
-            <field name="groups_id" eval="[(3,ref('account.group_account_invoice'))]"/>
-        </record>
+        <!--        <record id="account.menu_action_account_invoice_bank_journal_form" model="ir.ui.menu">-->
+        <!--            <field name="groups_id" eval="[(3,ref('account.group_account_invoice'))]"/>-->
+        <!--        </record>-->
 
         <!--  Grupo de admins  -->
         <record id="administration_group" model="res.groups">
             <field name="name">Administrators</field>
             <field name="category_id" ref="group_administration_security"/>
             <field name="comment">Administrators Group:
-                                   * Permission to edit in products:
-                                      - Name
-                                      - Category
-                                      - Type
-                                      - Company
-                                      - Internal Notes
-                                      - Sale ok
-                                      - Purchase ok
-                                      - Barcode
-                                      - Default code
+                * Permission to edit in products:
+                - Name
+                - Category
+                - Type
+                - Company
+                - Internal Notes
+                - Sale ok
+                - Purchase ok
+                - Barcode
+                - Default code
             </field>
         </record>
         <!--  Fin Grupo de admins  -->
@@ -89,7 +89,10 @@
             <field name="category_id" ref="group_invoice_security"/>
             <field name="users" eval="[(4, ref('base.user_root'))]"/>
             <field name="menu_access"
-                   eval="[(4, ref('account.product_product_menu_sellable')),(4, ref('account.menu_action_account_invoice_bank_journal_form')),(4, ref('account.menu_action_move_out_receipt_type')),(4, ref('account_banking_mandate.mandate_menu')),(4, ref('account.menu_action_account_payments_receivable'))]"/>
+                   eval="[(4, ref('account.product_product_menu_sellable')),
+                   (4, ref('account.menu_action_move_out_receipt_type')),
+                   (4, ref('account_banking_mandate.mandate_menu')),
+                   (4, ref('account.menu_action_account_payments_receivable'))]"/>
         </record>
         <!-- Fin Registrar pagos -->
         <!--  Margen   -->
@@ -172,7 +175,7 @@
             <field name="comment">Permission to cancel invoices</field>
         </record>
         <!--  Fin cancelar factura -->
-         <!--  Crear en factura -->
+        <!--  Crear en factura -->
         <record id="create_invoice" model="res.groups">
             <field name="name">Create invoice</field>
             <field name="category_id" ref="group_invoice_security"/>
@@ -228,7 +231,7 @@
             <field name="comment">Permission to view E-Commerce page</field>
         </record>
         <!--   Fin E-Commerce Page   -->
-         <record id="commercials_no_create_invoices" model="ir.rule">
+        <record id="commercials_no_create_invoices" model="ir.rule">
             <field name="name">No crear facturas a comerciales</field>
             <field name="model_id" ref="account.model_account_move"/>
             <field name="domain_force">[('type', '=', 'entry')]</field>
@@ -241,7 +244,7 @@
 
         <record id="own_invoices" model="ir.rule">
             <field name="name">Facturas Propias</field>
-            <field name="model_id" ref="edi_account.model_account_move"/>
+            <field name="model_id" ref="edi_account_oca.model_account_move"/>
             <field name="domain_force">[('type', 'in', ('entry', 'out_invoice', 'out_refund', 'in_invoice',
                 'in_refund')), '|',
                 ('invoice_user_id', '=', user.id), ('invoice_user_id', '=', False)]

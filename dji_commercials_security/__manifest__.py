@@ -1,5 +1,5 @@
 {
-    'name': 'Custom DJI Commercials Security',
+    'name': 'DJI Commercials Security',
     'summary': """Restricciones de seguridad para los comerciales del grupo DJI""",
     'version': '14.0.1.0.0',
     'description': """Restricciones de seguridad para los comerciales del grupo DJI""",

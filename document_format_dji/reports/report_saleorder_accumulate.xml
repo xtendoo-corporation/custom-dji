@@ -14,7 +14,7 @@
                     <table class="table table-condensed" style="border: none;">
                         <thead>
                             <tr style="line-height:10px; margin: 0px 0px 0px 0px;">
-                                <th style="width: 10%"></th>
+                                <th style="width: 10%">Código</th>
                                 <th style="width: 30%">Producto</th>
                                 <th style="width: 30%" class="text-right">Unidades</th>
                             </tr>
@@ -34,7 +34,7 @@
 
                                 <tr style="line-height:10px; margin: 0px 0px 0px 0px; border: none;">
                                     <td style="border: none;">
-                                        <span/>
+                                        <span t-esc="line['default_code']"/>
                                     </td>
                                     <td style="border: none;">
                                         <span t-esc="line['product_name']"/>

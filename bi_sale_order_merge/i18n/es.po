@@ -1,0 +1,124 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bi_sale_order_merge
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-31 11:38+0000\n"
+"PO-Revision-Date: 2021-03-31 11:38+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bi_sale_order_merge
+#: model_terms:ir.ui.view,arch_db:bi_sale_order_merge.view_order_merge_form_new_1
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: bi_sale_order_merge
+#: model:ir.model.fields,field_description:bi_sale_order_merge.field_order_merge__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: bi_sale_order_merge
+#: model:ir.model.fields,field_description:bi_sale_order_merge.field_order_merge__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: bi_sale_order_merge
+#: model:ir.model.fields,field_description:bi_sale_order_merge.field_order_merge__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: bi_sale_order_merge
+#: model:ir.model.fields,field_description:bi_sale_order_merge.field_order_merge__id
+msgid "ID"
+msgstr "IDENTIFICACIÓN"
+
+#. module: bi_sale_order_merge
+#: model:ir.model.fields,field_description:bi_sale_order_merge.field_order_merge____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: bi_sale_order_merge
+#: model:ir.model.fields,field_description:bi_sale_order_merge.field_order_merge__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por última vez por"
+
+#. module: bi_sale_order_merge
+#: model:ir.model.fields,field_description:bi_sale_order_merge.field_order_merge__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: bi_sale_order_merge
+#: model_terms:ir.ui.view,arch_db:bi_sale_order_merge.view_order_merge_form_new_1
+msgid "Merge"
+msgstr "Unir"
+
+#. module: bi_sale_order_merge
+#: model:ir.actions.act_window,name:bi_sale_order_merge.action_merge_sale_order
+msgid "Merge Sale Orders"
+msgstr "Fusionar órdenes de venta"
+
+#. module: bi_sale_order_merge
+#: model:ir.model,name:bi_sale_order_merge.model_order_merge
+msgid "Merge Sale orders"
+msgstr "Fusionar pedidos de venta"
+
+#. module: bi_sale_order_merge
+#: model:ir.model.fields,field_description:bi_sale_order_merge.field_order_merge__type
+msgid "Merge Type"
+msgstr "Tipo de combinación"
+
+#. module: bi_sale_order_merge
+#: model:ir.model.fields.selection,name:bi_sale_order_merge.selection__order_merge__type__exist_1
+msgid "Merge order on existing selected order and cancel others"
+msgstr "Combinar el pedido en el pedido seleccionado existente y cancelar otros"
+
+#. module: bi_sale_order_merge
+#: model:ir.model.fields.selection,name:bi_sale_order_merge.selection__order_merge__type__exist_2
+msgid "Merge order on existing selected order and delete others"
+msgstr "Combinar el pedido en el pedido seleccionado existente y eliminar otros"
+
+#. module: bi_sale_order_merge
+#: model_terms:ir.ui.view,arch_db:bi_sale_order_merge.view_order_merge_form_new_1
+msgid "Merge orders"
+msgstr "Fusionar pedidos"
+
+#. module: bi_sale_order_merge
+#: model:ir.model.fields,field_description:bi_sale_order_merge.field_order_merge__order
+msgid "Merge with"
+msgstr "Fusionarse con"
+
+#. module: bi_sale_order_merge
+#: model:ir.model.fields.selection,name:bi_sale_order_merge.selection__order_merge__type__new
+msgid "New Order and Cancel Selected"
+msgstr "Nuevo pedido y cancelar seleccionados"
+
+#. module: bi_sale_order_merge
+#: model:ir.model.fields.selection,name:bi_sale_order_merge.selection__order_merge__type__exist
+msgid "New order and Delete all selected order"
+msgstr "Nuevo pedido y Eliminar todos los pedidos seleccionados"
+
+#. module: bi_sale_order_merge
+#: model:ir.model.fields,field_description:bi_sale_order_merge.field_order_merge__order_to_merge
+msgid "Orders to merge"
+msgstr "Órdenes de fusión"
+
+#. module: bi_sale_order_merge
+#: code:addons/bi_sale_order_merge/wizard/order_merge_wiz.py:0
+#: code:addons/bi_sale_order_merge/wizard/order_merge_wiz.py:0
+#: code:addons/bi_sale_order_merge/wizard/order_merge_wiz.py:0
+#, python-format
+msgid "This sale order has been created from: <b>%s</b>"
+msgstr "Esta orden de venta se ha creado a partir de: <b>%s</b>"
+
+#. module: bi_sale_order_merge
+#: model_terms:ir.ui.view,arch_db:bi_sale_order_merge.view_order_merge_form_new_1
+msgid "or"
+msgstr "o"

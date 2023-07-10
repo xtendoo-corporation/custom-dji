@@ -5,17 +5,17 @@ from odoo.tools.misc import get_lang
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
-    def action_post(self):
-        res = super().action_post()
+    def post(self):
+        res = super().post()
         for invoice in self:
-            if invoice.partner_id.email and invoice.move_type == 'in_invoice' and invoice.partner_id.auto_invoice:
+            if invoice.partner_id.email and invoice.move_type == 'receivable' and invoice.partner_id.auto_invoice:
                 invoice.send_email()
         return res
 
 
     def send_email(self):
         template_id = (
-            self.env["mail.template"].search([("name", "=", "Factura: Enviar por correo electrónico")], limit=1).id
+            self.env["mail.template"].search([("name", "=", "Invoice: Send by email")], limit=1).id
         )
         template = self.env["mail.template"].browse(template_id)
         template.send_mail(self.id, force_send=True)

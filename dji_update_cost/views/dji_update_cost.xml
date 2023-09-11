@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <menuitem
-        id="dji_update_cost_manuitem"
+        id="dji_update_cost_menuitem"
         name="DJI Update Cost"
         parent="base.menu_custom"
         action="dji_update_cost_action"

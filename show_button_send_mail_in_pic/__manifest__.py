@@ -1,7 +1,7 @@
 {
     "name": "Show button send mail in pic",
     "summary": """Show button send mail in pic""",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "description": """Show button send mail in pic""",
     "author": "Daniel Dominguez",
     "company": "Xtendoo",

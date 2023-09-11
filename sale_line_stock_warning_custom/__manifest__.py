@@ -1,7 +1,7 @@
 {
     "name": "Sale line stock warning custom",
     "summary": """sale line stock warning custom para dji""",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "description": """sale line stock warning custom para dji""",
     "author": "Daniel Dominguez",
     "company": "Xtendoo",

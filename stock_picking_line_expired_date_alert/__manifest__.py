@@ -1,9 +1,9 @@
 {
     'name': 'Stock picking line expired date alert',
     'summary': """Stock picking line expired date alert""",
-    'version': '13.0.1.0.0',
+    'version': '14.0.1.0.0',
     'description': """Stock picking line expired date alert""",
-    'author': 'Camilo',
+    'author': 'Dani Domínguez',
     'company': 'Xtendoo',
     'website': 'http://xtendoo.es',
     'category': 'Admin Tools',

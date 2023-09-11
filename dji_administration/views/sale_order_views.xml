@@ -5,13 +5,30 @@
         <record id="dji_administration.saleorder_form_ihnerit_margins" model="ir.ui.view">
             <field name="name">sale.order.form.inherit.margins</field>
             <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale_margin.sale_margin_sale_order"/>
+            <field name="inherit_id" ref="sale_margin.sale_margin_sale_order_line_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='margin']" position="attributes">
                     <attribute name="groups">dji_administration.show_margins</attribute>
                 </xpath>
+                <xpath expr="//field[@name='margin_percent']" position="attributes">
+                    <attribute name="groups">dji_administration.show_margins</attribute>
+                </xpath>
+
+
             </field>
         </record>
+<!--        <record id="dji_administration.saleorder_form_ihnerit_margins_2" model="ir.ui.view">-->
+<!--            <field name="name">sale.order.form.inherit.margins.2</field>-->
+<!--            <field name="model">sale.order</field>-->
+<!--            <field name="inherit_id" ref="sale_order_line_margin_percent.view_order_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='margin_percent']" position="attributes">-->
+<!--                    <attribute name="groups">dji_administration.show_margins</attribute>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
 
         <!-- Fin margin-->
         <record id="dji_administration.saleorder_form_ihnerit" model="ir.ui.view">

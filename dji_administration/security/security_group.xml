@@ -84,25 +84,25 @@
         </record>
         <!--  Fin Grupo de admins  -->
         <!-- Registrar pagos -->
-        <record id="register_payments" model="res.groups">
-            <field name="name">Register Payments</field>
-            <field name="category_id" ref="group_invoice_security"/>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
-            <field name="menu_access"
-                   eval="[(4, ref('account.product_product_menu_sellable')),
-                   (4, ref('account.menu_action_move_out_receipt_type')),
-                   (4, ref('account_banking_mandate.mandate_menu')),
-                   (4, ref('account.menu_action_account_payments_receivable'))]"/>
-        </record>
+<!--        <record id="register_payments" model="res.groups">-->
+<!--            <field name="name">Register Payments</field>-->
+<!--            <field name="category_id" ref="group_invoice_security"/>-->
+<!--            <field name="users" eval="[(4, ref('base.user_root'))]"/>-->
+<!--            <field name="menu_access"-->
+<!--                   eval="[(4, ref('account.product_product_menu_sellable')),-->
+<!--                   (4, ref('account.menu_action_move_out_receipt_type')),-->
+<!--                   (4, ref('account_banking_mandate.mandate_menu')),-->
+<!--                   (4, ref('account.menu_action_account_payments_receivable'))]"/>-->
+<!--        </record>-->
         <!-- Fin Registrar pagos -->
-        <!--  Margen   -->
+          Margen
         <record id="show_margins" model="res.groups">
             <field name="category_id" ref="group_others_security"/>
             <field name="name">Show Margins</field>
             <field name="users" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to view margins</field>
         </record>
-        <!--  Fin Margen  -->
+          Fin Margen
         <!--  Coste  -->
         <record id="show_cost_price" model="res.groups">
             <field name="category_id" ref="group_others_security"/>
@@ -242,19 +242,19 @@
             <field name="perm_read" eval="False"/>
         </record>
 
-        <record id="own_invoices" model="ir.rule">
-            <field name="name">Facturas Propias</field>
-            <field name="model_id" ref="edi_account_oca.model_account_move"/>
-            <field name="domain_force">[('type', 'in', ('entry', 'out_invoice', 'out_refund', 'in_invoice',
-                'in_refund')), '|',
-                ('invoice_user_id', '=', user.id), ('invoice_user_id', '=', False)]
-            </field>
-            <field name="groups" eval="[(4, ref('dji_administration.commercial_group'))]"/>
-            <field name="perm_create" eval="False"/>
-            <field name="perm_unlink" eval="False"/>
-            <field name="perm_write" eval="False"/>
-            <field name="perm_read" eval="True"/>
-        </record>
+<!--        <record id="own_invoices" model="ir.rule">-->
+<!--            <field name="name">Facturas Propias</field>-->
+<!--            <field name="model_id" ref="edi_account_oca.model_account_move"/>-->
+<!--            <field name="domain_force">[('type', 'in', ('entry', 'out_invoice', 'out_refund', 'in_invoice',-->
+<!--                'in_refund')), '|',-->
+<!--                ('invoice_user_id', '=', user.id), ('invoice_user_id', '=', False)]-->
+<!--            </field>-->
+<!--            <field name="groups" eval="[(4, ref('dji_administration.commercial_group'))]"/>-->
+<!--            <field name="perm_create" eval="False"/>-->
+<!--            <field name="perm_unlink" eval="False"/>-->
+<!--            <field name="perm_write" eval="False"/>-->
+<!--            <field name="perm_read" eval="True"/>-->
+<!--        </record>-->
 
         <record id="own_payment" model="ir.rule">
             <field name="name">Pagos Propios</field>

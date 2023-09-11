@@ -56,9 +56,6 @@
                     <field name="can_edit_account" invisible="1"/>
                     <field name="asset_id" attrs="{'readonly': [('can_edit_account', '=', False)]}"/>
                 </xpath>
-                 <xpath expr="//field[@name='margin']" position="attributes">
-                    <attribute name="groups">dji_administration.show_margins</attribute>
-                </xpath>
                  <xpath expr="//page[@id='invoice_tab']/group" position="replace">
                      <group class="oe_subtotal_footer oe_right" attrs="{'invisible': ['|', ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt')),                                                                ('payment_state' ,'=', 'invoicing_legacy')]}">
                          <field name="margin" groups="dji_administration.show_margins"/>

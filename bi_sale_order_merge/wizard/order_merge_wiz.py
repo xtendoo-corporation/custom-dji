@@ -3,7 +3,6 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, RedirectWarning, ValidationError, Warning
-import copy
 
 
 class SaleOrderMerge(models.TransientModel):
@@ -54,20 +53,14 @@ class SaleOrderMerge(models.TransientModel):
 
     def merge_sale(self):
         sale_obj = self.env['sale.order']
-        mod_obj = self.env['ir.model.data']
         line_obj = self.env['sale.order.line']
-        action = mod_obj.xmlid_to_object('stock.stock_picking_action_picking_type')
-        form_view_id = mod_obj.xmlid_to_res_id('sale.view_order_form')
         sales = sale_obj.browse(self._context.get('active_ids', []))
         partners_list = []
         partners_list_write = []
-        line_list = []
         cancel_list = []
-        copy_list = []
-        vals = {}
         customer_ref = []
         partner_name = False
-        myString = ''
+        my_string = ''
 
         if len(sales) < 2:
             raise Warning('Please select multiple orders to merge in the list view.')
@@ -78,9 +71,9 @@ class SaleOrderMerge(models.TransientModel):
             if sale.client_order_ref:
                 customer_ref.append(sale.client_order_ref)
                 if len(customer_ref) > 1:
-                    myString = ",".join(customer_ref)
+                    my_string = ",".join(customer_ref)
                 else:
-                    myString = customer_ref[0]
+                    my_string = customer_ref[0]
 
         msg_origin = ""
         origin_list = []
@@ -97,11 +90,11 @@ class SaleOrderMerge(models.TransientModel):
 
         if not self.merge_with_diff_partner:
             if self.sale_order:
-                self.sale_order.write({'client_order_ref': myString})
+                self.sale_order.write({'client_order_ref': my_string})
             if self.type == 'new':
                 partner_name = sales and sales[0].partner_id.id
                 new_sale = sale_obj.create(
-                    {'partner_id': partner_name, 'client_order_ref': myString, 'origin': msg_origin, 'state': 'draft'})
+                    {'partner_id': partner_name, 'client_order_ref': my_string, 'origin': msg_origin, 'state': 'draft'})
                 for sale in sales:
                     partners_list.append(sale.partner_id)
                     if not partners_list[1:] == partners_list[:-1]:
@@ -127,7 +120,7 @@ class SaleOrderMerge(models.TransientModel):
             if self.type == 'exist':
                 partner_name = sales and sales[0].partner_id.id
                 new_sale = sale_obj.create(
-                    {'partner_id': partner_name, 'client_order_ref': myString, 'origin': msg_origin, 'state': 'draft'})
+                    {'partner_id': partner_name, 'client_order_ref': my_string, 'origin': msg_origin, 'state': 'draft'})
                 for sale in sales:
                     partners_list_write.append(sale.partner_id)
 
@@ -160,7 +153,6 @@ class SaleOrderMerge(models.TransientModel):
                     partners_list_write.append(self.sale_order.partner_id)
                     cancel_list.append(sale.id)
 
-                    user = partners_list_write
                     set1 = set(partners_list_write)
                     if len(set1) > 1:
                         raise Warning('You can only merge orders of same partners.')
@@ -231,7 +223,7 @@ class SaleOrderMerge(models.TransientModel):
         else:
             partner_name = self.partner_id.id
             new_sale = sale_obj.create(
-                {'partner_id': partner_name, 'client_order_ref': myString, 'origin': msg_origin, 'state': 'draft'})
+                {'partner_id': partner_name, 'client_order_ref': my_string, 'origin': msg_origin, 'state': 'draft'})
             for sale in sales:
                 partners_list.append(sale.partner_id)
                 cancel_list.append(sale)

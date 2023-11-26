@@ -12,7 +12,12 @@ Fusionar pedido de cliente, fusionar órdenes de compra, fusionar orden, fusiona
     'website': 'https://www.browseinfo.in',
     "price": 19,
     "currency": 'EUR',
-    'depends': ['base','sale_management','product'],
+    'depends': [
+        'base',
+        'sale_management',
+        'product',
+        'stock',
+    ],
     'data': [
         'views/order_merge_view.xml',
         'views/sale_order.xml',
@@ -28,4 +33,3 @@ Fusionar pedido de cliente, fusionar órdenes de compra, fusionar orden, fusiona
     "images":["static/description/Banner.png"],
 }
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

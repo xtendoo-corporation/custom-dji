@@ -1,21 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <act_window id="action_merge_sale_order"
-            name="Merge Sale Orders"
-            res_model="sale.order.merge"
-            binding_model="sale.order"
-            binding_type="action"
-            binding_views="list"
-            view_mode="form" target="new" />
 
-        <act_window id="action_merge_sale_order_lines"
-            name="Merge Order Lines"
-            res_model="sale.orderline.merge.wizard"
-            binding_model="sale.order"
-            binding_type="action"
-            binding_views="form"
-            view_mode="form" target="new" />
+        <record id="action_merge_sale_order" model="ir.actions.act_window">
+            <field name="name">Merge Sale Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.merge</field>
+            <field name="binding_model_id" ref="sale.model_sale_order" />
+            <field name="binding_type">action</field>
+            <field name="binding_view_types">list</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+<!--        <act_window id="action_merge_sale_order"-->
+<!--            name="Merge Sale Orders"-->
+<!--            res_model="sale.order.merge"-->
+<!--            binding_model="sale.order"-->
+<!--            binding_type="action"-->
+<!--            binding_views="list"-->
+<!--            view_mode="form" target="new" />-->
+
+        <record id="action_merge_sale_order_lines" model="ir.actions.act_window">
+            <field name="name">Merge Order Lines</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.orderline.merge.wizard</field>
+            <field name="binding_model_id" ref="sale.model_sale_order" />
+            <field name="binding_type">action</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+<!--        <act_window id="action_merge_sale_order_lines"-->
+<!--            name="Merge Order Lines"-->
+<!--            res_model="sale.orderline.merge.wizard"-->
+<!--            binding_model="sale.order"-->
+<!--            binding_type="action"-->
+<!--            binding_views="form"-->
+<!--            view_mode="form" target="new" />-->
 
     </data>
 </odoo>

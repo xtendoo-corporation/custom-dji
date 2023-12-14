@@ -9,7 +9,7 @@
     "category": "Extra Tools",
     "license": "AGPL-3",
     "depends": [
-        "document_format",
+        "dji_document_format",
     ],
     "data": [
         "views/delivery/delivery_document.xml",

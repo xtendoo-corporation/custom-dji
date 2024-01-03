@@ -359,7 +359,6 @@
                                     t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto"
                                 >
                                     <table class="table table-sm">
-                                        <!-- totales -->
                                         <t t-set="tax_totals" t-value="json.loads(doc.tax_totals_json)"/>
                                         <t t-call="account.document_tax_totals"/>
                                     </table>

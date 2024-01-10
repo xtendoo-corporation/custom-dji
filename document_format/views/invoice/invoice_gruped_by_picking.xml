@@ -429,7 +429,7 @@
                                         style="page-break-inside: avoid;"
                                     >
                                         <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
-                                    <t t-call="account.document_tax_totals"/>
+                                    <t t-call="document_format.document_tax_totals"/>
                                     </table>
                                 </div>
                             </div>

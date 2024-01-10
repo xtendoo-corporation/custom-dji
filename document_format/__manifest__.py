@@ -26,6 +26,7 @@
         "views/stock_picking/stock_picking_view.xml",
         "views/delivery/delivery_document.xml",
         "views/delivery/delivery_commodity.xml",
+        "views/invoice/account_tax_template.xml",
         "views/invoice/invoice_document.xml",
         "views/invoice/invoice_dossier.xml",
         "views/invoice/invoice_gruped_by_picking.xml",

@@ -327,7 +327,7 @@
                                 >
                                     <table class="table table-sm">
                                         <t t-set="tax_totals" t-value="json.loads(doc.tax_totals_json)"/>
-                                        <t t-call="account.document_tax_totals"/>
+                                        <t t-call="document_format.document_tax_totals"/>
                                     </table>
                                 </div>
                             </div>

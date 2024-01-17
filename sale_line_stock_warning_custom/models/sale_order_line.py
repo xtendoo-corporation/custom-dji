@@ -12,8 +12,11 @@ class SaleOrderLine(models.Model):
         super(SaleOrderLine, self)._compute_qty_to_deliver()
         """Compute the visibility of the inventory widget."""
         for line in self:
-            if line.display_qty_widget:
-                qty_total = 0.00
-                for qty in line.move_ids.filtered(lambda i: i.state == 'done').mapped("quantity_done"): qty_total += qty
-                if qty_total >= line.product_uom_qty:
+            if line.state in ('draft', 'sent') and line.product_type == 'product' and line.product_uom and line.qty_to_deliver > 0:
+                if line.state == 'sale' and not line.move_ids:
                     line.display_qty_widget = False
+                else:
+                    line.display_qty_widget = True
+            else:
+                line.display_qty_widget = False
+

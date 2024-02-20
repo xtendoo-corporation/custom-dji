@@ -16,7 +16,10 @@ class ReportSaleOrderLine(models.AbstractModel):
     def get_saleorder_lines(self, docids):
         records = []
         lines = self.env['sale.order.line'].read_group(
-            [('order_id', 'in', docids)],
+            [
+                ('order_id', 'in', docids),
+                ('display_type', '=', False)
+            ],
             ['product_id', 'product_uom_qty'],
             ['product_id'],
             lazy=False,

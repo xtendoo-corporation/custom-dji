@@ -40,6 +40,7 @@
         #"views/commissions/report_commission_liquidation.xml",
         "views/purchase/purchase.xml",
         "views/manufacture/manufacture_document.xml",
+        "report/report_saleorder_accumulate.xml",
     ],
     "installable": True,
     "auto_install": False,

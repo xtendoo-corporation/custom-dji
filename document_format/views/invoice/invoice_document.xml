@@ -113,6 +113,10 @@
                                     <strong>NIF:</strong>
                                     <span t-field="o.partner_id.vat"/>
                                 </li>
+                                <li t-if="o.reference_type == 'none' and o.payment_reference">
+                                    <strong>Referencia Pago:</strong>
+                                    <span t-field="o.payment_reference"/>
+                                </li>
                             </ul>
                         </div>
                         <!-- Fin datos del cliente -->

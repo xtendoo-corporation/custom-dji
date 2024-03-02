@@ -1,0 +1,15 @@
+<odoo>
+    <record id="view_account_payment_tree_inherit" model="ir.ui.view">
+        <field name="name">account.payment.tree.inherit</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="ref"/>
+            </xpath>
+            <xpath expr="//field[@name='amount_company_currency_signed']" position="after">
+                <field name="amount" widget="monetary" string="Amount" sum="Total"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

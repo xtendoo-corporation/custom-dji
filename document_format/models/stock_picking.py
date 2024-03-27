@@ -25,6 +25,8 @@ class StockPicking(models.Model):
                         if pic_id.name == picking.name:
                             picking.pic_name = alb_ids[i].name
                     i += 1
+            if not picking.pic_name:
+                picking.pic_name = picking.name
 
 
 

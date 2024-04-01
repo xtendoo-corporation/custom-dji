@@ -57,14 +57,14 @@
                 </xpath>
                 <!--  Fin no editar internal_notes -->
                 <!--  no editar sale_ok  -->
-                <xpath expr="//div/field[@name='sale_ok']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
-                </xpath>
+<!--                <xpath expr="//div/field[@name='sale_ok']" position="attributes">-->
+<!--                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>-->
+<!--                </xpath>-->
                 <!--  Fin no editar sale_ok -->
                 <!--  no editar purchase_ok  -->
-                <xpath expr="//div/field[@name='purchase_ok']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
-                </xpath>
+<!--                <xpath expr="//div/field[@name='purchase_ok']" position="attributes">-->
+<!--                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>-->
+<!--                </xpath>-->
                 <!--  Fin no editar purchase_ok -->
                 <!--  No ver costes  -->
                 <xpath expr="//label[@for='standard_price']" position="attributes">
@@ -196,16 +196,16 @@
         </record>
         <!--   Fin Inventory page   -->
         <!--   E-Commerce Page   -->
-        <record model="ir.ui.view" id="dji_administration.show_ecommerce_page_form_product_product">
-            <field name="name">show.ecommerce.page.form.product.product</field>
-            <field name="model">product.template</field>
-            <field name="inherit_id" ref="product.product_template_form_view"/>
-            <field name="arch" type="xml">
-                <xpath expr="//page[@name='shop']" position="attributes">
-                    <attribute name="groups">dji_administration.show_ecommerce_page</attribute>
-                </xpath>
-            </field>
-        </record>
+<!--        <record model="ir.ui.view" id="dji_administration.show_ecommerce_page_form_product_product">-->
+<!--            <field name="name">show.ecommerce.page.form.product.product</field>-->
+<!--            <field name="model">product.template</field>-->
+<!--            <field name="inherit_id" ref="product.product_template_form_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//page[@name='shop']" position="attributes">-->
+<!--                    <attribute name="groups">dji_administration.show_ecommerce_page</attribute>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
         <!--   Fin E-Commerce page   -->
     </data>
 </odoo>

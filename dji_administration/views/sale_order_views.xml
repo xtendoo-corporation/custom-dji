@@ -48,6 +48,13 @@
                 </xpath>
                 <!--  Fin no ver margen  -->
 
+                <!--  Edicion de tarifas  -->
+                <xpath expr="//field[@name='pricelist_id']" position="replace">
+                    <field name="is_admin" invisible="1"/>
+                    <field name="pricelist_id" options="{'no_open':True,'no_create': True}" attrs="{'readonly': [('is_admin', '=', False)]}" force_save="1"/>
+                </xpath>
+                <!--  Fin Edicion de tarifas  -->
+
                 <!--  No editar precio unitario  -->
                 <xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="replace">
                     <field name="can_edit_price" invisible="1"/>

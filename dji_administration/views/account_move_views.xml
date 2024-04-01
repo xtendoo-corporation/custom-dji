@@ -62,7 +62,7 @@
                          <field name="margin_percent" groups="dji_administration.show_margins"/>
                          <field name="amount_tax" invisible="1"/>
                          <field name="amount_untaxed" attrs="{'invisible': [('amount_tax', '=', 0)]}"/>
-                         <field name="amount_by_group" widget="tax-group-custom-field" nolabel="1" colspan="2" attrs="{'invisible': [('amount_tax', '=', 0)]}"/>
+<!--                         <field name="amount_by_group" widget="tax-group-custom-field" nolabel="1" colspan="2" attrs="{'invisible': [('amount_tax', '=', 0)]}"/>-->
                          <field name="commission_total" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible': [                         ('move_type', 'not in', ['out_invoice', 'out_refund'])                     ]}"/>
                          <field name="amount_total" attrs="{'invisible': [('amount_tax', '!=', 0)]}"/>
                          <field name="amount_total" class="oe_subtotal_footer_separator" attrs="{'invisible': [('amount_tax', '=', 0)]}"/>

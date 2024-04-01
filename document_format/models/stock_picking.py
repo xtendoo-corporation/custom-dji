@@ -14,7 +14,6 @@ class StockPicking(models.Model):
             picking.pic_name = picking.name
             alb_ids = self.env['stock.picking'].search([('sale_id', '=', picking.sale_id.id), ('name', 'like', 'ALB%')],order='date_done desc')
             pic_ids = self.env['stock.picking'].search([('sale_id', '=', picking.sale_id.id), ('name', 'like', 'PIC%')],order='date_done desc')
-            print(len(alb_ids))
             if "PIC" in picking.name:
                 if len(alb_ids) <= 1:
                     picking.pic_name = alb_ids.name

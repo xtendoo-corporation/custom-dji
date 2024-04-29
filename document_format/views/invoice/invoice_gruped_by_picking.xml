@@ -69,9 +69,9 @@
                                       <strong>Pedido:</strong>
                                     <span class="m-0" t-field="o.invoice_origin" />
                                 </li>
-                                <li t-if="o.ref" name="reference">
+                                <li t-if="o.reference_payment" name="reference">
                                     <strong>Referencia:</strong>
-                                    <span class="m-0" t-field="o.ref" />
+                                    <span class="m-0" t-field="o.reference_payment" />
                                 </li>
                                 <li t-if="o.invoice_payment_term_id" name="reference">
                                     <strong>Forma de Pago:</strong>

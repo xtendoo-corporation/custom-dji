@@ -11,3 +11,4 @@ class StockMoveLine(models.Model):
                 move_line.expiration_date = move_line.lot_id.expiration_date
             else:
                 move_line.expiration_date = False
+

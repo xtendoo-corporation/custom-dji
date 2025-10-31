@@ -1,0 +1,63 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* dji_administration
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-07 08:28+0000\n"
+"PO-Revision-Date: 2020-10-07 08:28+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dji_administration
+#: model_terms:ir.ui.view,arch_db:dji_administration.view_users_form_create_invoice
+msgid "Administration Roles"
+msgstr "Permisos de Administradción"
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_res_users__administrator
+#: model_terms:ir.ui.view,arch_db:dji_administration.view_users_form_create_invoice
+msgid "Administrator"
+msgstr "Administrador"
+
+#. module: dji_administration
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order__is_administrator
+#: model:ir.model.fields,field_description:dji_administration.field_sale_order_line__is_administrator
+msgid "Is Administrator"
+msgstr "Es Administrador"
+
+#. module: dji_administration
+#: model:ir.model,name:dji_administration.model_sale_order
+msgid "Sale Order"
+msgstr "Pedido de venta"
+
+#. module: dji_administration
+#: model:ir.model,name:dji_administration.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de pedido de venta"
+
+#. module: dji_administration
+#: model:ir.model,name:dji_administration.model_res_users
+msgid "Users"
+msgstr "Usuarios"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.show_margins
+msgid "Show Margins"
+msgstr "Mostrar Márgenes"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.show_cost_price
+msgid "Show cost price"
+msgstr "Mostrar precio de coste"
+
+#. module: dji_administration
+#: model:res.groups,name:dji_administration.register_payments
+msgid "Register Payments"
+msgstr "Registrar Pagos"

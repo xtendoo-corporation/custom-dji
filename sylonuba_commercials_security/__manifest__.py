@@ -1,7 +1,7 @@
 {
     'name': 'sylonuba_commercials_security',
     'summary': """Restricciones de seguridad para los comerciales del grupo sylonuba""",
-    'version': '16.0.1.0.0',
+    'version': '17.0.1.4.6.0',
     'description': """Restricciones de seguridad para los comerciales del grupo sylonuba""",
     'author': 'Dani Domínguez',
     'company': 'Xtendoo',

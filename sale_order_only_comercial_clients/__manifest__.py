@@ -8,7 +8,7 @@
 {
     "name": "Sale order only comercial clients",
     "summary": """Sale order only comercial clients""",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.4.6.0",
     "description": """Sale order only comercial clients""",
     "author": "Dani Domínguez",
     "company": "Xtendoo",

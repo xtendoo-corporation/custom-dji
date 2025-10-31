@@ -3,7 +3,7 @@
 {
     "name": "document_format_dji",
     "summary": """Formatos de documentos Distribuciones Joaquin Infante""",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.4.6.0",
     "description": """Formatos de documentos Distribuciones Joaquin Infante""",
     "author": "DDL",
     "company": "Xtendoo",

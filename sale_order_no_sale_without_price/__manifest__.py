@@ -1,7 +1,7 @@
 {
     'name': 'Sale Order Not sale without price',
     'summary': """Sale Order Not sale without price""",
-    'version': '16.0.1.0.0',
+    'version': '17.0.1.4.6.0',
     'description': """Sale Order Not sale without price""",
     'author': 'Dani Domínguez',
     'company': 'Xtendoo',

@@ -1,7 +1,7 @@
 {
     'name': 'Sale order delivery and invoice',
     'summary': """Sale order delivery and invoice""",
-    'version': '17.0.1.4.6.0',
+    'version': '17.0.1.4.6',
     'description': """Sale order delivery and invoice""",
     'author': 'Camilo',
     'company': 'Xtendoo',

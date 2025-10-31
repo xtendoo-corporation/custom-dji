@@ -3,7 +3,7 @@
 {
     "name": "Purchase show date order always",
     "summary": """Mostrar la fecha de pedido siempre en vista tree de compras""",
-    "version": "17.0.1.4.6.0",
+    "version": "17.0.1.4.6",
     "description": """Mostrar la fecha de pedido siempre en vista tree de compras""",
     "author": "DDL",
     "company": "Xtendoo",

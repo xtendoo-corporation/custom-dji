@@ -4,7 +4,7 @@
     "name": "DJI Update vendor price",
     "summary": """
         DJI Update vendor price""",
-    "version": "17.0.1.4.6.0",
+    "version": "17.0.1.4.6",
     "depends": [
         "purchase",
     ],

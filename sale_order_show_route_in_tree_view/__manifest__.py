@@ -1,7 +1,7 @@
 {
     'name': 'Sale order show route in tree view',
     'summary': """Sale order show route in tree view""",
-    'version': '17.0.1.4.6.0',
+    'version': '17.0.1.4.6',
     'description': """Sale order show route in tree view""",
     'author': 'Dani Domínguez',
     'company': 'Xtendoo',

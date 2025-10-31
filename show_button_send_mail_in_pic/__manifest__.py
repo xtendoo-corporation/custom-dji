@@ -1,7 +1,7 @@
 {
     "name": "Show button send mail in pic",
     "summary": """Show button send mail in pic""",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "description": """Show button send mail in pic""",
     "author": "Daniel Dominguez",
     "company": "Xtendoo",
@@ -12,7 +12,7 @@
         "stock_picking_send_by_mail",
     ],
     "data": [
-        "views/send_mail_view.xml",
+       # "views/send_mail_view.xml",
     ],
     "installable": True,
     "auto_install": False,

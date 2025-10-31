@@ -4,7 +4,7 @@
     "name": "Sale Order Delivery Product",
     "summary": """Insert a button on the sales order to directly access
                 the first of the deliveries and make the delivery.""",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Sale",
     "website": "https://xtendoo.es",
     "author": "Daniel Domínguez, Manuel Calero, Odoo Community Association (OCA)",
@@ -15,6 +15,6 @@
         "stock"
     ],
     "data": [
-        "views/sale_order_views.xml"
+       # "views/sale_order_views.xml"
     ],
 }

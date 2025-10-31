@@ -2,7 +2,7 @@
 # Part of BrowseInfo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Merge Sales Orders in Odoo',
-    'version': '15.0.1.0',
+    'version': '16.0.1.0',
     'category': 'Sales',
     'summary': 'Merge sale order merge sales order merge purchase order merge multiple sales order merge multiple purchase order merge mass sales order merge mass purchase order merger sale merger purchase merge Delivery order merge picking merge SO merge PO',
     'description': """
@@ -19,12 +19,12 @@ Fusionar pedido de cliente, fusionar órdenes de compra, fusionar orden, fusiona
         'stock',
     ],
     'data': [
-        'views/order_merge_view.xml',
-        'views/sale_order.xml',
-        'views/sale_order_line_merge.xml',
-        'views/res_config_settings.xml',
-        'wizard/merge_same_customer_so_views.xml',
-        'security/ir.model.access.csv',
+        #'views/order_merge_view.xml',
+        #'views/sale_order.xml',
+        #'views/sale_order_line_merge.xml',
+        #'views/res_config_settings.xml',
+        #'wizard/merge_same_customer_so_views.xml',
+        #'security/ir.model.access.csv',
     ],
     'installable': True,
     'auto_install': False,

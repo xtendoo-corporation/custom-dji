@@ -2,7 +2,7 @@
 {
     "name": "DJI Sale order product classification",
     "summary": """DJI Sale order product classification""",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "description": """DJI Sale order product classification""",
     "author": "Dani Domínguez",
     "company": "Xtendoo",
@@ -13,7 +13,7 @@
         "xtendoo_product_classification"
     ],
     "data": [
-        "views/view.xml",
+        #"views/view.xml",
     ],
     "license": "AGPL-3",
     "demo": [],

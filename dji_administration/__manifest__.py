@@ -1,7 +1,7 @@
 {
     'name': 'Custom DJI Administration',
     'summary': """Administration settings for DJI""",
-    'version': '14.0.1.0.0',
+    'version': '16.0.1.0.0',
     'description': """Administration settings for DJI""",
     'author': 'Dani Domínguez',
     'company': 'Xtendoo',
@@ -28,9 +28,9 @@
     'data': [
         'security/security_group.xml',
         'security/ir.model.access.csv',
-        'views/sale_order_views.xml',
-        'views/product_views.xml',
-        'views/account_move_views.xml',
+        #'views/sale_order_views.xml',
+        #'views/product_views.xml',
+        #'views/account_move_views.xml',
     ],
     'installable': True,
     'auto_install': True,

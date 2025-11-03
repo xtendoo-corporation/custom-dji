@@ -1,7 +1,7 @@
 {
     "name": "Document Format",
     "summary": """Formatos de documentos entregados por Xtendoo""",
-    "version": "17.0.1.4.6",
+    "version": "18.0.1.0.0",
     "description": """Formatos de documentos entregados por Xtendoo""",
     "author": "Manuel Calero, Daniel Dominguez",
     "company": "Xtendoo",

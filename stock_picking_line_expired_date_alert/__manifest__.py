@@ -1,7 +1,7 @@
 {
     'name': 'Stock picking line expired date alert',
     'summary': """Stock picking line expired date alert""",
-    'version': '17.0.1.4.6',
+    'version': '18.0.1.0.0',
     'description': """Stock picking line expired date alert""",
     'author': 'Dani Domínguez',
     'company': 'Xtendoo',

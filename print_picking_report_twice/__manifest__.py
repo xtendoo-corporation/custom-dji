@@ -1,7 +1,7 @@
 {
     "name": "Print picking report twice",
     "summary": """Permite la impresión de 2 copias de albarán""",
-    "version": "17.0.1.4.6",
+    "version": "18.0.1.0.0",
     "description": """Permite la impresión de 2 copias de albarán""",
     "author": "Daniel Dominguez",
     "company": "Xtendoo",

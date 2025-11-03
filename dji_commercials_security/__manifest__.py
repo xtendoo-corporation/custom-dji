@@ -1,7 +1,7 @@
 {
     'name': 'DJI Commercials Security',
     'summary': """Restricciones de seguridad para los comerciales del grupo DJI""",
-    'version': '17.0.1.4.6',
+    'version': '18.0.1.0.0',
     'description': """Restricciones de seguridad para los comerciales del grupo DJI""",
     'author': 'Dani Domínguez',
     'company': 'Xtendoo',

@@ -14,12 +14,11 @@
         "stock_picking_report_valued",
         "product",
         "account",
-        "account_invoice_report_due_list",
         "account_payment_partner",
         "account_invoice_report_grouped_by_picking",
         "mail",
         "contacts",
-        "sale_commission",
+        "sale_commission_oca",
     ],
     "data": [
         "data/paper_format_label.xml",

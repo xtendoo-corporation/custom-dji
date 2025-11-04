@@ -21,7 +21,7 @@
         'account_payment_return',
         'account_payment_return_import',
         'account_asset_management',
-        'sale_commission',
+        'sale_commission_oca',
         'account_invoice_margin',
     ],
     'license': 'AGPL-3',

@@ -14,7 +14,7 @@
     "author": "Xtendoo",
     "license": "AGPL-3",
     "data": [
-        "views/account_payment_view.xml",
+      #  "views/account_payment_view.xml",
     ],
     "application": True,
     "installable": True,

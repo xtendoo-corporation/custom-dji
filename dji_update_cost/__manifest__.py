@@ -11,8 +11,8 @@
         """,
     "data": [
         "security/ir.model.access.csv",
-        #"wizard/dji_update_cost.xml",
-        #"views/dji_update_cost.xml"
+        "wizard/dji_update_cost.xml",
+        "views/dji_update_cost.xml"
     ],
     "installable": True,
     "auto_install": True,

@@ -7,9 +7,9 @@
 <!--            <xpath expr="//field[@name='name']" position="after">-->
 <!--                <field name="ref"/>-->
 <!--            </xpath>-->
-<!--            <xpath expr="//field[@name='amount_company_currency_signed']" position="after">-->
-<!--                <field name="amount" widget="monetary" string="Amount" sum="Total"/>-->
-<!--            </xpath>-->
+            <xpath expr="//field[@name='amount_company_currency_signed']" position="after">
+                <field name="amount" widget="monetary" string="Amount" sum="Total"/>
+            </xpath>
         </field>
     </record>
 </odoo>

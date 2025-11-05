@@ -6,7 +6,6 @@
         <field name="name">sale.order.classification</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_quotation_tree"/>
-        <field name="type">tree</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='expected_date']" position="before">
                 <field name="classification_str"/>
@@ -18,7 +17,6 @@
         <field name="name">sale.order.classification.form</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
-        <field name="type">form</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_term_id']" position="before">
                 <field name="classification_str"/>

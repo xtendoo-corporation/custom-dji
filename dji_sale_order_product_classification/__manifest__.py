@@ -13,7 +13,7 @@
         "xtendoo_product_classification"
     ],
     "data": [
-        #"views/view.xml",
+        "views/view.xml",
     ],
     "license": "AGPL-3",
     "demo": [],

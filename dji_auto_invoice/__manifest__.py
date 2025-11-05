@@ -15,7 +15,7 @@
     "author": "Xtendoo",
     "license": "AGPL-3",
     "data": [
-        #"views/partner_view.xml",
+        "views/partner_view.xml",
     ],
     "application": True,
     "installable": True,

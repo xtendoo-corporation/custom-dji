@@ -13,7 +13,7 @@
     "license": "AGPL-3",
     "depends": ["stock"],
     "data": [
-        #"views/purchase_order.xml",
+        "views/purchase_order.xml",
     ],
     "demo": [],
     "installable": True,

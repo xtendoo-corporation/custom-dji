@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
-       <report
-            id="report_invoice_without_grouped"
-            string="Factura sin Agrupar"
-            model="account.move"
-            report_type="qweb-pdf"
-            name="document_format.report_invoice_not_grouped"
-            print_report_name="(object._get_report_base_filename())"
-        />
+<!--       <report-->
+<!--            id="report_invoice_without_grouped"-->
+<!--            string="Factura sin Agrupar"-->
+<!--            model="account.move"-->
+<!--            report_type="qweb-pdf"-->
+<!--            name="document_format.report_invoice_not_grouped"-->
+<!--            print_report_name="(object._get_report_base_filename())"-->
+<!--        />-->
+
+         <record id="document_format.report_invoice_without_grouped" model="ir.actions.report">
+            <field name="name">Factura sin Agrupar</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">document_format.report_invoice_not_grouped</field>
+            <field name="report_file">document_format.report_invoice_not_grouped</field>
+            <field name="attachment"/>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="binding_view_types">list,form</field>
+        </record>
+
         <template id="report_invoice_not_grouped">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
@@ -58,10 +71,10 @@
                                     <strong>Pedido:</strong>
                                     <span class="m-0" t-field="o.invoice_origin"/>
                                 </li>
-                                <li t-if="o.reference_payment" name="reference">
-                                    <strong>Referencia:</strong>
-                                    <span class="m-0" t-field="o.reference_payment"/>
-                                </li>
+<!--                                <li t-if="o.reference_payment" name="reference">-->
+<!--                                    <strong>Referencia:</strong>-->
+<!--                                    <span class="m-0" t-field="o.reference_payment"/>-->
+<!--                                </li>-->
                                 <li t-if="o.invoice_payment_term_id" name="reference">
                                     <strong>Forma de Pago:</strong>
                                     <span class="m-0" t-field="o.invoice_payment_term_id"/>
@@ -370,13 +383,14 @@
                                 <div
                                     t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto"
                                 >
-                                    <table
-                                        class="table table-sm"
-                                        style="page-break-inside: avoid;"
-                                    >
-                                        <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
-                                        <t t-call="document_format.document_tax_totals"/>
-                                    </table>
+                                                                   <!-- Tax totals summary (company currency) -->
+                                <t t-if="o.tax_totals.get('display_in_company_currency')">
+                                    <t t-set="tax_totals" t-value="o.tax_totals"/>
+                                    <t t-call="account.document_tax_totals_company_currency_template"/>
+                                </t>
+                                <t t-else="">
+                                    <div class="oe_structure"/>
+                                </t>
                                 </div>
                             </div>
                             <!-- Fin totales documento -->

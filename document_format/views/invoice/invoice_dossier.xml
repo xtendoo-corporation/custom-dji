@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
-        <report
-            id="report_invoice_dossier"
-            string="Informe"
-            model="account.move"
-            report_type="qweb-pdf"
-            name="document_format.format_report_invoice_document_dossier"
-            print_report_name="(object._get_report_base_filename())"
-        />
+<!--        <report-->
+<!--            id="report_invoice_dossier"-->
+<!--            string="Informe"-->
+<!--            model="account.move"-->
+<!--            report_type="qweb-pdf"-->
+<!--            name="document_format.format_report_invoice_document_dossier"-->
+<!--            print_report_name="(object._get_report_base_filename())"-->
+<!--        />-->
+
+        <record id="document_format.report_invoice_dossier" model="ir.actions.report">
+            <field name="name">Informe</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">document_format.format_report_invoice_document_dossier</field>
+            <field name="report_file">document_format.format_report_invoice_document_dossier</field>
+            <field name="attachment"/>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="binding_view_types">list,form</field>
+        </record>
+
         <template id="document_format.format_report_invoice_document_dossier">
             <t t-name="document_format.format_report_invoice_document_dossier">
             <t t-set="moneda" t-value=""/>
@@ -117,7 +130,7 @@
                                     <strong
                                         t-esc="subtotal"
                                         t-options='{"widget": "monetary", "display_currency": docs[0].currency_id}'
-                                    /> 
+                                    />
                                 </td>
                             </tr>
                         </table>

@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <report
-        string="Albarán de mercancía"
-        id="action_report_delivery"
-        model="stock.picking"
-        report_type="qweb-pdf"
-        name="document_format.report_delivery_commodity"
-        file="document_format.report_delivery_commodity"
-        print_report_name="'Delivery Commodity - %s - %s' % (object.partner_id.name or '', object.name)"
-    />
+<!--    <report-->
+<!--        string="Albarán de mercancía"-->
+<!--        id="action_report_delivery"-->
+<!--        model="stock.picking"-->
+<!--        report_type="qweb-pdf"-->
+<!--        name="document_format.report_delivery_commodity"-->
+<!--        file="document_format.report_delivery_commodity"-->
+<!--        print_report_name="'Delivery Commodity - %s - %s' % (object.partner_id.name or '', object.name)"-->
+<!--    />-->
+
+<record id="document_format.action_report_delivery" model="ir.actions.report">
+    <field name="name">Albarán de mercancía</field>
+    <field name="model">stock.picking</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">document_format.report_delivery_commodity</field>
+    <field name="report_file">document_format.report_delivery_commodity</field>
+    <field name="attachment"/>
+    <field name="binding_model_id" ref="stock.model_stock_picking"/>
+    <field name="binding_type">report</field>
+    <field name="binding_view_types">list,form</field>
+</record>
+
+
     <template id="document_format.report_delivery_commodity">
         <t t-foreach="docs" t-as="o">
             <t

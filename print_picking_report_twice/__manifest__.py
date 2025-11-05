@@ -9,10 +9,10 @@
     "category": "Extra Tools",
     "license": "AGPL-3",
     "depends": [
-        "dji_document_format",
+        "document_format",
     ],
     "data": [
-       # "views/delivery/delivery_document.xml",
+       "views/delivery/delivery_document.xml",
     ],
     "installable": True,
     "auto_install": False,

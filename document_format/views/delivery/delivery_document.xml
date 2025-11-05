@@ -231,7 +231,7 @@
                                             class="text-right"
                                             style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                         >
-                                            <span t-field="move_line.qty_done" />
+                                            <span t-field="move_line.quantity" />
                                         </td>
                                         <td
                                             class="text-right"

@@ -26,10 +26,10 @@ class AccountMove(models.Model):
                 picking_dict.setdefault(key, 0)
                 qty = 0
                 if move.location_id.usage == "customer":
-                    qty = -move.quantity_done * sign
+                    qty = -move.quantity * sign
                     has_returned_qty = True
                 elif move.location_dest_id.usage == "customer":
-                    qty = move.quantity_done * sign
+                    qty = move.quantity * sign
                 picking_dict[key] += qty
                 remaining_qty -= qty
             if not line.move_line_ids and line.sale_line_ids:

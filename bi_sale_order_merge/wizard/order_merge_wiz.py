@@ -2,7 +2,7 @@
 # Part of BrowseInfo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError, RedirectWarning, ValidationError, Warning
+from odoo.exceptions import UserError, RedirectWarning, ValidationError
 
 
 class SaleOrderMerge(models.TransientModel):

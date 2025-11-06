@@ -29,9 +29,7 @@
                             string="Create Invoice"
                             type="action"
                             class="btn-primary"
-                            attrs="{'invisible':
-                            ['|',   ('invoice_status', '!=', 'to invoice'),
-                                    ('can_create_invoice', '=', False)]}"/>
+                            invisible="invoice_status != 'to invoice' or not can_create_invoice"/>
                 </xpath>
                 <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="replace">
                     <attribute name="groups">account.group_account_invoice</attribute>
@@ -39,7 +37,7 @@
                             string="Create Invoice"
                             type="action"
                             class="btn-primary"
-                            attrs="{'invisible': True}"/>
+                            invisible="True"/>
                 </xpath>
 
                 <!--  No ver Margen  -->
@@ -51,27 +49,30 @@
                 <!--  Edicion de tarifas  -->
                 <xpath expr="//field[@name='pricelist_id']" position="replace">
                     <field name="is_admin" invisible="1"/>
-                    <field name="pricelist_id" options="{'no_open':True,'no_create': True}" attrs="{'readonly': [('is_admin', '=', False)]}" force_save="1"/>
+                    <field name="pricelist_id" options="{'no_open':True,'no_create': True}"
+                           readonly="not is_admin"/>
                 </xpath>
                 <!--  Fin Edicion de tarifas  -->
 
                 <!--  No editar precio unitario  -->
-                <xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="replace">
+                <xpath expr="//field[@name='order_line']/list//field[@name='price_unit']" position="replace">
                     <field name="can_edit_price" invisible="1"/>
                     <field name="is_admin" invisible="1"/>
-                    <field name="price_unit" attrs="{'readonly': [('can_edit_price', '=', False)]}"/>
+                    <field name="price_unit"
+                           readonly="not can_edit_price"/>
                 </xpath>
                 <xpath expr="//page[@name='order_lines']//field[@name='price_unit']" position="replace">
                     <field name="can_edit_price" invisible="1"/>
                     <field name="is_admin" invisible="1"/>
-                    <field name="price_unit" attrs="{'readonly': [('can_edit_price', '=', False)]}"/>
+                    <field name="price_unit"
+                           readonly="not can_edit_price"/>
                 </xpath>
                 <!--  Fin no editar precio unitario  -->
 
                 <!--  Ocultar coste en linea y no dejar editarlo a comerciales -->
-                <xpath expr="//field[@name='order_line']/tree//field[@name='purchase_price']" position="replace">
+                <xpath expr="//field[@name='order_line']/list//field[@name='purchase_price']" position="replace">
                     <field name="purchase_price" groups="dji_administration.show_cost_price"
-                           attrs="{'readonly': [('is_admin', '=', False)]}"/>
+                           readonly="not is_admin"/>
                 </xpath>
 
                 <!--   Abrir:Lineas del pedido   -->
@@ -81,33 +82,35 @@
                 <!--   Fin Abrir.Lineas del pedido   -->
 
                 <!--  No editar IVA  -->
-                <xpath expr="//field[@name='order_line']/tree//field[@name='tax_id']" position="replace">
+                <xpath expr="//field[@name='order_line']/list//field[@name='tax_id']" position="replace">
                     <field name="can_edit_tax" invisible="1"/>
                     <field name="tax_id" widget="many2many_tags" options="{'no_create': True}"
                            domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]"
-                           attrs="{'readonly': [('can_edit_tax', '=', False)]}"/>
+                           readonly="not can_edit_tax"/>
                 </xpath>
 
                 <xpath expr="//page[@name='order_lines']//field[@name='tax_id']" position="replace">
                     <field name="can_edit_tax" invisible="1"/>
                     <field name="tax_id" widget="many2many_tags" options="{'no_create': True}"
                            domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]"
-                           attrs="{'readonly': [('can_edit_tax', '=', False)]}"/>
+                           readonly="not can_edit_tax"/>
                 </xpath>
                 <!--  Fin no editar IVA  -->
 
                 <!--  No editar descuento 1  -->
-                <xpath expr="//field[@name='order_line']/tree//field[@name='discount']" position="replace">
+                <xpath expr="//field[@name='order_line']/list//field[@name='discount']" position="replace">
                     <field name="can_edit_discounts" invisible="1"/>
-                    <field name="discount" attrs="{'readonly': [('can_edit_discounts', '=', False)]}"/>
+                    <field name="discount"
+                           readonly="not can_edit_discounts"/>
                 </xpath>
                 <xpath expr="//page[@name='order_lines']//field[@name='discount']" position="replace">
                     <field name="can_edit_discounts" invisible="1"/>
-                    <field name="discount" attrs="{'readonly': [('can_edit_discounts', '=', False)]}"/>
+                    <field name="discount"
+                           readonly="not can_edit_discounts"/>
                 </xpath>
                 <!--  Fin no editar descuento 1 -->
 
-                <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                <xpath expr="//field[@name='order_line']/list" position="attributes">
                     <attribute name="limit">800</attribute>
                 </xpath>
 
@@ -115,24 +118,24 @@
         </record>
 
         <!--  Buscar mas... (ventas)   -->
-        <record id="product_template_tree_view_inherit" model="ir.ui.view" >
-            <field name="name">product.template.tree.view.inherit</field>
-            <field name="model">product.product</field>
-            <field name="inherit_id" ref="product.product_product_tree_view"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='standard_price']" position="attributes">
-                    <attribute name="groups">dji_administration.show_cost_price</attribute>
-                </xpath>
-            </field>
-        </record>
+<!--        <record id="product_template_tree_view_inherit" model="ir.ui.view" >-->
+<!--            <field name="name">product.template.tree.view.inherit</field>-->
+<!--            <field name="model">product.product</field>-->
+<!--            <field name="inherit_id" ref="product.product_product_list_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='standard_price']" position="attributes">-->
+<!--                    <attribute name="groups">dji_administration.show_cost_price</attribute>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
         <!--    Fin buscar mas... (ventas)    -->
 
         <!-- Tipo en vista de pedidos -->
-       <record id="view_order_tree" model="ir.ui.view">
+       <record id="view_order_list" model="ir.ui.view">
             <field name="name">sale.order.type.view.list</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_tree"/>
-            <field name="type">tree</field>
+            <field name="type">list</field>
             <field name="arch" type="xml">
                 <field name="state" position="before">
                     <field name="is_picking_state_done" optional="hide"/>

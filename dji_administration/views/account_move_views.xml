@@ -25,71 +25,80 @@
 
                 <xpath expr="//field[@name='invoice_line_ids']//field[@name='price_unit']" position="replace">
                     <field name="can_edit_price" invisible="1"/>
-                    <field name="price_unit" attrs="{'readonly': [('can_edit_price', '=', False)]}"/>
+                    <field name="price_unit"
+                           readonly="not can_edit_price"/>
                 </xpath>
 
                 <xpath expr="//field[@name='invoice_line_ids']//field[@name='account_id']" position="replace">
                     <field name="can_edit_account" invisible="1"/>
-                    <field name="account_id" attrs="{'readonly': [('can_edit_account', '=', False)]}"/>
+                    <field name="account_id"
+                           readonly="not can_edit_account"/>
                 </xpath>
 
                 <xpath expr="//field[@name='invoice_line_ids']//field[@name='quantity']" position="replace">
                     <field name="can_edit_quantity" invisible="1"/>
-                    <field name="quantity" attrs="{'readonly': [('can_edit_quantity', '=', False)]}"/>
+                    <field name="quantity"
+                           readonly="not can_edit_quantity"/>
                 </xpath>
 
                 <xpath expr="//field[@name='invoice_line_ids']//field[@name='discount']" position="replace">
                     <field name="can_edit_discounts" invisible="1"/>
-                    <field name="discount" attrs="{'readonly': [('can_edit_discounts', '=', False)]}"/>
+                    <field name="discount"
+                           readonly="not can_edit_discounts"/>
                 </xpath>
 
                 <xpath expr="//field[@name='invoice_line_ids']//field[@name='product_id']" position="replace">
                     <field name="can_edit_product_id" invisible="1"/>
-                    <field name="product_id" attrs="{'readonly': [('can_edit_product_id', '=', False)]}"/>
+                    <field name="product_id"
+                           readonly="not can_edit_product_id"/>
                 </xpath>
 
                 <xpath expr="//field[@name='invoice_line_ids']//field[@name='name']" position="replace">
                     <field name="can_edit_product_desc" invisible="1"/>
-                    <field name="name" attrs="{'readonly': [('can_edit_product_desc', '=', False)]}"/>
+                    <field name="name"
+                           readonly="not can_edit_product_desc"/>
                 </xpath>
 
                 <xpath expr="//field[@name='invoice_line_ids']//field[@name='asset_id']" position="replace">
                     <field name="can_edit_account" invisible="1"/>
-                    <field name="asset_id" attrs="{'readonly': [('can_edit_account', '=', False)]}"/>
+                    <field name="asset_id"
+                           readonly="not can_edit_account"/>
                 </xpath>
-                <xpath expr="//page[@id='invoice_tab']/group[@class='oe_invoice_lines_tab']" position="replace">
-                    <group col="12" class="oe_invoice_lines_tab">
-                        <group colspan="8">
-                            <field name="narration" placeholder="Terms and Conditions" class="oe_inline text-break"
-                                   nolabel="1"/>
-                        </group>
-                        <!-- Totals (only invoices / receipts) -->
-                        <group colspan="4">
-                            <group class="oe_subtotal_footer oe_right"
-                                   attrs="{'invisible': ['|', ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt')),                                                                        ('payment_state' ,'=', 'invoicing_legacy')]}">
-                                <field name="margin" groups="dji_administration.show_margins"/>
-                                <field name="margin_percent" groups="dji_administration.show_margins" colspan="3"/>
-                                <field name="amount_tax" invisible="1"/>
-                                <div style="margin-right:-100px;">
-                                    <field name="tax_totals_json" class="oe_invoice_outstanding_credits_debits" colspan="2"  widget="account-tax-totals-field" nolabel="1"/>
-                                </div>
-                                <field name="commission_total" widget="monetary"
-                                       options="{'currency_field': 'currency_id'}"
-                                       attrs="{'invisible': [                         ('move_type', 'not in', ['out_invoice', 'out_refund'])                     ]}"/>
-                                <field name="amount_total" attrs="{'invisible': [('amount_tax', '!=', 0)]}"/>
-                                <field name="amount_total" class="oe_subtotal_footer_separator"
-                                       attrs="{'invisible': [('amount_tax', '=', 0)]}"/>
-                                <field name="invoice_payments_widget" colspan="3" nolabel="1" widget="payment"/>
-                                <field name="amount_residual" class="oe_subtotal_footer_separator"
-                                       attrs="{'invisible': [('state', '=', 'draft')]}"/>
-                            </group>
-                            <field name="invoice_outstanding_credits_debits_widget"
-                                   class="oe_invoice_outstanding_credits_debits" colspan="2" nolabel="1"
-                                   widget="payment" attrs="{'invisible': [('state', '!=', 'posted')]}"/>
-                        </group>
+<!--                <xpath expr="//page[@id='invoice_tab']/group[@class='oe_invoice_lines_tab']" position="replace">-->
+<!--                    <group col="12" class="oe_invoice_lines_tab">-->
+<!--                        <group colspan="8">-->
+<!--                            <field name="narration" placeholder="Terms and Conditions" class="oe_inline text-break"-->
+<!--                                   nolabel="1"/>-->
+<!--                        </group>-->
+<!--                        &lt;!&ndash; Totals (only invoices / receipts) &ndash;&gt;-->
+<!--                        <group colspan="4">-->
+<!--                            <group class="oe_subtotal_footer oe_right"-->
+<!--                                   invisible="move_type not in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt') or payment_state == 'invoicing_legacy'">-->
+<!--                                <field name="margin" groups="dji_administration.show_margins"/>-->
+<!--                                <field name="margin_percent" groups="dji_administration.show_margins" colspan="3"/>-->
+<!--                                <field name="amount_tax" invisible="1"/>-->
+<!--                                <div style="margin-right:-100px;">-->
+<!--                                    <field name="tax_totals_json" class="oe_invoice_outstanding_credits_debits" colspan="2"  widget="account-tax-totals-field" nolabel="1"/>-->
+<!--                                </div>-->
+<!--                                <field name="commission_total" widget="monetary"-->
+<!--                                       options="{'currency_field': 'currency_id'}"-->
+<!--                                        invisible="move_type not in ('out_invoice', 'out_refund')"/>-->
+<!--                                <field name="amount_total"-->
+<!--                                       invisible="amount_tax != 0"/>-->
+<!--                                <field name="amount_total" class="oe_subtotal_footer_separator"-->
+<!--                                       invisible="amount_tax == 0"/>-->
+<!--                                <field name="invoice_payments_widget" colspan="3" nolabel="1" widget="payment"/>-->
+<!--                                <field name="amount_residual" class="oe_subtotal_footer_separator"-->
+<!--                                       invisible="state == 'draft'"/>-->
+<!--                            </group>-->
+<!--                            <field name="invoice_outstanding_credits_debits_widget"-->
+<!--                                   class="oe_invoice_outstanding_credits_debits" colspan="2" nolabel="1"-->
+<!--                                   widget="payment"-->
+<!--                                   invisible="state != 'posted'"/>-->
+<!--                        </group>-->
 
-                    </group>
-                </xpath>
+<!--                    </group>-->
+<!--                </xpath>-->
             </field>
         </record>
 
@@ -116,11 +125,11 @@
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
 
-                <xpath expr="//field[@name='invoice_line_ids']/tree" position="attributes">
+                <xpath expr="//field[@name='invoice_line_ids']/list" position="attributes">
                     <attribute name="limit">800</attribute>
                 </xpath>
 
-                <xpath expr="//field[@name='line_ids']/tree" position="attributes">
+                <xpath expr="//field[@name='line_ids']/list" position="attributes">
                     <attribute name="limit">800</attribute>
                 </xpath>
 

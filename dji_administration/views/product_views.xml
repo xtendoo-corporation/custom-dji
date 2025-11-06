@@ -11,7 +11,7 @@
                     <field name="is_admin" invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='commission_free']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                    <attribute name="readonly">is_admin == False</attribute>
                 </xpath>
             </field>
         </record>
@@ -33,27 +33,27 @@
                 </xpath>
                 <!--  no editar name  -->
                 <xpath expr="//field[@name='name']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                    <attribute name="readonly">not is_admin</attribute>
                 </xpath>
                 <!--  Fin no editar name -->
                 <!--  no editar categ_id  -->
                 <xpath expr="//field[@name='categ_id']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                    <attribute name="readonly">not is_admin</attribute>
                 </xpath>
                 <!--  Fin no editar categ_id -->
                 <!--  no editar type  -->
                 <xpath expr="//field[@name='type']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                    <attribute name="readonly">not is_admin</attribute>
                 </xpath>
                 <!--  Fin no editar type -->
                 <!--  no editar company_id  -->
                 <xpath expr="//field[@name='company_id']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                    <attribute name="readonly">not is_admin</attribute>
                 </xpath>
                 <!--  Fin no editar internal_notes -->
                 <!--  no editar company_id  -->
                 <xpath expr="//group/field[@name='description']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                    <attribute name="readonly">not is_admin</attribute>
                 </xpath>
                 <!--  Fin no editar internal_notes -->
                 <!--  no editar sale_ok  -->
@@ -82,7 +82,7 @@
                     <field name="can_edit_price" invisible="1"/>
                     <field name="list_price" string="Sales Price" widget="monetary"
                            options="{'currency_field': 'currency_id', 'field_digits': True}"
-                           attrs="{'readonly': [('can_edit_price', '=', False)]}"/>
+                           readonly="not can_edit_price"/>
                 </xpath>
                 <!--  Fin no editar pvp -->
             </field>
@@ -122,12 +122,12 @@
                 </xpath>
                 <!--  no editar barcode  -->
                 <xpath expr="//field[@name='barcode']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                    <attribute name="readonly">not is_admin</attribute>
                 </xpath>
                 <!--  Fin no editar barcode -->
                 <!--  no editar default_code  -->
                 <xpath expr="//field[@name='default_code']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('is_admin', '=', False)]}</attribute>
+                    <attribute name="readonly">not is_admin</attribute>
                 </xpath>
                 <!--  Fin no editar default_code -->
             </field>
@@ -142,7 +142,7 @@
                     <field name="can_edit_tax" invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='taxes_id']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('can_edit_tax', '=', False)]}</attribute>
+                    <attribute name="readonly">not is_admin</attribute>
                 </xpath>
             </field>
         </record>

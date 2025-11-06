@@ -8,13 +8,13 @@
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_quotation_send']" position="after">
-                <field name="picking_ids" invisible="1"></field>
+                <field name="picking_ids" invisible="1"/>
                 <button
                     string="Deliver Products"
                     type="object"
                     name="action_view_picking"
                     class="btn-primary"
-                    attrs="{'invisible':['|', ('state','!=','sale'), ('picking_ids','=',[])]}"
+                    invisible="state != 'sale' or not picking_ids"
                 />
             </xpath>
         </field>

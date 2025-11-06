@@ -13,7 +13,7 @@
     ],
     'license': 'AGPL-3',
     'data': [
-        #'views/stock_picking_view.xml'
+        'views/stock_picking_view.xml'
     ],
     'installable': True,
     'auto_install': True,

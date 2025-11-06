@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="sale.view_order_form" />
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='action_confirm']" position="after">
-                    <button name="delivery_and_invoice" type="object" string="Deliver and Invoice" class="btn-primary" style="color: #fff;" attrs="{'invisible': [('state', '!=', 'sale')]}"/>
+                    <button name="delivery_and_invoice" type="object" string="Deliver and Invoice" class="btn-primary" style="color: #fff;" invisible="state != 'sale'"/>
                 </xpath>
             </field>
         </record>

@@ -13,7 +13,7 @@
     ],
     'license': 'AGPL-3',
     'data': [
-        #'views/sale_order_invoice.xml'
+        'views/sale_order_invoice.xml'
     ],
     'installable': True,
     'auto_install': True,

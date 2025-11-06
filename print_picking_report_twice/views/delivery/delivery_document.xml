@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-    <!-- Herencia del template del informe-->
+    <!-- Herencia del tenplate del informe-->
         <template id="print_picking_report_twice.format_report_delivery_document"
               inherit_id="document_format.format_report_delivery_document">
             <xpath expr="//t[@t-call='document_format.report_delivery_document_xtendoo']" position="replace">
@@ -9,9 +8,8 @@
                 <t t-call="document_format.report_delivery_document_xtendoo" t-lang="o.partner_id.lang"/>
             </xpath>
         </template>
-    <!-- Fin Herencia del template del informe-->
+    <!-- Fin Herencia del tenplate del informe-->
 
     </data>
 </odoo>
-
 

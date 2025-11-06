@@ -24,6 +24,7 @@ class SaleOrderRecommendation(models.TransientModel):
         readonly=True,
         ondelete="cascade",
     )
+    currency_id = fields.Many2one(related="order_id.currency_id", store=True, readonly=True)
     months = fields.Float(
         default=6,
         required=True,
@@ -187,7 +188,7 @@ class SaleOrderRecommendationLine(models.TransientModel):
     _description = "Recommended product for current sale order"
     _order = "id"
 
-    currency_id = fields.Many2one(related="product_id.currency_id")
+    currency_id = fields.Many2one(related="wizard_id.order_id.currency_id", store=True, readonly=True)
     partner_id = fields.Many2one(related="wizard_id.order_id.partner_id")
     product_id = fields.Many2one("product.product", string="Product")
     price_unit = fields.Monetary(compute="_compute_price_unit")

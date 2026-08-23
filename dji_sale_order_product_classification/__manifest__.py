@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     "name": "DJI Sale order product classification",
     "summary": """DJI Sale order product classification""",

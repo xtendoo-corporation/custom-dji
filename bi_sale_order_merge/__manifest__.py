@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 # Part of BrowseInfo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Merge Sales Orders in Odoo',
-    'version': '16.0.1.0',
+    'version': "16.0.1.0.0",
     'category': 'Sales',
     'summary': 'Merge sale order merge sales order merge purchase order merge multiple sales order merge multiple purchase order merge mass sales order merge mass purchase order merger sale merger purchase merge Delivery order merge picking merge SO merge PO',
     'description': """

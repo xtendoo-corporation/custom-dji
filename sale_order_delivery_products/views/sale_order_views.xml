@@ -14,7 +14,7 @@
                     type="object"
                     name="action_view_picking"
                     class="btn-primary"
-                    attrs="{'invisible':['|', ('state','!=','sale'), ('picking_ids','=',[])]}"
+                    invisible="state != 'sale' or not picking_ids"
                 />
             </xpath>
         </field>

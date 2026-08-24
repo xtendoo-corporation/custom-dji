@@ -82,7 +82,7 @@
                     <field name="can_edit_price" invisible="1"/>
                     <field name="list_price" string="Sales Price" widget="monetary"
                            options="{'currency_field': 'currency_id', 'field_digits': True}"
-                           attrs="{'readonly': [('can_edit_price', '=', False)]}"/>
+                           readonly="not can_edit_price"/>
                 </xpath>
                 <!--  Fin no editar pvp -->
             </field>

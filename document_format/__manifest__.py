@@ -14,7 +14,7 @@
         "stock_picking_report_valued",
         "product",
         "account",
-        "account_invoice_report_due_list",
+        "xtendoo_account_invoice_report_due_list",
         "account_payment_partner",
         "account_invoice_report_grouped_by_picking",
         "mail",

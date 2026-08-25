@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Part of BrowseInfo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Merge Sales Orders in Odoo',
@@ -9,6 +8,7 @@
 Fusionar pedido de cliente, fusionar órdenes de compra, fusionar orden, fusionar datos,
 """,
     'author': 'BrowseInfo',
+    'license': 'OPL-1',
     'website': 'https://www.browseinfo.in',
     "price": 19,
     "currency": 'EUR',
@@ -19,10 +19,10 @@ Fusionar pedido de cliente, fusionar órdenes de compra, fusionar orden, fusiona
         'stock',
     ],
     'data': [
-        'views/order_merge_view.xml',
-        'views/sale_order.xml',
-        'views/sale_order_line_merge.xml',
-        'views/res_config_settings.xml',
+        #'views/order_merge_view.xml',
+        #'views/sale_order.xml',
+        #'views/sale_order_line_merge.xml',
+        #'views/res_config_settings.xml',
         #'wizard/merge_same_customer_so_views.xml',
         #'security/ir.model.access.csv',
     ],

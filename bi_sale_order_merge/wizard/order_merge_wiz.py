@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Part of BrowseInfo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models, _
@@ -35,7 +34,7 @@ class SaleOrderMerge(models.TransientModel):
             sales = self.env['sale.order'].browse(active_ids)
 
             if any(sale.state == 'done' for sale in sales):
-                raise Warning('You can not merge done orders.')
+                raise UserError('You can not merge done orders.')
 
             sale_ids = [sale.id for sale in sales]
 
@@ -63,10 +62,10 @@ class SaleOrderMerge(models.TransientModel):
         my_string = ''
 
         if len(sales) < 2:
-            raise Warning('Please select multiple orders to merge in the list view.')
+            raise UserError('Please select multiple orders to merge in the list view.')
 
         if any(sale.state in ['done', 'sale', 'confirmed', 'cancel'] for sale in sales):
-            raise Warning('You can not merge Done and Sale order orders.')
+            raise UserError('You can not merge Done and Sale order orders.')
         for sale in sales:
             if sale.client_order_ref:
                 customer_ref.append(sale.client_order_ref)
@@ -98,7 +97,7 @@ class SaleOrderMerge(models.TransientModel):
                 for sale in sales:
                     partners_list.append(sale.partner_id)
                     if not partners_list[1:] == partners_list[:-1]:
-                        raise Warning('You can only merge orders of same partners.')
+                        raise UserError('You can only merge orders of same partners.')
 
                     else:
                         cancel_list.append(sale)
@@ -125,7 +124,7 @@ class SaleOrderMerge(models.TransientModel):
                     partners_list_write.append(sale.partner_id)
 
                     if not partners_list_write[1:] == partners_list_write[:-1]:
-                        raise Warning('You can only merge orders of same partners.')
+                        raise UserError('You can only merge orders of same partners.')
 
                     else:
                         cancel_list.append(sale)
@@ -155,13 +154,13 @@ class SaleOrderMerge(models.TransientModel):
 
                     set1 = set(partners_list_write)
                     if len(set1) > 1:
-                        raise Warning('You can only merge orders of same partners.')
+                        raise UserError('You can only merge orders of same partners.')
                     else:
                         partner_name = sale.partner_id.id
                         merge_ids = line_obj.search([('order_id', '=', sale.id)])
                         for line in merge_ids:
                             if self.sale_order.state in ['done', 'sale', 'confirmed', 'cancel']:
-                                raise Warning('You can not merge oredrs with Done, Cancel and Sale order orders.')
+                                raise UserError('You can not merge oredrs with Done, Cancel and Sale order orders.')
                             else:
                                 if sale.id != self.sale_order.id:
                                     vals = {
@@ -195,11 +194,11 @@ class SaleOrderMerge(models.TransientModel):
                     set1 = set(partners_list_write)
 
                     if len(set1) > 1:
-                        raise Warning('You can only merge orders of same partners.')
+                        raise UserError('You can only merge orders of same partners.')
                     else:
                         partner_name = sale.partner_id.id
                         if self.sale_order.state in ['done', 'sale', 'confirmed', 'cancel']:
-                            raise Warning('You can not merge orders with Done, Cancel and Sale order orders.')
+                            raise UserError('You can not merge orders with Done, Cancel and Sale order orders.')
                         else:
                             merge_ids = line_obj.search([('order_id', '=', sale.id)])
                             for line in merge_ids:

@@ -36,7 +36,7 @@ class SaleOrder(models.Model):
                              (i.product_id == order.product_id) and (i.price_unit == order.price_unit)]
                         if len(a) == 1:
                             order_new_lines[a[0]].product_uom_qty += order.product_uom_qty
-                            order_new_lines[a[0]].tax_id += order.tax_id
+                            order_new_lines[a[0]].tax_ids += order.tax_ids
                         else:
                             order_new_lines.append(order)
 
@@ -82,7 +82,7 @@ class SaleOrder(models.Model):
                              (i.product_id == order.product_id) and (i.price_unit == order.price_unit)]
                         if len(a) == 1:
                             order_new_lines[a[0]].product_uom_qty += order.product_uom_qty
-                            order_new_lines[a[0]].tax_id += order.tax_id
+                            order_new_lines[a[0]].tax_ids += order.tax_ids
                         else:
                             order_new_lines.append(order)
                 return set(order_new_lines)

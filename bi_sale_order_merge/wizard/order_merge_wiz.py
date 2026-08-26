@@ -107,7 +107,7 @@ class SaleOrderMerge(models.TransientModel):
                                 'product_id': line.product_id.id or False,
                                 'product_uom_qty': line.product_uom_qty or False,
                                 'price_unit': line.price_unit or False,
-                                'tax_id': [(6, 0, [tax.id for tax in line.tax_id if line.tax_id])] or False,
+                                'tax_ids': [(6, 0, [tax.id for tax in line.tax_ids if line.tax_ids])] or False,
                                 'order_id': new_sale.id,
                             }
                             line_obj.create(vals)
@@ -134,7 +134,7 @@ class SaleOrderMerge(models.TransientModel):
                                 'product_id': line.product_id.id or False,
                                 'product_uom_qty': line.product_uom_qty or False,
                                 'price_unit': line.price_unit or False,
-                                'tax_id': [(6, 0, [tax.id for tax in line.tax_id if line.tax_id])] or False,
+                                'tax_ids': [(6, 0, [tax.id for tax in line.tax_ids if line.tax_ids])] or False,
                                 'order_id': new_sale.id,
                             }
                             line_obj.create(vals)
@@ -167,7 +167,7 @@ class SaleOrderMerge(models.TransientModel):
                                         'product_id': line.product_id.id or False,
                                         'product_uom_qty': line.product_uom_qty or False,
                                         'price_unit': line.price_unit or False,
-                                        'tax_id': [(6, 0, [tax.id for tax in line.tax_id if line.tax_id])] or False,
+                                        'tax_ids': [(6, 0, [tax.id for tax in line.tax_ids if line.tax_ids])] or False,
                                         'order_id': self.sale_order.id,
                                     }
                                     line_obj.create(vals)
@@ -232,7 +232,7 @@ class SaleOrderMerge(models.TransientModel):
                         'product_id': line.product_id.id or False,
                         'product_uom_qty': line.product_uom_qty or False,
                         'price_unit': line.price_unit or False,
-                        'tax_id': [(6, 0, [tax.id for tax in line.tax_id if line.tax_id])] or False,
+                        'tax_ids': [(6, 0, [tax.id for tax in line.tax_ids if line.tax_ids])] or False,
                         'order_id': new_sale.id,
                     }
                     line_obj.create(vals)

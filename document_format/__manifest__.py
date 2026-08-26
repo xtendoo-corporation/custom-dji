@@ -1,7 +1,7 @@
 {
     "name": "Document Format",
     "summary": """Formatos de documentos entregados por Xtendoo""",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "description": """Formatos de documentos entregados por Xtendoo""",
     "author": "Manuel Calero, Daniel Dominguez",
     "company": "Xtendoo",
@@ -14,7 +14,7 @@
         "stock_picking_report_valued",
         "product",
         "account",
-        "account_payment_partner",
+        "account_payment_mode",  # renombrado de account_payment_partner en 19.0 (apriori.py)
         "account_invoice_report_grouped_by_picking",
         "mail",
         "contacts",

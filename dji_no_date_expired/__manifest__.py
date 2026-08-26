@@ -4,7 +4,7 @@
     "name": "DJI No Expired Date",
     "summary": """
         DJI No Expired Date""",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "depends": [
         "product_expiry",
     ],

@@ -20,9 +20,9 @@
                         </group>
                         <group>
                             <field nolabel="1" name="sale_order_to_merge" invisible="not partner_id" domain="[('state','=','draft'),('partner_id','=', partner_id)]" options="{'no_create': True, 'no_edit': True}">
-                                <tree create="true" edit="true" delete="true">
+                                <list create="true" edit="true" delete="true">
                                     <field name="name"/>
-                                    <field name="state" invisible="1"/>
+                                    <field name="state" column_invisible="1"/>
                                     <field name="date_order"/>
                                     <field name="commitment_date"/>
                                     <field name="expected_date"/>
@@ -30,7 +30,7 @@
                                     <field name="user_id"/>
                                     <field name="amount_total"/>
                                     <field name="invoice_status"/>
-                                </tree>
+                                </list>
                             </field>
                         </group>
                     </sheet>

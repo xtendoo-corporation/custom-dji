@@ -214,7 +214,7 @@
                                                         t-field="line.product_uom_qty"
                                                     />
                                                     <span
-                                                        t-field="line.product_uom"
+                                                        t-field="line.product_uom_id"
                                                         groups="uom.group_uom"
                                                     />
                                                 </td>

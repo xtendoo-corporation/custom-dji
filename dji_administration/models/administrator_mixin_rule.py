@@ -9,12 +9,12 @@ class AdministratorMixinRule(models.Model):
 
 
     def _get_default_admin(self):
-        return self.env["res.users"].has_group(
+        return self.env.user.has_group(
             "dji_administration.administration_group"
         )
 
     def _is_admin(self):
-        self.is_admin = self.env["res.users"].has_group(
+        self.is_admin = self.env.user.has_group(
             "dji_administration.administration_group"
         )
 
@@ -30,7 +30,7 @@ class AdministratorMixinRule(models.Model):
     )
 
     def _get_can_edit_tax(self):
-        return self.env["res.users"].has_group(
+        return self.env.user.has_group(
             "dji_administration.edit_tax"
         )
 
@@ -41,17 +41,17 @@ class AdministratorMixinRule(models.Model):
     )
 
     def _can_edit_tax(self):
-        self.can_edit_tax = self.env["res.users"].has_group(
+        self.can_edit_tax = self.env.user.has_group(
             "dji_administration.edit_tax"
         )
 
     def _can_edit_discounts(self):
-        self.can_edit_discounts = self.env["res.users"].has_group(
+        self.can_edit_discounts = self.env.user.has_group(
             "dji_administration.edit_discounts"
         )
 
     def _get_can_edit_discounts(self):
-        return self.env["res.users"].has_group(
+        return self.env.user.has_group(
             "dji_administration.edit_discounts"
         )
 
@@ -62,7 +62,7 @@ class AdministratorMixinRule(models.Model):
     )
 
     def _can_edit_price(self):
-        self.can_edit_price = self.env["res.users"].has_group(
+        self.can_edit_price = self.env.user.has_group(
             "dji_administration.edit_sale_price"
         )
 
@@ -73,17 +73,17 @@ class AdministratorMixinRule(models.Model):
     )
 
     def _get_can_edit_price(self):
-        return self.env["res.users"].has_group(
+        return self.env.user.has_group(
             "dji_administration.edit_sale_price"
         )
 
     def _can_edit_account(self):
-        self.can_edit_account = self.env["res.users"].has_group(
+        self.can_edit_account = self.env.user.has_group(
             "dji_administration.edit_account"
         )
 
     def _get_can_edit_account(self):
-        return self.env["res.users"].has_group(
+        return self.env.user.has_group(
             "dji_administration.edit_account"
         )
 
@@ -94,12 +94,12 @@ class AdministratorMixinRule(models.Model):
     )
 
     def _can_edit_quantity(self):
-        self.can_edit_quantity = self.env["res.users"].has_group(
+        self.can_edit_quantity = self.env.user.has_group(
             "dji_administration.edit_quantity"
         )
 
     def _get_can_edit_quantity(self):
-        return self.env["res.users"].has_group(
+        return self.env.user.has_group(
             "dji_administration.edit_quantity"
         )
 
@@ -110,12 +110,12 @@ class AdministratorMixinRule(models.Model):
     )
 
     def _can_edit_product_desc(self):
-        self.can_edit_product_desc = self.env["res.users"].has_group(
+        self.can_edit_product_desc = self.env.user.has_group(
             "dji_administration.edit_product_desc"
         )
 
     def _get_can_edit_product_desc(self):
-        return self.env["res.users"].has_group(
+        return self.env.user.has_group(
             "dji_administration.edit_product_desc"
         )
 
@@ -126,12 +126,12 @@ class AdministratorMixinRule(models.Model):
     )
 
     def _can_edit_product_id(self):
-        self.can_edit_product_id = self.env["res.users"].has_group(
+        self.can_edit_product_id = self.env.user.has_group(
             "dji_administration.edit_product_id"
         )
 
     def _get_can_edit_product_desc(self):
-        return self.env["res.users"].has_group(
+        return self.env.user.has_group(
             "dji_administration.edit_product_id"
         )
 
@@ -142,12 +142,12 @@ class AdministratorMixinRule(models.Model):
     )
 
     def _can_create_invoice(self):
-        self.can_create_invoice = self.env["res.users"].has_group(
+        self.can_create_invoice = self.env.user.has_group(
             "dji_administration.create_invoice"
         )
 
     def _get_can_create_invoice(self):
-        return self.env["res.users"].has_group(
+        return self.env.user.has_group(
             "dji_administration.create_invoice"
         )
 
@@ -158,12 +158,12 @@ class AdministratorMixinRule(models.Model):
     )
 
     def _can_cancel_invoice(self):
-        self.can_cancel_invoice = self.env["res.users"].has_group(
+        self.can_cancel_invoice = self.env.user.has_group(
             "dji_administration.cancel_invoice"
         )
 
     def _get_can_cancel_invoice(self):
-        return self.env["res.users"].has_group(
+        return self.env.user.has_group(
             "dji_administration.cancel_invoice"
         )
 
@@ -174,12 +174,12 @@ class AdministratorMixinRule(models.Model):
     )
 
     def _can_create_refund_invoice(self):
-        self.can_create_refund_invoice = self.env["res.users"].has_group(
+        self.can_create_refund_invoice = self.env.user.has_group(
             "dji_administration.create_refund_invoice"
         )
 
     def _get_can_create_refund_invoice(self):
-        return self.env["res.users"].has_group(
+        return self.env.user.has_group(
             "dji_administration.create_refund_invoice"
         )
 
@@ -190,12 +190,12 @@ class AdministratorMixinRule(models.Model):
     )
 
     def _show_ecommerce_page(self):
-        self.show_ecommerce_page = self.env["res.users"].has_group(
+        self.show_ecommerce_page = self.env.user.has_group(
             "dji_administration.show_ecommerce_page"
         )
 
     def _get_show_ecommerce_page(self):
-        return self.env["res.users"].has_group(
+        return self.env.user.has_group(
             "dji_administration.show_ecommerce_page"
         )
 

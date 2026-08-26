@@ -112,7 +112,7 @@
 <!--        <record id="register_payments" model="res.groups">-->
 <!--            <field name="name">Register Payments</field>-->
 <!--            <field name="privilege_id" ref="privilege_invoice_security"/>-->
-<!--            <field name="users" eval="[(4, ref('base.user_root'))]"/>-->
+<!--            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>-->
 <!--            <field name="menu_access"-->
 <!--                   eval="[(4, ref('account.product_product_menu_sellable')),-->
 <!--                   (4, ref('account.menu_action_move_out_receipt_type')),-->
@@ -124,7 +124,7 @@
         <record id="show_margins" model="res.groups">
             <field name="privilege_id" ref="privilege_others_security"/>
             <field name="name">Show Margins</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to view margins</field>
         </record>
           Fin Margen
@@ -132,7 +132,7 @@
         <record id="show_cost_price" model="res.groups">
             <field name="privilege_id" ref="privilege_others_security"/>
             <field name="name">Show cost price</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to view costs</field>
         </record>
         <!--  Fin Coste  -->
@@ -140,7 +140,7 @@
         <record id="edit_sale_price" model="res.groups">
             <field name="privilege_id" ref="privilege_others_security"/>
             <field name="name">Edit sale price</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to edit sale price</field>
         </record>
         <!--  Fin Pvp  -->
@@ -148,7 +148,7 @@
         <record id="edit_tax" model="res.groups">
             <field name="privilege_id" ref="privilege_others_security"/>
             <field name="name">Edit tax</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to edit taxes</field>
         </record>
         <!--  Fin editar impuesto -->
@@ -156,7 +156,7 @@
         <record id="edit_discounts" model="res.groups">
             <field name="privilege_id" ref="privilege_others_security"/>
             <field name="name">Edit discounts</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to edit discounts</field>
         </record>
         <!--  Fin editar descuento -->
@@ -164,7 +164,7 @@
         <record id="edit_account" model="res.groups">
             <field name="privilege_id" ref="privilege_invoice_security"/>
             <field name="name">Edit accounts invoice</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to edit account in invoice</field>
         </record>
         <!--  Fin editar cuenta en factura -->
@@ -172,7 +172,7 @@
         <record id="edit_quantity" model="res.groups">
             <field name="privilege_id" ref="privilege_invoice_security"/>
             <field name="name">Edit quantity invoice</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to edit quantity in invoice</field>
         </record>
         <!--  Fin editar cantidad en factura -->
@@ -180,7 +180,7 @@
         <record id="edit_product_desc" model="res.groups">
             <field name="privilege_id" ref="privilege_invoice_security"/>
             <field name="name">Edit product description in invoice</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to edit product description in invoice</field>
         </record>
         <!--  Fin editar descripcion de producto en factura -->
@@ -188,7 +188,7 @@
         <record id="edit_product_id" model="res.groups">
             <field name="privilege_id" ref="privilege_invoice_security"/>
             <field name="name">Edit product in invoice</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to edit product in invoice</field>
         </record>
         <!--  Fin editar producto en factura -->
@@ -196,7 +196,7 @@
         <record id="cancel_invoice" model="res.groups">
             <field name="name">Cancel invoice</field>
             <field name="privilege_id" ref="privilege_invoice_security"/>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to cancel invoices</field>
         </record>
         <!--  Fin cancelar factura -->
@@ -204,7 +204,7 @@
         <record id="create_invoice" model="res.groups">
             <field name="name">Create invoice</field>
             <field name="privilege_id" ref="privilege_invoice_security"/>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to create invoices</field>
         </record>
         <!--  Fin Crear factura -->
@@ -212,7 +212,7 @@
         <record id="create_refund_invoice" model="res.groups">
             <field name="name">Create refund invoice</field>
             <field name="privilege_id" ref="privilege_invoice_security"/>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to create refund invoices</field>
         </record>
         <!--  Fin crear Factura rectificativa factura -->
@@ -220,7 +220,7 @@
         <record id="show_purchase_page" model="res.groups">
             <field name="privilege_id" ref="privilege_product_security"/>
             <field name="name">Show Purcahse Page</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to view purchase page</field>
         </record>
         <!--   Fin Purchase Page   -->
@@ -228,7 +228,7 @@
         <record id="show_inventory_page" model="res.groups">
             <field name="privilege_id" ref="privilege_product_security"/>
             <field name="name">Show Inventory Page</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to view inventory page</field>
         </record>
         <!--   Fin Inventory Page   -->
@@ -236,7 +236,7 @@
         <record id="show_accounting_page" model="res.groups">
             <field name="privilege_id" ref="privilege_product_security"/>
             <field name="name">Show Accounting Page</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to view accounting page</field>
         </record>
         <!--   Fin Accounting Page   -->
@@ -244,7 +244,7 @@
         <record id="show_sale_page" model="res.groups">
             <field name="privilege_id" ref="privilege_product_security"/>
             <field name="name">Show Sale Page</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to view sale page</field>
         </record>
         <!--   Fin Sale Page   -->
@@ -252,7 +252,7 @@
         <record id="show_ecommerce_page" model="res.groups">
             <field name="privilege_id" ref="privilege_product_security"/>
             <field name="name">Show E-Commerce Page</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
             <field name="comment">Permission to view E-Commerce page</field>
         </record>
         <!--   Fin E-Commerce Page   -->

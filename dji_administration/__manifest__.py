@@ -23,6 +23,12 @@
         'account_asset_management',
         'sale_commission_oca',
         'account_invoice_margin',
+        # dependencia real, no declarada hasta ahora: sale_order_views.xml
+        # hereda una vista de sale_margin sin tenerlo como depends - ha
+        # funcionado "por suerte" (orden de carga) hasta que en el salto
+        # 18->19 un cambio de dependencias en otro sitio movió el orden y
+        # dejó de cargar antes que dji_administration.
+        'sale_margin',
     ],
     'license': 'AGPL-3',
     'data': [

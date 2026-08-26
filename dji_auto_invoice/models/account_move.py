@@ -13,9 +13,6 @@ class AccountMove(models.Model):
         return res
 
     def send_email(self):
-        print("*"*120)
-        print("Entra a SEND MAIL")
-        print("*"*120)
         self.ensure_one()
         template = self.env.ref('account.email_template_edi_invoice')
         email_message = template.with_context(mail_notify_force_send=True).send_mail(self.id)

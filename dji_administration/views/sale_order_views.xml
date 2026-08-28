@@ -23,20 +23,20 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][1]" position="replace">
-                    <attribute name="groups">account.group_account_invoice</attribute>
                     <field name="can_create_invoice" invisible="1"/>
                     <button name="%(sale.action_view_sale_advance_payment_inv)d"
                             string="Create Invoice"
                             type="action"
                             class="btn-primary"
+                            groups="account.group_account_invoice"
                             invisible="invoice_status != 'to invoice' or not can_create_invoice"/>
                 </xpath>
                 <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="replace">
-                    <attribute name="groups">account.group_account_invoice</attribute>
                     <button name="%(sale.action_view_sale_advance_payment_inv)d"
                             string="Create Invoice"
                             type="action"
                             class="btn-primary"
+                            groups="account.group_account_invoice"
                             invisible="True"/>
                 </xpath>
 

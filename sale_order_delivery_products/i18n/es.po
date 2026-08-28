@@ -17,8 +17,8 @@ msgstr ""
 
 #. module: sale_order_delivery_products
 #: model_terms:ir.ui.view,arch_db:sale_order_delivery_products.view_order_form
-msgid "Deliver Products"
-msgstr "Entregar Productos"
+msgid "Entregar productos"
+msgstr "Entregar productos"
 
 #. module: sale_order_delivery_products
 #: model:ir.model,name:sale_order_delivery_products.model_sale_order

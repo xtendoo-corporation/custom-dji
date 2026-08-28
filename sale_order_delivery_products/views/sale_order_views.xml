@@ -10,7 +10,7 @@
             <xpath expr="//button[@name='action_quotation_send']" position="after">
                 <field name="picking_ids" invisible="1"/>
                 <button
-                    string="Deliver Products"
+                    string="Entregar productos"
                     type="object"
                     name="action_view_picking"
                     class="btn-primary"

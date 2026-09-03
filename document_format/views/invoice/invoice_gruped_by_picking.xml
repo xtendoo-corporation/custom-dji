@@ -425,8 +425,12 @@
                                         class="table table-sm"
                                         style="page-break-inside: avoid;"
                                     >
-                                        <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
-                                    <t t-call="document_format.document_tax_totals"/>
+                                        <!-- o.tax_totals_json (Char/JSON) ya no existe en Odoo 19,
+                                             ahora es o.tax_totals (Binary, ya deserializado) -->
+                                    <t t-call="document_format.document_tax_totals">
+                                        <t t-set="tax_totals" t-value="o.tax_totals"/>
+                                        <t t-set="currency" t-value="o.currency_id"/>
+                                    </t>
                                     </table>
                                 </div>
                             </div>

@@ -21,28 +21,33 @@ class SaleOrder(models.Model):
                     pass
         return res
 
-    @api.model
-    def create(self, vals):
-        res = super(SaleOrder, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Desde Odoo 17 el core siempre llama a create() con una lista
+        # (creacion en lote). Con @api.model + create(self, vals) el "res"
+        # de super().create() puede tener varios registros y res.state /
+        # res.order_line explota con "Expected singleton" en creaciones
+        # multiples (import CSV, integraciones). Se itera por cada pedido
+        # creado en vez de asumir uno solo.
+        res = super(SaleOrder, self).create(vals_list)
         res_config = self.env['res.config.settings'].sudo().search([], order="id desc", limit=1)
         if res_config.auto_merge_sale_orderlines:
-            order_new_lines = []
-            if res.state == 'draft':
-                for order in res.order_line:
-                    if order.product_id not in [i.product_id for i in order_new_lines]:
-                        order_new_lines.append(order)
-                    elif order.product_id in [i.product_id for i in order_new_lines]:
-                        a = [order_new_lines.index(i) for i in order_new_lines if
-                             (i.product_id == order.product_id) and (i.price_unit == order.price_unit)]
-                        if len(a) == 1:
-                            order_new_lines[a[0]].product_uom_qty += order.product_uom_qty
-                            order_new_lines[a[0]].tax_ids += order.tax_ids
-                        else:
+            for order_rec in res:
+                if order_rec.state == 'draft':
+                    order_new_lines = []
+                    for order in order_rec.order_line:
+                        if order.product_id not in [i.product_id for i in order_new_lines]:
                             order_new_lines.append(order)
+                        elif order.product_id in [i.product_id for i in order_new_lines]:
+                            a = [order_new_lines.index(i) for i in order_new_lines if
+                                 (i.product_id == order.product_id) and (i.price_unit == order.price_unit)]
+                            if len(a) == 1:
+                                order_new_lines[a[0]].product_uom_qty += order.product_uom_qty
+                                order_new_lines[a[0]].tax_ids += order.tax_ids
+                            else:
+                                order_new_lines.append(order)
 
-                res.order_line = [(6, 0, [i.id for i in set(order_new_lines)])]
-            else:
-                pass
+                    order_rec.order_line = [(6, 0, [i.id for i in set(order_new_lines)])]
         return res
 
 

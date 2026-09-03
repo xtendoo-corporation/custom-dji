@@ -57,17 +57,13 @@
                                 <li t-if="company.email">
                                     <span t-field="company.email" />
                                 </li>
-                                <t t-if="not is_purchase">
-                                </t>
-                                <t t-else="">
-                                    <li>
-                                        <b>Descarga: C/ Olivo,7</b>
-                                    </li>
-                                    <li>
-                                        <b>21700-La Palma del Condado
-                                            ( HUELVA )</b>
-                                    </li>
-                                </t>
+                                <!-- El bloque "Descarga: C/ Olivo,7" (solo para
+                                     compras, via is_purchase) se ha movido al
+                                     cuerpo de purchase.xml: al vivir aqui la
+                                     cabecera cambiaba de altura segun el tipo de
+                                     documento y en compras se solapaba con el
+                                     titulo (2 lineas extra no cabian en el
+                                     margin_top de 52mm ya ajustado para 7 lineas) -->
                             </ul>
                         </div>
                     </div>

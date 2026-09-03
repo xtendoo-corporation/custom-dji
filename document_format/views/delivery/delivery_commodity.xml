@@ -41,49 +41,54 @@
                 />
                 <div class="page">
                     <!-- Datos del documento -->
-                    <h1 style="font-size:4em;">
-                        <ul class="list-unstyled">
-                            <li t-if="o.partner_id.name">
-                                <span t-field="o.partner_id.name" />
-                            </li>
-                            <li t-if="o.partner_id.street">
-                                <span t-field="o.partner_id.street" />
-                            </li>
-                            <li>
-                                <span
-                                    t-if="o.partner_id.zip"
-                                    t-field="o.partner_id.zip"
-                                />
-                                <span
-                                    t-if="o.partner_id.city"
-                                    t-field="o.partner_id.city"
-                                />
+                    <!-- El <h1 style="font-size:4em;"> envolvia TODA la lista de
+                         direccion (font-size:4em en cada linea) en vez de ser
+                         solo un titulo grande - bug de origen, no introducido
+                         en esta migracion. Sustituido por un bloque normal,
+                         mismo estilo que el resto de informes del modulo. -->
+                    <ul class="list-unstyled">
+                        <li t-if="o.partner_id.name">
+                            <span t-field="o.partner_id.name" />
+                        </li>
+                        <li t-if="o.partner_id.street">
+                            <span t-field="o.partner_id.street" />
+                        </li>
+                        <li>
+                            <span
+                                t-if="o.partner_id.zip"
+                                t-field="o.partner_id.zip"
+                            />
+                            <span
+                                t-if="o.partner_id.city"
+                                t-field="o.partner_id.city"
+                            />
 ,
-                                <span
-                                    t-if="o.partner_id.state_id"
-                                    t-field="o.partner_id.state_id.name"
-                                />
-                            </li>
-                            <li
-                                t-if="o.partner_id.country_id and o.partner_id.country_id.name not in ['España','Spain']"
-                            >
-                                <span t-field="o.partner_id.country_id.name" />
-                            </li>
-                            <li t-if="o.partner_id.vat">
-                                NIF:
-                                <span t-field="o.partner_id.vat" />
-                            </li>
-                            <li t-if="o.partner_id.phone">
-                                <i class="fa fa-phone" />
-                                <span t-field="o.partner_id.phone" />
-                            </li>
-                        </ul>
-                    </h1>
+                            <span
+                                t-if="o.partner_id.state_id"
+                                t-field="o.partner_id.state_id.name"
+                            />
+                        </li>
+                        <li
+                            t-if="o.partner_id.country_id and o.partner_id.country_id.name not in ['España','Spain']"
+                        >
+                            <span t-field="o.partner_id.country_id.name" />
+                        </li>
+                        <li t-if="o.partner_id.vat">
+                            NIF:
+                            <span t-field="o.partner_id.vat" />
+                        </li>
+                        <li t-if="o.partner_id.phone">
+                            <i class="fa fa-phone" />
+                            <span t-field="o.partner_id.phone" />
+                        </li>
+                    </ul>
                     <h2>
                         <span t-field="o.name" />
                     </h2>
+                    <!-- Las dos columnas (Pedido / Fecha de envio) salian
+                         pegadas sin separacion; añadido margin-right explicito -->
                     <div class="row mt32 mb32">
-                        <div t-if="o.origin" class="col-auto" name="div_origin">
+                        <div t-if="o.origin" class="col-auto" name="div_origin" style="margin-right:40px;">
                             <strong>Pedido:</strong>
                             <p t-field="o.origin" />
                         </div>

@@ -83,6 +83,15 @@
 						</div>
 						<!-- Fin datos del cliente -->
 						<!-- Fin datos del documento -->
+						<!-- Movido aqui desde external_layout_clean.xml (is_purchase):
+						     vivir en la cabecera compartida hacia que esta cambiase
+						     de altura solo para compras y se solapase con el titulo -->
+						<div style="clear:both;">
+							<p style="margin-top:8px;">
+								<b>Descarga: C/ Olivo,7</b><br/>
+								<b>21700-La Palma del Condado ( HUELVA )</b>
+							</p>
+						</div>
                         <div class="page">
                             <div class="oe_structure" />
                             <!-- Is there a discount on at least one line? -->

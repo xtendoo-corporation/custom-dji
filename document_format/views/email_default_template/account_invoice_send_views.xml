@@ -46,7 +46,9 @@
                     </p>
                 </div>
             </field>
-            <field name="report_template" ref="document_format.report_invoice_without_grouped"/>
+            <!-- report_template (Many2one) ya no existe en mail.template en
+                 Odoo 19, ahora es report_template_ids (Many2many) -->
+            <field name="report_template_ids" eval="[(6, 0, [ref('document_format.report_invoice_without_grouped')])]"/>
             <field name="report_name">
                 Invoice_${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}
             </field>

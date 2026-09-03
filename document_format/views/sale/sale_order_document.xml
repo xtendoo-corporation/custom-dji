@@ -1,9 +1,11 @@
 <?xml version="1.0" ?>
 <odoo>
     <data>
-    <!-- Herencia del tenplate del informe-->
+    <!-- Herencia del tenplate del informe. En Odoo 19 sale.report_saleorder
+         ya no llama directo a sale.report_saleorder_document, delega en
+         sale.report_saleorder_raw (que es donde vive ese t-call ahora) -->
          <template id="document_format.format_report_sale_order_document"
-              inherit_id="sale.report_saleorder">
+              inherit_id="sale.report_saleorder_raw">
             <xpath expr='//t[@t-call="sale.report_saleorder_document"]' position="replace">
                 <t t-call="document_format.report_saleorder_document_xtendoo" t-lang="doc.partner_id.lang"/>
             </xpath>

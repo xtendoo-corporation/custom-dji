@@ -5,7 +5,11 @@
             id="document_format.external_layout_clean_xtendoo"
             inherit_id="web.external_layout_bold"
         >
-            <xpath expr="//div[hasclass('o_clean_header')]" position="replace">
+            <!-- web.external_layout_bold ya no tiene la clase o_clean_header en
+                 Odoo 19 (el div de cabecera ahora usa t-attf-class dinamico);
+                 se retargetea por el atributo t-att-style="report_header_style",
+                 unico dentro de la plantilla, para localizar el mismo div. -->
+            <xpath expr="//div[@t-att-style='report_header_style']" position="replace">
                 <div class="o_clean_header">
                     <div class="row">
                         <div class="col-6">

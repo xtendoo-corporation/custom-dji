@@ -14,20 +14,13 @@
         </template>
 <!--         Fin Herencia del template del informe Factura-->
 
-<!--         Herencia del template del informe Factura sin pagos-->
-         <template id="document_format.format_report_invoice_document_with_payments"
-              inherit_id="account.report_invoice_with_payments">
-            <xpath expr='//t[@t-call="web.html_container"]' position="replace">
-                  <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="o">
-                    <t t-set="lang" t-value="o.partner_id.lang"/>
-                    <t t-set="print_with_payments" t-value="True"/>
-                    <t t-if="o._get_name_invoice_report() == 'account.report_invoice_document'" t-call="document_format.report_invoice_grouped_by_picking_document" t-lang="lang"/>
-                </t>
-            </t>
-            </xpath>
-        </template>
-<!--         Fin Herencia del template del informe Factura sin pagos-->
+<!--         account.report_invoice_with_payments ya no define su propio
+             t-call="web.html_container" en Odoo 19: ahora solo delega en
+             account.report_invoice (t-call) con print_with_payments=True.
+             Como el bloque de arriba ya parchea account.report_invoice,
+             ese delegado hereda el layout custom automáticamente - este
+             segundo inherit (que apuntaba a una estructura que ya no
+             existe) queda redundante y se retira. -->
 
         <template id="document_format.report_invoice_grouped_by_picking_document">
             <t t-name="document_format.report_invoice_grouped_by_picking_document">

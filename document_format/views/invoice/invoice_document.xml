@@ -16,6 +16,10 @@
             <field name="report_type">qweb-pdf</field>
             <field name="report_name">document_format.report_invoice_not_grouped</field>
             <field name="report_file">document_format.report_invoice_not_grouped</field>
+            <!-- Movido aqui desde account_invoice_send_views.xml: mail.template.report_name
+                 ya no existe en Odoo 19, el nombre del adjunto del email ahora
+                 depende de print_report_name en el report enlazado -->
+            <field name="print_report_name">'Invoice_%s%s' % ((object.name or '').replace('/', '_'), '_draft' if object.state == 'draft' else '')</field>
             <field name="attachment"/>
             <field name="binding_model_id" ref="account.model_account_move"/>
             <field name="binding_type">report</field>

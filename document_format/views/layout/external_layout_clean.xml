@@ -10,7 +10,13 @@
                  se retargetea por el atributo t-att-style="report_header_style",
                  unico dentro de la plantilla, para localizar el mismo div. -->
             <xpath expr="//div[@t-att-style='report_header_style']" position="replace">
-                <div class="o_clean_header">
+                <!-- Odoo extrae la cabecera del PDF buscando un div cuya clase
+                     contenga el TOKEN exacto "header" (ir_actions_report.py,
+                     _prepare_html: match_klass sobre 'header'/'footer'/'article').
+                     Sin ese token el bloque se descarta en silencio del PDF
+                     aunque se vea bien en el HTML - por eso se mantiene aqui,
+                     igual que el div original que se sustituyo. -->
+                <div class="header o_clean_header">
                     <div class="row">
                         <div class="col-6">
                             <img
@@ -62,10 +68,10 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-                <div
-                    style="height:2px;width:100%;background-color:black;margin-top:2px;"
-                >
+                    <div
+                        style="height:2px;width:100%;background-color:black;margin-top:2px;"
+                    >
+                    </div>
                 </div>
             </xpath>
 <!--            <xpath expr="//div[@t-attf-class='o_clean_footer']" position="replace">-->

@@ -19,11 +19,14 @@
                 <div class="header o_clean_header">
                     <div class="row">
                         <div class="col-6">
+                            <!-- 200px (~53mm) ocupaba casi todo el margin_top del
+                                 paperformat (52mm), solapando con el titulo del
+                                 documento; reducido para que quepa con margen -->
                             <img
                                 t-if="company.logo"
                                 t-att-src="image_data_uri(company.logo)"
                                 alt="Logo"
-                                style="max-height:200px"
+                                style="max-height:110px"
                             />
                         </div>
                         <div class="col-5 offset-1" name="company_address">

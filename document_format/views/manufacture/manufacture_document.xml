@@ -3,13 +3,15 @@
 
     <data>
 
-          <report id="document_format.mrp_report"
-                string="Parte de Producción"
-                model="mrp.production"
-                report_type="qweb-pdf"
-                name="document_format.mrp_report_rp"
-                file="document_format.mrp_report_rp"
-        />
+          <!-- La etiqueta corta <report .../> ya no es valida en Odoo 19
+               (RelaxNG la rechaza); convertido a record ir.actions.report -->
+          <record id="document_format.mrp_report" model="ir.actions.report">
+                <field name="name">Parte de Producción</field>
+                <field name="model">mrp.production</field>
+                <field name="report_type">qweb-pdf</field>
+                <field name="report_name">document_format.mrp_report_rp</field>
+                <field name="report_file">document_format.mrp_report_rp</field>
+        </record>
 
           <template id="document_format.mrp_report_rp">
            <t t-name="document_format.mrp_report_rp">

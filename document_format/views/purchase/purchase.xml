@@ -340,7 +340,8 @@
                             </div>
                             <!-- Fin totales -->
                         </div>
-					    <p t-field="o.notes" />
+					    <!-- purchase.order.notes ya no existe en Odoo 19, es o.note (Html) -->
+				    <p t-field="o.note" />
                         <div class="oe_structure" />
                     </div>
 				</t>

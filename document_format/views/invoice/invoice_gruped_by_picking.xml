@@ -427,7 +427,10 @@
                                     >
                                         <!-- o.tax_totals_json (Char/JSON) ya no existe en Odoo 19,
                                              ahora es o.tax_totals (Binary, ya deserializado) -->
-                                    <t t-call="document_format.document_tax_totals">
+                                    <!-- document_format.document_tax_totals reimplementaba a mano la
+                                         estructura antigua de tax_totals y ya no es compatible con
+                                         Odoo 19; se usa directamente el widget generico del core -->
+                                    <t t-call="account.document_tax_totals">
                                         <t t-set="tax_totals" t-value="o.tax_totals"/>
                                         <t t-set="currency" t-value="o.currency_id"/>
                                     </t>

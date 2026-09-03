@@ -317,11 +317,6 @@
             <field name="group_ids" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
         </record>
 
-        <!-- Facturación / Contabilidad/Clientes/Recepciones -->
-        <record id="account.menu_action_move_out_receipt_type" model="ir.ui.menu">
-            <field name="group_ids" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
-        </record>
-
         <!-- Facturación / Contabilidad/Activos -->
         <record id="account_asset_management.menu_finance_assets" model="ir.ui.menu">
             <field name="group_ids" eval="[(6, 0, [ref('account.group_account_manager')])]"/>

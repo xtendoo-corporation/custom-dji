@@ -55,15 +55,25 @@
                 <!--  Fin Edicion de tarifas  -->
 
                 <!--  No editar precio unitario  -->
+                <!-- GOTCHA REAL v19: dentro de una <list>, "invisible" ya NO
+                     oculta la columna (solo el contenido de cada celda,
+                     evaluado fila a fila) - el propio core de Odoo usa
+                     "column_invisible" para estos campos tecnicos que solo
+                     alimentan expresiones readonly/invisible de otros campos
+                     (ver sale/views/sale_order_views.xml: linked_line_id,
+                     combo_item_id, collapse_prices, etc, todos con
+                     column_invisible="1"). En v15 "invisible=1" bastaba para
+                     las dos cosas. Sin este cambio, is_admin/can_edit_* se
+                     veian como columnas reales en la lista de lineas. -->
                 <xpath expr="//field[@name='order_line']/list//field[@name='price_unit']" position="replace">
-                    <field name="can_edit_price" invisible="1"/>
-                    <field name="is_admin" invisible="1"/>
+                    <field name="can_edit_price" column_invisible="1"/>
+                    <field name="is_admin" column_invisible="1"/>
                     <field name="price_unit"
                            readonly="not can_edit_price"/>
                 </xpath>
                 <xpath expr="//page[@name='order_lines']//field[@name='price_unit']" position="replace">
-                    <field name="can_edit_price" invisible="1"/>
-                    <field name="is_admin" invisible="1"/>
+                    <field name="can_edit_price" column_invisible="1"/>
+                    <field name="is_admin" column_invisible="1"/>
                     <field name="price_unit"
                            readonly="not can_edit_price"/>
                 </xpath>
@@ -83,14 +93,14 @@
 
                 <!--  No editar IVA  -->
                 <xpath expr="//field[@name='order_line']/list//field[@name='tax_ids']" position="replace">
-                    <field name="can_edit_tax" invisible="1"/>
+                    <field name="can_edit_tax" column_invisible="1"/>
                     <field name="tax_ids" widget="many2many_tags" options="{'no_create': True}"
                            domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]"
                            readonly="not can_edit_tax"/>
                 </xpath>
 
                 <xpath expr="//page[@name='order_lines']//field[@name='tax_ids']" position="replace">
-                    <field name="can_edit_tax" invisible="1"/>
+                    <field name="can_edit_tax" column_invisible="1"/>
                     <field name="tax_ids" widget="many2many_tags" options="{'no_create': True}"
                            domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]"
                            readonly="not can_edit_tax"/>
@@ -99,12 +109,12 @@
 
                 <!--  No editar descuento 1  -->
                 <xpath expr="//field[@name='order_line']/list//field[@name='discount']" position="replace">
-                    <field name="can_edit_discounts" invisible="1"/>
+                    <field name="can_edit_discounts" column_invisible="1"/>
                     <field name="discount"
                            readonly="not can_edit_discounts"/>
                 </xpath>
                 <xpath expr="//page[@name='order_lines']//field[@name='discount']" position="replace">
-                    <field name="can_edit_discounts" invisible="1"/>
+                    <field name="can_edit_discounts" column_invisible="1"/>
                     <field name="discount"
                            readonly="not can_edit_discounts"/>
                 </xpath>

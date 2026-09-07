@@ -17,6 +17,12 @@
                      peticion del cliente. -->
                 <xpath expr="//list" position="attributes">
                     <attribute name="editable">bottom</attribute>
+                    <!-- 'multi_edit' es un atributo APARTE de 'editable' en
+                         v19 (list_arch_parser.js), no implicito - sin el,
+                         seleccionar varios presupuestos y editar un campo
+                         no ofrece aplicarlo a todos, aunque la lista ya sea
+                         editable en linea para un solo registro. -->
+                    <attribute name="multi_edit">1</attribute>
                 </xpath>
             </field>
         </record>

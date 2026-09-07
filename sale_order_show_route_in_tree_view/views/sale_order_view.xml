@@ -11,28 +11,23 @@
                     <field name="route_ids" widget="many2many_tags" optional="show"/>
                 </xpath>
                 <!-- v19 core quito editable="bottom" que si tenia v15 en esta
-                     lista - sin eso no se puede editar en linea ni
-                     seleccionar varios presupuestos para cambiar un campo a
-                     la vez (ruta, fecha de entrega, etc). Restaurado a
-                     peticion del cliente. -->
+                     lista. PRIMER INTENTO (revertido): restaurar
+                     editable="bottom" + open_form_view="1" - funcionaba pero
+                     rompia la experiencia normal de clic para abrir el
+                     presupuesto (habia que usar un icono aparte), distinto
+                     de como lo hace el propio Odoo en listas nativas con
+                     multi-edicion real (ir.ui.view de account.analytic.account
+                     "Analytic Accounts", payment.method "Payment Methods"):
+                     esas NO llevan editable, solo multi_edit="1" - el clic
+                     normal (sin seleccion) sigue abriendo el formulario
+                     exactamente igual que antes (ver onCellClicked en
+                     list_renderer.js: sin editable, isInlineEditable()
+                     devuelve false y sin seleccion cae directo a
+                     openRecord()); la edicion multiple solo se activa
+                     cuando ya hay varias filas seleccionadas con las
+                     casillas. Ese es el patron correcto, replicado aqui. -->
                 <xpath expr="//list" position="attributes">
-                    <attribute name="editable">bottom</attribute>
-                    <!-- 'multi_edit' es un atributo APARTE de 'editable' en
-                         v19 (list_arch_parser.js), no implicito - sin el,
-                         seleccionar varios presupuestos y editar un campo
-                         no ofrece aplicarlo a todos, aunque la lista ya sea
-                         editable en linea para un solo registro. -->
                     <attribute name="multi_edit">1</attribute>
-                    <!-- GOTCHA REAL v19: con editable="bottom" el clic en
-                         una fila entra en edicion inline en vez de abrir el
-                         presupuesto (a diferencia de v15, donde la lista NO
-                         era editable y el clic siempre abria el formulario).
-                         'open_form_view' es el atributo oficial (ver
-                         list_renderer.js: hasOpenFormViewButton = editable
-                         ? archInfo.openFormView : false) que añade una
-                         columna con un icono para abrir el formulario sin
-                         perder la edicion en linea/multi-edicion. -->
-                    <attribute name="open_form_view">1</attribute>
                 </xpath>
             </field>
         </record>

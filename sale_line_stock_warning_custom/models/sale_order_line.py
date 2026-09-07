@@ -7,16 +7,15 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
 
-    @api.depends('product_type', 'product_uom_qty', 'qty_delivered', 'state', 'move_ids', 'product_uom_id')
+    @api.depends('is_storable', 'product_uom_qty', 'qty_delivered', 'state', 'move_ids', 'product_uom_id')
     def _compute_qty_to_deliver(self):
         super(SaleOrderLine, self)._compute_qty_to_deliver()
         """Compute the visibility of the inventory widget."""
         for line in self:
-            if line.state in ('draft', 'sent') and line.product_type == 'product' and line.product_uom_id and line.qty_to_deliver > 0:
+            if line.state in ('draft', 'sent') and line.is_storable and line.product_uom_id and line.qty_to_deliver > 0:
                 if line.state == 'sale' and not line.move_ids:
                     line.display_qty_widget = False
                 else:
                     line.display_qty_widget = True
             else:
                 line.display_qty_widget = False
-

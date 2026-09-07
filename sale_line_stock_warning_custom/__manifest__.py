@@ -14,7 +14,8 @@
     "data": [
     ],
     'assets': {
-        'web.assets_qweb':[
+        'web.assets_backend': [
+            'sale_line_stock_warning_custom/static/src/js/qty_at_date_widget_patch.js',
             'sale_line_stock_warning_custom/static/src/xml/qty_at_date.xml',
         ],
     },

@@ -30,7 +30,7 @@ class SaleOrderLine(models.Model):
         for line in self:
             if line.product_id:
                 try:
-                    display_price = line._get_display_price(line.product_id)
+                    display_price = line._get_display_price()
                     pricelist_price_unit = self.env[
                         "account.tax"
                     ]._fix_tax_included_price_company(
@@ -50,7 +50,7 @@ class SaleOrderLine(models.Model):
     def _compute_is_pricelist_change_line(self, price_unit):
         if self.product_id:
             try:
-                display_price = self._get_display_price(self.product_id)
+                display_price = self._get_display_price()
                 pricelist_price_unit = self.env[
                     "account.tax"
                 ]._fix_tax_included_price_company(

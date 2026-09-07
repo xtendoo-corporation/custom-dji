@@ -23,6 +23,16 @@
                          no ofrece aplicarlo a todos, aunque la lista ya sea
                          editable en linea para un solo registro. -->
                     <attribute name="multi_edit">1</attribute>
+                    <!-- GOTCHA REAL v19: con editable="bottom" el clic en
+                         una fila entra en edicion inline en vez de abrir el
+                         presupuesto (a diferencia de v15, donde la lista NO
+                         era editable y el clic siempre abria el formulario).
+                         'open_form_view' es el atributo oficial (ver
+                         list_renderer.js: hasOpenFormViewButton = editable
+                         ? archInfo.openFormView : false) que añade una
+                         columna con un icono para abrir el formulario sin
+                         perder la edicion en linea/multi-edicion. -->
+                    <attribute name="open_form_view">1</attribute>
                 </xpath>
             </field>
         </record>

@@ -10,6 +10,14 @@
                 <xpath expr="//field[@name='partner_id']" position="after">
                     <field name="route_ids" widget="many2many_tags" optional="show"/>
                 </xpath>
+                <!-- v19 core quito editable="bottom" que si tenia v15 en esta
+                     lista - sin eso no se puede editar en linea ni
+                     seleccionar varios presupuestos para cambiar un campo a
+                     la vez (ruta, fecha de entrega, etc). Restaurado a
+                     peticion del cliente. -->
+                <xpath expr="//list" position="attributes">
+                    <attribute name="editable">bottom</attribute>
+                </xpath>
             </field>
         </record>
     </data>

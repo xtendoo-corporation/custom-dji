@@ -176,13 +176,19 @@ class DjiFaltasWizard(models.TransientModel):
         pedido.message_post(body=_("Faltas pasadas a %s: %s") % (faltas.name, texto))
         faltas.message_post(body=_("Faltas recibidas de %s: %s") % (pedido.name, texto))
 
-        if pedido.user_id:
-            faltas.sudo().activity_schedule(
-                "mail.mail_activity_data_todo",
-                user_id=pedido.user_id.id,
-                summary=_("Faltas de %s") % pedido.name,
-                note=_("Productos que han quedado en falta del pedido %s: %s") % (
+        # NOTA: de momento avisamos con una nota de chatter (mención) en vez
+        # de una actividad (mail.activity). Hay un bug en el módulo
+        # sales_team_security de este Odoo 19 ("'res.users' object has no
+        # attribute 'activity_team_ids'") que revienta el chatter de
+        # CUALQUIER pedido que tenga una actividad asignada, para
+        # cualquier usuario que lo abra. Hasta que se corrija esa regla,
+        # no creamos actividades desde aquí.
+        if pedido.user_id and pedido.user_id.partner_id:
+            faltas.message_post(
+                body=_("Productos que han quedado en falta del pedido %s: %s") % (
                     pedido.name, texto),
+                subject=_("Faltas de %s") % pedido.name,
+                partner_ids=[pedido.user_id.partner_id.id],
             )
 
         mensaje = _("%s %s con %d producto(s).") % (

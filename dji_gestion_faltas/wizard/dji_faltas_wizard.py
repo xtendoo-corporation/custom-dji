@@ -1,7 +1,14 @@
+import logging
+
+import requests
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
+_logger = logging.getLogger(__name__)
+
 NOMBRE_ETIQUETA_FALTAS = "FALTAS"
+WEBHOOK_TIMEOUT = 5  # segundos; si no responde a tiempo, no bloquea al usuario
 
 
 class DjiFaltasWizard(models.TransientModel):
@@ -191,6 +198,8 @@ class DjiFaltasWizard(models.TransientModel):
                 partner_ids=[pedido.user_id.partner_id.id],
             )
 
+        self._avisar_whatsapp_comercial(pedido, faltas, resumen)
+
         mensaje = _("%s %s con %d producto(s).") % (
             _("Creado") if es_nuevo else _("Añadido a"), faltas.name, len(resumen))
 
@@ -205,6 +214,53 @@ class DjiFaltasWizard(models.TransientModel):
                 "next": {"type": "ir.actions.client", "tag": "soft_reload"},
             },
         }
+
+
+    def _avisar_whatsapp_comercial(self, pedido, faltas, resumen):
+        """Avisa por WhatsApp al comercial vía webhook a Netlify.
+        No lanza excepción si falla: el presupuesto FALTAS ya está creado
+        y no queremos que un problema de red deje el wizard en un estado
+        confuso para el almacén.
+        """
+        if not pedido.user_id:
+            return
+
+        params = self.env["ir.config_parameter"].sudo()
+        base_url = params.get_param("web.base.url") or ""
+        enlace_faltas = "%s/odoo/sales/%s" % (base_url.rstrip("/"), faltas.id)
+
+        url = params.get_param("dji_gestion_faltas.webhook_url")
+        if not url:
+            _logger.info(
+                "dji_gestion_faltas: sin dji_gestion_faltas.webhook_url "
+                "configurado, no se avisa por WhatsApp del pedido %s",
+                pedido.name,
+            )
+            return
+        secret = params.get_param("dji_gestion_faltas.webhook_secret")
+
+        payload = {
+            "empresa": "DJI",
+            "comercial_odoo_user_id": pedido.user_id.id,
+            "cliente": pedido.partner_id.display_name,
+            "pedido_origen": pedido.name,
+            "pedido_faltas": faltas.name,
+            "pedido_faltas_id": faltas.id,
+            "productos": resumen,
+            "enlace_faltas": enlace_faltas,
+        }
+        headers = {"Content-Type": "application/json"}
+        if secret:
+            headers["X-Webhook-Secret"] = secret
+
+        try:
+            requests.post(url, json=payload, headers=headers, timeout=WEBHOOK_TIMEOUT)
+        except Exception:
+            _logger.warning(
+                "dji_gestion_faltas: fallo avisando por WhatsApp del pedido %s",
+                pedido.name,
+                exc_info=True,
+            )
 
 
 class DjiFaltasWizardLine(models.TransientModel):

@@ -182,7 +182,6 @@
                                         t-if="display_discount"
                                         class="text-right"
                                         style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
-                                        groups="product.group_discount_per_so_line"
                                     >
                                         Dto.%
                                     </th>
@@ -198,10 +197,10 @@
                                         class="text-right"
                                         style="solid; black; padding: 0px; margin: 0px; width:12%; font-size:0.8em; !important;"
                                     >
-                                        <t groups="account.group_show_line_subtotals_tax_excluded">
+                                        <t t-if="o.company_price_include != 'tax_included'">
                                             Total
                                         </t>
-                                        <t groups="account.group_show_line_subtotals_tax_included">
+                                        <t t-if="o.company_price_include == 'tax_included'">
                                             Total I.I.
                                         </t>
                                     </th>
@@ -219,15 +218,13 @@
                                 <!-- Fin variables -->
                                 <t t-foreach="lines" t-as="line">
                                     <!-- Variables FOREACH-->
-                                    <t
+                                    <t t-if="o.company_price_include != 'tax_included'"
                                         t-set="current_subtotal"
                                         t-value="current_subtotal + line.price_subtotal"
-                                        groups="account.group_show_line_subtotals_tax_excluded"
                                     />
-                                    <t
+                                    <t t-if="o.company_price_include == 'tax_included'"
                                         t-set="current_subtotal"
                                         t-value="current_subtotal + line.price_total"
-                                        groups="account.group_show_line_subtotals_tax_included"
                                     />
                                     <!-- Fin variables FOREACH-->
                                     <!-- Lineas impresión-->
@@ -318,15 +315,13 @@
                                                 <t t-if=" o.move_type in ('out_refund','in_refund')">
                                                     <span>- </span>
                                                 </t>
-                                                <span
+                                                <span t-if="o.company_price_include != 'tax_included'"
                                                     class="text-nowrap"
                                                     t-field="line.price_subtotal"
-                                                    groups="account.group_show_line_subtotals_tax_excluded"
                                                 />
-                                                <span
+                                                <span t-if="o.company_price_include == 'tax_included'"
                                                     class="text-nowrap"
                                                     t-field="line.price_total"
-                                                    groups="account.group_show_line_subtotals_tax_included"
                                                 />
                                             </td>
                                         </t>

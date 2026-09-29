@@ -175,7 +175,6 @@
                                         t-if="display_discount"
                                         class="text-right"
                                         style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
-                                        groups="product.group_discount_per_so_line"
                                     >
                                         Dto.%
                                     </th>
@@ -191,10 +190,10 @@
                                         class="text-right"
                                         style="solid; black; padding: 0px; margin: 0px; width:12%; font-size:0.8em; !important;"
                                     >
-                                        <t groups="account.group_show_line_subtotals_tax_excluded">
+                                        <t t-if="o.company_price_include != 'tax_included'">
                                             Total
                                         </t>
-                                        <t groups="account.group_show_line_subtotals_tax_included">
+                                        <t t-if="o.company_price_include == 'tax_included'">
                                             Total I.I.
                                         </t>
                                     </th>
@@ -344,9 +343,8 @@
                                                 style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                             >
                                                 <t
-                                                    t-if="lines_group['quantity'] != l.quantity"
+                                                    t-if="(lines_group['quantity'] != l.quantity) and o.company_price_include != 'tax_included'"
                                                     id="picking_subtotal"
-                                                    groups="!account.group_show_line_subtotals_tax_included"
                                                 >
                                                     <!-- Compute subtotal for that picking with discounts -->
                                                     <t
@@ -374,15 +372,13 @@
                                                         <span>- </span>
                                                     </t>
 
-                                                    <span
+                                                    <span t-if="o.company_price_include != 'tax_included'"
                                                         class="text-nowrap"
                                                         t-field="line.price_subtotal"
-                                                        groups="account.group_show_line_subtotals_tax_excluded"
                                                     />
-                                                    <span
+                                                    <span t-if="o.company_price_include == 'tax_included'"
                                                         class="text-nowrap"
                                                         t-field="line.price_total"
-                                                        groups="account.group_show_line_subtotals_tax_included"
                                                     />
                                                 </t>
 

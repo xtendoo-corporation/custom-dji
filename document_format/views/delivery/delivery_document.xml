@@ -142,7 +142,6 @@
                                             t-if="display_discount"
                                             class="text-right"
                                             style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
-                                            groups="product.group_discount_per_so_line"
                                         >
                                             Dto.%
                                         </th>
@@ -243,7 +242,6 @@
                                             class="text-right"
                                             t-if="display_discount"
                                             style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
-                                            groups="product.group_discount_per_so_line"
                                         >
                                             <span t-field="move_line.sale_discount" />
                                         </td>

@@ -12,21 +12,6 @@
                 <field name="sale_line_id" optional="hide" />
                 <field name="id" optional="hide" />
             </xpath>
-            <!-- En v15 la columna Hecho empezaba en 0 y se veia el cambio al
-                 recibir; en v19 la cantidad ya viene rellena. Verde cuando la
-                 linea esta marcada como Recogida (columna visible por defecto). -->
-            <xpath
-                expr="//field[@name=move_ids]/list//field[@name=quantity]"
-                position="attributes"
-            >
-                <attribute name="decoration-success">picked and state not in (done, cancel) and not (product_uom_qty and quantity &gt; product_uom_qty)</attribute>
-            </xpath>
-            <xpath
-                expr="//field[@name=move_ids]/list//field[@name=picked]"
-                position="attributes"
-            >
-                <attribute name="optional">show</attribute>
-            </xpath>
         </field>
     </record>
 </odoo>

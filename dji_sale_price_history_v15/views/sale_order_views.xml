@@ -6,9 +6,9 @@
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="priority">1000</field>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name=order_line]/list" position="inside">
+            <xpath expr="//field[@name='order_line']/list" position="inside">
                 <xpath
-                    expr="//field[@name=order_line]/list/widget[@name=sale_line_price_history_widget]"
+                    expr="//field[@name='order_line']/list/widget[@name='sale_line_price_history_widget']"
                     position="move"
                 />
             </xpath>

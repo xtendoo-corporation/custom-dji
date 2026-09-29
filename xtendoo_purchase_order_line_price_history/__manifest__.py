@@ -7,7 +7,7 @@
 # con el módulo OCA original. Se mantiene la autoría/licencia original.
 {
     "name": "Purchase order line price history",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Purchase Management",
     "author": "Tecnativa, Odoo Community Association (OCA), Xtendoo",
     "website": "https://github.com/OCA/purchase-workflow",

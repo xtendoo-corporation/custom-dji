@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form.dji.price.history.v15</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name=order_line]/list" position="inside">
+                <xpath
+                    expr="//field[@name=order_line]/list/widget[@name=sale_line_price_history_widget]"
+                    position="move"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

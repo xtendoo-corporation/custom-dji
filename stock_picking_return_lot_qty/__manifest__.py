@@ -4,7 +4,7 @@
 {
     "name": "Stock Picking Return Lot Qty",
     "summary": "Return  to delivered quantity",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "license": "AGPL-3",
     "author": "Xtendoo, Manuel Calero",
     "website": "https://xtendoo.es",

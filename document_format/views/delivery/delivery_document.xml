@@ -249,8 +249,8 @@
                                             class="text-right"
                                             style="solid; black; padding: 0px; margin: 0px; width:5%; font-size:0.8em; !important;"
                                         >
-                                            <span t-esc="', '.join(map(lambda x: (str(x.amount)), move_line.sale_tax_id))"
-                                                id="move_line.sale_tax_id"/>
+                                            <span t-esc="', '.join(map(lambda x: (str(x.amount)), move_line.sale_tax_ids))"
+                                                id="move_line.sale_tax_ids"/>
                                         </td>
                                         <td
                                             t-if="move_line.currency_id"

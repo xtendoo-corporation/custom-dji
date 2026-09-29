@@ -12,6 +12,14 @@ class StockReturnPicking(models.TransientModel):
         val = super()._prepare_stock_return_picking_line_vals_from_move(stock_move)
         if len(stock_move.move_line_ids) == 1 and stock_move.move_line_ids[:1].lot_id:
             val["lot_id"] = stock_move.move_line_ids[:1].lot_id
+        # v18+ propone 0 por defecto; DJI quiere la cantidad pendiente de
+        # devolver, como en v15 (mismo calculo que action_create_returns_all)
+        if stock_move.state != "cancel" and stock_move.location_dest_usage != "inventory":
+            quantity = stock_move.quantity
+            for move in stock_move.move_dest_ids:
+                if move.origin_returned_move_id == stock_move and move.state != "cancel":
+                    quantity -= move.quantity
+            val["quantity"] = max(stock_move.product_uom.round(quantity), 0)
         return val
 
     def _create_returns(self):

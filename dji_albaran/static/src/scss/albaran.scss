@@ -44,7 +44,7 @@ $dji-fondo: #F4F8FB;
     .tricolor td { height: 5px; padding: 0; }
 
     // Datos del documento
-    .meta td { width: 33%; padding-bottom: 14px; }
+    .meta td { padding-bottom: 14px; padding-right: 10px; }
     .meta .valor { font-size: 14px; font-weight: 600; }
 
     // Tarjetas cliente / entrega
@@ -82,7 +82,7 @@ $dji-fondo: #F4F8FB;
     .totales td { padding: 6px 14px; }
     .totales tr.sep td { border-top: 1px solid $dji-linea-suave !important; }
     .totales tr.total td { background: $dji-azul !important; color: #FFFFFF; padding: 9px 14px; vertical-align: middle; }
-    .totales tr.total .etq-total { font-size: 13px; font-weight: 600; }
+    .totales tr.total .etq-total { font-size: 13px; font-weight: 600; white-space: nowrap; }
     .totales tr.total .importe-total { font-size: 20px; font-weight: 700; }
     .recibi { margin-top: 14px; border: 1px solid $dji-linea; border-radius: 8px; padding: 10px 14px 14px; }
     .recibi .titulo-recibi { font-size: 12px; font-weight: 600; color: $dji-azul; }
@@ -92,6 +92,27 @@ $dji-fondo: #F4F8FB;
     .recibi .campo td:last-child { padding-right: 0; }
     .recibi .hueco { border-bottom: 1px solid #9AA8B6; height: 26px; }
     .recibi .titulo-recibi, .recibi .aviso { vertical-align: bottom; }
+
+    // Promoción
+    .promo {
+        display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 3px;
+        background: $dji-naranja; color: #FFFFFF; font-size: 9px; font-weight: bold;
+        letter-spacing: 1px; vertical-align: middle;
+    }
+    td.num .promo { margin-left: 0; }
+
+    // Devolución
+    .cab-doc .tipo-devolucion { color: #B8651A; }
+    .cab-doc .numero-devolucion { color: #B8651A; }
+    .cab-doc .sub-devolucion { font-size: 10px; font-weight: bold; letter-spacing: 1px; color: #B8651A; text-transform: uppercase; }
+    table.aviso-devolucion { margin-bottom: 14px; border: 1px solid $dji-naranja !important; }
+    .aviso-devolucion td { padding: 8px 12px; vertical-align: middle; }
+    .aviso-devolucion td.marca {
+        width: 120px; background: $dji-naranja !important; color: #FFFFFF;
+        font-size: 13px; font-weight: 700; letter-spacing: 1px; text-align: center;
+    }
+    .aviso-devolucion td.texto { background: #FDF4EA !important; }
+    .totales tr.total-devolucion td { background: #B8651A !important; }
 
     // Pie (se repite en cada página)
     .pie td { border-top: 1px solid $dji-linea-suave !important; padding-top: 8px; font-size: 10px; color: $dji-gris-claro; }

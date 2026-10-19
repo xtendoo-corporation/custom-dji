@@ -26,8 +26,9 @@
                             </div>
                         </td>
                         <td class="cab-doc">
-                            <div class="tipo titulo">ALBARÁN DE ENTREGA</div>
-                            <div class="numero titulo" t-out="d['numero']"/>
+                            <div t-attf-class="tipo titulo #{'tipo-devolucion' if d['devolucion'] else ''}" t-out="d['titulo']"/>
+                            <div t-attf-class="numero titulo #{'numero-devolucion' if d['devolucion'] else ''}" t-out="d['numero']"/>
+                            <div t-if="d['devolucion']" class="sub-devolucion">Abono · Material retirado</div>
                         </td>
                     </tr>
                 </table>
@@ -49,8 +50,19 @@
                 <table class="meta">
                     <tr>
                         <td><div class="etq">Fecha</div><div class="valor" t-out="d['fecha']"/></td>
+                        <td t-if="d['original']"><div class="etq">Albarán original</div><div class="valor" t-out="d['original']"/></td>
                         <td><div class="etq">Pedido</div><div class="valor" t-out="d['pedido']"/></td>
                         <td><div class="etq">Comercial</div><div class="valor" t-out="d['comercial'] or '—'"/></td>
+                    </tr>
+                </table>
+
+                <table t-if="d['devolucion']" class="aviso-devolucion">
+                    <tr>
+                        <td class="marca titulo">DEVOLUCIÓN</td>
+                        <td class="texto">
+                            <b>Material retirado al cliente.</b> Este documento no es una entrega: recoge la mercancía devuelta<t t-if="d['original']"> del albarán <t t-out="d['original']"/></t>.
+                            <t t-if="d['valorado']">Su importe se abonará mediante factura rectificativa.</t>
+                        </td>
                     </tr>
                 </table>
 
@@ -66,7 +78,7 @@
                         </td>
                         <td style="padding-left: 7px;">
                             <div class="tarjeta suave">
-                                <div class="etq-azul">Dirección de entrega</div>
+                                <div class="etq-azul" t-out="'Recogida en' if d['devolucion'] else 'Dirección de entrega'"/>
                                 <div class="principal" style="font-weight: 600;">
                                     <t t-if="d['entrega'] != d['cliente'] and d['entrega'].name"><t t-out="d['entrega'].name"/> · </t><t t-out="d['entrega'].street"/>
                                     <t t-if="d['entrega'].street2"> <t t-out="d['entrega'].street2"/></t>
@@ -99,7 +111,7 @@
                         <t t-foreach="d['lineas']" t-as="l">
                             <tr t-att-class="'par' if l_index % 2 else ''">
                                 <td class="gris" t-out="l['codigo']"/>
-                                <td class="art" t-out="l['nombre']"/>
+                                <td class="art"><t t-out="l['nombre']"/><span t-if="l['promo']" class="promo">PROMO</span></td>
                                 <td class="lote" t-out="l['lote']"/>
                                 <td class="cad" t-out="l['caducidad']"/>
                                 <td class="num cant">
@@ -107,9 +119,16 @@
                                     <div t-if="l['unidad']" class="unidad" t-out="l['unidad']"/>
                                 </td>
                                 <t t-if="d['valorado']">
-                                    <td class="num"><t t-out="l['precio']"/><t t-if="l['precio']"> €</t></td>
-                                    <td class="num gris" t-out="l['iva']"/>
-                                    <td class="num" style="font-weight: 600;"><t t-out="l['importe']"/><t t-if="l['importe']"> €</t></td>
+                                    <t t-if="l['promo']">
+                                        <td class="num"/>
+                                        <td class="num"/>
+                                        <td class="num"><span class="promo">PROMO</span></td>
+                                    </t>
+                                    <t t-else="">
+                                        <td class="num"><t t-out="l['precio']"/><t t-if="l['precio']"> €</t></td>
+                                        <td class="num gris" t-out="l['iva']"/>
+                                        <td class="num" style="font-weight: 600;"><t t-out="l['importe']"/><t t-if="l['importe']"> €</t></td>
+                                    </t>
                                 </t>
                             </tr>
                         </t>
@@ -147,8 +166,8 @@
                                         <td class="gris" t-out="imp['etiqueta']"/>
                                         <td class="num"><t t-out="imp['importe']"/> €</td>
                                     </tr>
-                                    <tr class="total">
-                                        <td class="etq-total titulo">TOTAL</td>
+                                    <tr t-attf-class="total #{'total-devolucion' if d['devolucion'] else ''}">
+                                        <td class="etq-total titulo" t-out="'TOTAL ABONO' if d['devolucion'] else 'TOTAL'"/>
                                         <td class="num importe-total titulo"><t t-out="d['total']"/> €</td>
                                     </tr>
                                 </table>
@@ -159,8 +178,14 @@
                     <div class="recibi">
                         <table>
                             <tr>
-                                <td class="titulo-recibi titulo">RECIBÍ CONFORME</td>
-                                <td class="aviso">Compruebe la mercancía antes de firmar. Las incidencias se anotan en Observaciones.</td>
+                                <t t-if="d['devolucion']">
+                                    <td class="titulo-recibi titulo">CONFORME CON LA RETIRADA</td>
+                                    <td class="aviso">El cliente entrega la mercancía indicada. Las incidencias se anotan en Observaciones.</td>
+                                </t>
+                                <t t-else="">
+                                    <td class="titulo-recibi titulo">RECIBÍ CONFORME</td>
+                                    <td class="aviso">Compruebe la mercancía antes de firmar. Las incidencias se anotan en Observaciones.</td>
+                                </t>
                             </tr>
                         </table>
                         <table class="campo">

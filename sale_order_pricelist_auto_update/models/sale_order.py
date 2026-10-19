@@ -13,10 +13,15 @@ class SaleOrder(models.Model):
         for line in self.order_line:
             if vals.get('order_line'):
                 for line_vals in vals.get('order_line'):
-                    if line_vals[1] == line.id:
-                        if line_vals[2] != False:
-                            if line_vals[2].get('price_unit'):
-                                change = line._compute_is_pricelist_change_line(line_vals[2].get('price_unit'))
+                    # Los comandos 2, 3 y 4 llegan con solo 2 elementos
+                    if (
+                        len(line_vals) > 2
+                        and line_vals[0] == 1
+                        and line_vals[1] == line.id
+                        and line_vals[2]
+                        and line_vals[2].get('price_unit')
+                    ):
+                        change = line._compute_is_pricelist_change_line(line_vals[2].get('price_unit'))
         vals['is_price_list_change'] = change
         res = super(SaleOrder, self).write(vals)
         return res

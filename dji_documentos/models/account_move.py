@@ -3,7 +3,41 @@ import re
 
 from odoo import models
 
-from odoo.addons.dji_albaran.models.stock_picking import _cantidad, _nombre_comercial, _num
+from odoo.addons.dji_albaran.models.stock_picking import _cantidad, _num
+
+try:
+    from odoo.addons.dji_albaran.models.stock_picking import _nombre_comercial
+except ImportError:  # dji_albaran anterior a la 19.0.1.2.0
+    def _nombre_comercial(*contactos):
+        for contacto in contactos:
+            if not contacto or 'comercial' not in contacto._fields:
+                continue
+            nombre = (contacto.comercial or '').strip()
+            if nombre and nombre.lower() != (contacto.commercial_partner_id.name or '').strip().lower():
+                return nombre
+        return ''
+
+
+def _establecimiento(contacto):
+    """Nombre del local de una dirección de entrega: su "Nombre comercial" o,
+    si es una dirección hija del cliente (p. ej. "CAFETERIA GARDEN"), su nombre."""
+    if not contacto:
+        return ''
+    nombre = _nombre_comercial(contacto)
+    if nombre:
+        return nombre
+    if contacto.parent_id and contacto.name:
+        return contacto.name.strip()
+    return ''
+
+
+def _linea_direccion(contacto):
+    partes = [contacto.street or '', contacto.street2 or '']
+    calle = ' '.join(p for p in partes if p)
+    ciudad = ' '.join(p for p in [contacto.zip or '', contacto.city or ''] if p)
+    if contacto.state_id:
+        ciudad += f' ({contacto.state_id.name})'
+    return ' · '.join(p for p in [calle, ciudad] if p)
 
 
 def _qr_png(env, texto):
@@ -200,6 +234,17 @@ class AccountMove(models.Model):
 
         lista_grupos = []
         hay_albaranes = any(grupos[c]['albaranes'] for c in orden)
+        # Dirección de entrega / establecimiento de la factura
+        entregas = self.env['res.partner']
+        for c in orden:
+            entregas |= grupos[c]['albaranes'].partner_id
+        if 'partner_shipping_id' in self._fields and self.partner_shipping_id:
+            entregas = entregas or self.partner_shipping_id
+        varias_entregas = len(entregas) > 1
+        entrega = self.partner_shipping_id if 'partner_shipping_id' in self._fields and self.partner_shipping_id else entregas[:1]
+        if varias_entregas:
+            entrega = self.env['res.partner']
+
         def _orden_grupo(c):
             fechas = [d for d in grupos[c]['albaranes'].mapped('date_done') if d]
             return (not grupos[c]['albaranes'], min(fechas).timestamp() if fechas else 0, orden.index(c))
@@ -212,8 +257,10 @@ class AccountMove(models.Model):
                 pedidos = sorted({p.sale_id.name for p in alb if p.sale_id})
                 titulo = ('Albarán de devolución ' if rect else 'Albarán ') if len(alb) == 1 else (
                     'Albaranes de devolución ' if rect else 'Albaranes ')
+                locales = [_establecimiento(e) for e in alb.partner_id]
                 cabecera = {
                     'titulo': titulo + ', '.join(alb.mapped('name')),
+                    'local': ', '.join(sorted({x for x in locales if x})) if varias_entregas else '',
                     'detalle': ' · '.join(filter(None, [', '.join(fechas),
                                                         ('Pedido ' + ', '.join(pedidos)) if pedidos else ''])),
                 }
@@ -253,8 +300,13 @@ class AccountMove(models.Model):
             'borrador': self.state == 'draft',
             'fecha': (self.invoice_date or self.date).strftime('%d/%m/%Y') if (self.invoice_date or self.date) else '',
             'cliente': cliente,
-            'nombre_comercial': _nombre_comercial(self.partner_shipping_id if 'partner_shipping_id' in self._fields else False, direccion, cliente),
+            'nombre_comercial': _nombre_comercial(direccion, cliente),
             'direccion': direccion,
+            'entrega': {
+                'local': _establecimiento(entrega),
+                'direccion': _linea_direccion(entrega),
+            } if entrega and (entrega != direccion or _establecimiento(entrega)) else False,
+            'varias_entregas': varias_entregas,
             'cod_cliente': cliente.ref or '',
             'comercial': self.invoice_user_id.name or '',
             'forma_pago': forma_pago,

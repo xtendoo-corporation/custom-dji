@@ -1,12 +1,95 @@
 # Part of BrowseInfo. See LICENSE file for full copyright and licensing details.
 
+from markupsafe import Markup
+
 from odoo import api, fields, models, _
+from odoo.tools import is_html_empty
 from odoo.exceptions import UserError, RedirectWarning, ValidationError
 import copy
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
     _description = 'Sale Order Inherit'
+
+    @api.model
+    def _merge_notes(self, orders):
+        """Une el campo "Términos y condiciones" (note) de todos los pedidos,
+        en el orden dado: una nota por párrafo y sin repetir las idénticas."""
+        parts = []
+        for order in orders:
+            if is_html_empty(order.note):
+                continue
+            note = str(order.note).strip()
+            if not note.lower().startswith(('<p', '<div', '<ul', '<ol', '<h', '<table', '<blockquote')):
+                note = '<p>%s</p>' % note
+            if note not in parts:
+                parts.append(note)
+        return Markup('').join(Markup(part) for part in parts)
+
+    def _merge_orders(self, sales, merge_type, target=None, partner=None, customer_ref='', origin=''):
+        """Fusiona los presupuestos `sales` y devuelve el pedido resultante.
+
+        merge_type: 'new' (pedido nuevo y cancelar), 'exist' (nuevo y borrar),
+        'exist_1' (sobre `target` y cancelar), 'exist_2' (sobre `target` y borrar).
+        Las líneas se copian completas (descuento, unidad, secciones, notas,
+        analítica...) con copy_data y conservan su orden: primero las del
+        destino y después las de cada pedido, uno detrás de otro.
+        """
+        sale_obj = self.env['sale.order']
+        line_obj = self.env['sale.order.line']
+        if merge_type in ('new', 'exist'):
+            base = sales[0]
+            if partner and partner != base.partner_id:
+                vals = {'partner_id': partner.id}
+            else:
+                vals = base.copy_data()[0]
+                vals.pop('order_line', None)
+            vals.update({
+                'client_order_ref': customer_ref,
+                'origin': origin,
+                'state': 'draft',
+                'note': self._merge_notes(sales),
+            })
+            target = sale_obj.create(vals)
+            sources = sales
+        else:
+            vals = {'origin': origin}
+            if customer_ref:
+                vals['client_order_ref'] = customer_ref
+            notes = self._merge_notes(target | (sales - target))
+            if notes:
+                vals['note'] = notes
+            target.write(vals)
+            sources = sales - target
+
+        sequence = max(target.order_line.mapped('sequence') or [0])
+        new_lines = []
+        for sale in sources:
+            for line in sale.order_line.sorted(lambda l: (l.sequence, l.id)):
+                sequence += 10
+                if merge_type == 'exist_2':
+                    line.write({'order_id': target.id, 'sequence': sequence})
+                else:
+                    new_lines.append(line.copy_data({'order_id': target.id, 'sequence': sequence})[0])
+        if new_lines:
+            line_obj.create(new_lines)
+
+        target.message_post(body=_("This sale order has been created from: <b>%s</b>") % origin)
+        sources = sources.with_context(disable_cancel_warning=True)
+        sources.action_cancel()
+        if merge_type in ('exist', 'exist_2'):
+            sources.unlink()
+        return target
+
+    @staticmethod
+    def _merge_action(order):
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'sale.order',
+            'res_id': order.id,
+            'view_mode': 'form',
+            'views': [(False, 'form')],
+        }
 
     def write(self, vals):
         res = super(SaleOrder, self).write(vals)

@@ -38,8 +38,6 @@ class MergeSameCustomerSaleOrder(models.TransientModel):
         sale_obj = self.env['sale.order']
         mod_obj = self.env['ir.model.data']
         line_obj = self.env['sale.order.line']
-        action = mod_obj.xmlid_to_object('stock.stock_picking_action_picking_type')
-        form_view_id = mod_obj.xmlid_to_res_id('sale.view_order_form')
         sales = sale_obj.browse(self.sale_order_to_merge.ids)
         partners_list = []
         partners_list_write = []
@@ -52,10 +50,10 @@ class MergeSameCustomerSaleOrder(models.TransientModel):
         myString = ''
         new_sale = False
         if len(sales) < 2:
-            raise UserError('Please select multiple orders to merge in the list view.')
+            raise UserError(_('Please select multiple orders to merge in the list view.'))
 
         if any(sale.state in ['done', 'sale', 'confirmed', 'cancel'] for sale in sales):
-            raise UserError('You can not merge Done and Sale order orders.')
+            raise UserError(_('You can not merge Done and Sale order orders.'))
         for sale in sales:
             if sale.client_order_ref:
                 customer_ref.append(sale.client_order_ref)
@@ -77,142 +75,11 @@ class MergeSameCustomerSaleOrder(models.TransientModel):
         elif len(origin_list) > 1:
             msg_origin = ', '.join(set(origin_list))
 
-        if self.sale_order:
-            self.sale_order.write({'client_order_ref': myString})
-        if self.type == 'new':
-            partner_name = sales and sales[0].partner_id.id
-            new_sale = sale_obj.create(
-                {'partner_id': partner_name, 'client_order_ref': myString, 'origin': msg_origin, 'state': 'draft'})
-            for sale in sales:
-                partners_list.append(sale.partner_id)
-                if not partners_list[1:] == partners_list[:-1]:
-                    raise UserError('You can only merge orders of same partners.')
-
-                else:
-                    cancel_list.append(sale)
-                    merge_ids = line_obj.search([('order_id', '=', sale.id)])
-                    for line in merge_ids:
-                        vals = {
-                            'product_id': line.product_id.id or False,
-                            'product_uom_qty': line.product_uom_qty or False,
-                            'price_unit': line.price_unit or False,
-                            'tax_ids': [(6, 0, [tax.id for tax in line.tax_ids if line.tax_ids])] or False,
-                            'order_id': new_sale.id,
-                        }
-                        line_obj.create(vals)
-            msg_body = _("This sale order has been created from: <b>%s</b>") % (msg_origin)
-            new_sale.message_post(body=msg_body)
-            new_sale.write({'partner_id': partner_name})
-            for orders in cancel_list:
-                orders.action_cancel()
-        if self.type == 'exist':
-            partner_name = sales and sales[0].partner_id.id
-            new_sale = sale_obj.create(
-                {'partner_id': partner_name, 'client_order_ref': myString, 'origin': msg_origin, 'state': 'draft'})
-            for sale in sales:
-                partners_list_write.append(sale.partner_id)
-
-                if not partners_list_write[1:] == partners_list_write[:-1]:
-                    raise UserError('You can only merge orders of same partners.')
-
-                else:
-                    cancel_list.append(sale)
-                    merge_ids = line_obj.search([('order_id', '=', sale.id)])
-                    for line in merge_ids:
-                        vals = {
-                            'product_id': line.product_id.id or False,
-                            'product_uom_qty': line.product_uom_qty or False,
-                            'price_unit': line.price_unit or False,
-                            'tax_ids': [(6, 0, [tax.id for tax in line.tax_ids if line.tax_ids])] or False,
-                            'order_id': new_sale.id,
-                        }
-                        line_obj.create(vals)
-            msg_body = _("This sale order has been created from: <b>%s</b>") % (msg_origin)
-            new_sale.message_post(body=msg_body)
-            new_sale.write({'partner_id': partner_name})
-
-            for orders in cancel_list:
-                orders.action_cancel()
-                orders.unlink()
-
-        if self.type == 'exist_1':
-            for sale in sales:
-                partners_list_write.append(sale.partner_id)
-                partners_list_write.append(self.sale_order.partner_id)
-                cancel_list.append(sale.id)
-
-                user = partners_list_write
-                set1 = set(partners_list_write)
-                if len(set1) > 1:
-                    raise UserError('You can only merge orders of same partners.')
-                else:
-                    partner_name = sale.partner_id.id
-                    merge_ids = line_obj.search([('order_id', '=', sale.id)])
-                    for line in merge_ids:
-                        if self.sale_order.state in ['done', 'sale', 'confirmed', 'cancel']:
-                            raise UserError('You can not merge oredrs with Done, Cancel and Sale order orders.')
-                        else:
-                            if sale.id != self.sale_order.id:
-                                vals = {
-                                    'product_id': line.product_id.id or False,
-                                    'product_uom_qty': line.product_uom_qty or False,
-                                    'price_unit': line.price_unit or False,
-                                    'tax_ids': [(6, 0, [tax.id for tax in line.tax_ids if line.tax_ids])] or False,
-                                    'order_id': self.sale_order.id,
-                                }
-                                line_obj.create(vals)
-
-            msg_body = _("This sale order has been created from: <b>%s</b>") % (msg_origin)
-            self.sale_order.message_post(body=msg_body)
-            self.sale_order.write({'partner_id': partner_name, 'origin': msg_origin})
-
-            if self.sale_order.id in cancel_list:
-                cancel_list.remove(self.sale_order.id)
-
-            for orders in cancel_list:
-                for s_order in self.env['sale.order'].browse(orders):
-                    s_order.action_cancel()
-
-        if self.type == 'exist_2':
-            for sale in sales:
-                partners_list_write.append(sale.partner_id)
-                partners_list_write.append(self.sale_order.partner_id)
-                cancel_list.append(sale.id)
-
-                user = partners_list_write
-                set1 = set(partners_list_write)
-
-                if len(set1) > 1:
-                    raise UserError('You can only merge orders of same partners.')
-                else:
-                    partner_name = sale.partner_id.id
-                    if self.sale_order.state in ['done', 'sale', 'confirmed', 'cancel']:
-                        raise UserError('You can not merge orders with Done, Cancel and Sale order orders.')
-                    else:
-                        merge_ids = line_obj.search([('order_id', '=', sale.id)])
-                        for line in merge_ids:
-                            line.write({
-                                'order_id': self.sale_order.id
-                            })
-
-            msg_body = _("This sale order has been created from: <b>%s</b>") % (msg_origin)
-            self.sale_order.message_post(body=msg_body)
-            self.sale_order.write({'partner_id': partner_name, 'origin': msg_origin})
-
-            if self.sale_order.id in cancel_list:
-                cancel_list.remove(self.sale_order.id)
-
-            for orders in cancel_list:
-                for s_order in self.env['sale.order'].browse(orders):
-                    s_order.action_cancel()
-                    s_order.unlink()
-
-        result = {
-            'type': 'ir.actions.act_window',
-            'res_model': 'sale.order',
-            'view_mode': 'form',
-            'view_type': 'form',
-            'views': [(False, 'form')],
-        }
-        return result
-
+        target = self.sale_order if self.type in ('exist_1', 'exist_2') else sale_obj
+        partners = (sales | target).mapped('partner_id')
+        if len(partners) > 1:
+            raise UserError(_('You can only merge orders of same partners.'))
+        if target and target.state in ['done', 'sale', 'confirmed', 'cancel']:
+            raise UserError(_('You can not merge orders with Done, Cancel and Sale order orders.'))
+        result = sale_obj._merge_orders(sales, self.type, target or None, customer_ref=myString, origin=msg_origin)
+        return sale_obj._merge_action(result)

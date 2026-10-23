@@ -17,7 +17,7 @@ class SaleOrderLineMerge(models.TransientModel):
 
         for rec in sale_order:
             if rec.state != 'draft':
-                raise ValidationError('Operation can only be perform when the sale order is in Quatation only')
+                raise ValidationError(_('Operation can only be perform when the sale order is in Quatation only'))
             else:
                 for order in sale_order.order_line:
                     if order.product_id not in [i.product_id for i in order_new_lines]:

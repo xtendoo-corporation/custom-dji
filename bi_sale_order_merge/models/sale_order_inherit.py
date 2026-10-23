@@ -74,7 +74,7 @@ class SaleOrder(models.Model):
         if new_lines:
             line_obj.create(new_lines)
 
-        target.message_post(body=_("This sale order has been created from: <b>%s</b>") % origin)
+        target.message_post(body=Markup(_("This sale order has been created from: <b>%s</b>")) % origin)
         sources = sources.with_context(disable_cancel_warning=True)
         sources.action_cancel()
         if merge_type in ('exist', 'exist_2'):

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_move_list_pending_delivery" model="ir.ui.view">
+        <field name="name">stock.move.list.pending.delivery</field>
+        <field name="model">stock.move</field>
+        <field name="arch" type="xml">
+            <list string="Pending Delivery" create="0" edit="0" delete="0">
+                <field name="date"/>
+                <field name="picking_id"/>
+                <field name="partner_id"/>
+                <field name="origin"/>
+                <field name="product_id"/>
+                <field name="product_uom_qty"/>
+                <field name="product_uom"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+</odoo>

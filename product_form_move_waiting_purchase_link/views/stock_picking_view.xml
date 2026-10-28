@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="purchase_picking_view" model="ir.ui.view">
+        <field name="name">stock.picking.form.pending.delivery</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    class="oe_stat_button"
+                    name="action_picking_template_sale_list"
+                    type="object"
+                    icon="fa-list"
+                    invisible="picking_type_code == 'outgoing'"
+                >
+                    <field
+                        string="Pending Delivery"
+                        name="move_product_qty"
+                        widget="statinfo"
+                    />
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>

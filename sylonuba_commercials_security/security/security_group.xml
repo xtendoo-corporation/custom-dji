@@ -6,10 +6,16 @@
                 <field name="name">Sylonuba Comerciales</field>
                 <field name="sequence">60</field>
             </record>
+        <!-- Odoo 19: res.groups.category_id se sustituye por res.groups.privilege_id (-> res.groups.privilege, que sigue enlazando a la categoría) -->
+        <record model="res.groups.privilege" id="privilege_commercials_security">
+            <field name="name">Sylonuba Comerciales</field>
+            <field name="category_id" ref="group_commercials_security"/>
+            <field name="sequence">60</field>
+        </record>
         <!-- Comercial Jose Gonzalez -->
         <record id="jose_gonzalez_payments" model="res.groups">
             <field name="name">Jose Gonzalez</field>
-           <field name="category_id" ref="group_commercials_security"/>
+           <field name="privilege_id" ref="privilege_commercials_security"/>
         </record>
 
          <record id="payment_term_joseli" model="ir.rule">
@@ -26,7 +32,7 @@
         <!-- Comercial Domingo -->
         <record id="domingo_payments" model="res.groups">
             <field name="name">Domingo</field>
-            <field name="category_id" ref="group_commercials_security"/>
+            <field name="privilege_id" ref="privilege_commercials_security"/>
         </record>
 
          <record id="payment_term_domingo" model="ir.rule">

@@ -24,7 +24,6 @@ class SaleOrderRecommendation(models.TransientModel):
         readonly=True,
         ondelete="cascade",
     )
-    currency_id = fields.Many2one(related="order_id.currency_id", store=True, readonly=True)
     months = fields.Float(
         default=6,
         required=True,
@@ -111,15 +110,21 @@ class SaleOrderRecommendation(models.TransientModel):
         self.last_compute = last_compute
         # Search delivered products in previous months
         # Search with sudo for get sale order from other commercials users
-        found_lines = (
-            self.env["sale.order.line"]
+        # Odoo 19: read_group se sustituye por _read_group (tuplas); se reconstruye el formato de diccionario que usa el resto del código
+        found_lines = [
+            {
+                "product_id": (product.id, product.display_name),
+                "product_id_count": count,
+                "qty_delivered": qty_delivered,
+            }
+            for product, count, qty_delivered in self.env["sale.order.line"]
             .sudo()
-            .read_group(
+            ._read_group(
                 self._recomendable_sale_order_lines_domain(),
-                ["product_id", "qty_delivered"],
-                ["product_id"],
+                groupby=["product_id"],
+                aggregates=["__count", "qty_delivered:sum"],
             )
-        )
+        ]
         # Manual ordering that circumvents ORM limitations
         found_lines = sorted(
             found_lines,
@@ -188,7 +193,7 @@ class SaleOrderRecommendationLine(models.TransientModel):
     _description = "Recommended product for current sale order"
     _order = "id"
 
-    currency_id = fields.Many2one(related="wizard_id.order_id.currency_id", store=True, readonly=True)
+    currency_id = fields.Many2one(related="product_id.currency_id")
     partner_id = fields.Many2one(related="wizard_id.order_id.partner_id")
     product_id = fields.Many2one("product.product", string="Product")
     price_unit = fields.Monetary(compute="_compute_price_unit")
@@ -204,7 +209,7 @@ class SaleOrderRecommendationLine(models.TransientModel):
         readonly=True,
     )
     sale_line_id = fields.Many2one(comodel_name="sale.order.line")
-    sale_uom_id = fields.Many2one(related="sale_line_id.product_uom")
+    sale_uom_id = fields.Many2one(related="sale_line_id.product_uom_id")
 
     @api.depends(
         "partner_id",
@@ -216,16 +221,16 @@ class SaleOrderRecommendationLine(models.TransientModel):
     def _compute_price_unit(self):
         """Get product price unit from product list price or from last sale price
         """
-        price_origin = (
-            fields.first(self).wizard_id.sale_recommendation_price_origin or "pricelist"
-        )
+        # Odoo 19: fields.first ya no existe y product.price (con contexto de tarifa) tampoco: se usa la tarifa del pedido
+        price_origin = self[:1].wizard_id.sale_recommendation_price_origin or "pricelist"
         for one in self:
             if price_origin == "pricelist":
-                one.price_unit = one.product_id.with_context(
-                    partner=one.partner_id.id,
-                    pricelist=one.pricelist_id.id,
-                    quantity=one.units_included,
-                ).price
+                if one.pricelist_id:
+                    one.price_unit = one.pricelist_id._get_product_price(
+                        one.product_id, one.units_included or 1.0
+                    )
+                else:
+                    one.price_unit = one.product_id.lst_price
             else:
                 one.price_unit = one._get_last_sale_price_product()
 

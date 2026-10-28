@@ -1,7 +1,7 @@
 {
     'name': 'Reoommended Product For Sylonuba',
     'summary': """Reoommended Product For Sylonuba""",
-    'version': '18.0.1.0.0',
+    'version': '19.0.1.0.0',
     'description': """Reoommended Product For Sylonuba""",
     'author': 'Dani Domínguez',
     'company': 'Xtendoo',
@@ -17,6 +17,6 @@
        "views/sale_order_view.xml",
     ],
     'installable': True,
-    'auto_install': True,
+    'auto_install': False,
 }
 

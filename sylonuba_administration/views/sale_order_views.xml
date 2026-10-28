@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--margin-->
+        <record id="sylonuba_administration.saleorder_form_ihnerit_margins" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.margins</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_margin.sale_margin_sale_order"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='margin']" position="attributes">
+                    <attribute name="groups">sylonuba_administration.show_margins</attribute>
+                </xpath>
+                <xpath expr="//field[@name='margin_percent']" position="attributes">
+                    <attribute name="groups">sylonuba_administration.show_margins</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Fin margin-->
+        <record id="sylonuba_administration.saleorder_form_ihnerit" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][1]" position="replace">
+                    <field name="can_create_invoice" invisible="1"/>
+                    <button name="%(sale.action_view_sale_advance_payment_inv)d"
+                            string="Create Invoice"
+                            type="action"
+                            class="btn-primary"
+                            groups="account.group_account_invoice"
+                            invisible="invoice_status != 'to invoice' or not can_create_invoice"/>
+                </xpath>
+                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="replace">
+                    <button name="%(sale.action_view_sale_advance_payment_inv)d"
+                            string="Create Invoice"
+                            type="action"
+                            class="btn-primary"
+                            groups="account.group_account_invoice"
+                            invisible="True"/>
+                </xpath>
+
+                <!--  No ver Margen  -->
+                <xpath expr="//field[@name='margin']" position="attributes">
+                    <attribute name="groups">sylonuba_administration.show_margins</attribute>
+                </xpath>
+                <!--  Fin no ver margen  -->
+
+                <!--  Edicion de tarifas  -->
+                <xpath expr="//field[@name='pricelist_id']" position="replace">
+                    <field name="is_admin" invisible="1"/>
+                    <field name="pricelist_id" options="{'no_open':True,'no_create': True}"
+                           readonly="not is_admin"/>
+                </xpath>
+                <!--  Fin Edicion de tarifas  -->
+
+                <!--  No editar precio unitario  -->
+                <!-- GOTCHA REAL v19: dentro de una <list>, "invisible" ya NO
+                     oculta la columna (solo el contenido de cada celda,
+                     evaluado fila a fila) - el propio core de Odoo usa
+                     "column_invisible" para estos campos tecnicos que solo
+                     alimentan expresiones readonly/invisible de otros campos
+                     (ver sale/views/sale_order_views.xml: linked_line_id,
+                     combo_item_id, collapse_prices, etc, todos con
+                     column_invisible="1"). En v15 "invisible=1" bastaba para
+                     las dos cosas. Sin este cambio, is_admin/can_edit_* se
+                     veian como columnas reales en la lista de lineas. -->
+                <xpath expr="//field[@name='order_line']/list//field[@name='price_unit']" position="replace">
+                    <field name="can_edit_price" column_invisible="1"/>
+                    <field name="is_admin" column_invisible="1"/>
+                    <field name="price_unit"
+                           readonly="not can_edit_price"/>
+                </xpath>
+                <xpath expr="//page[@name='order_lines']//field[@name='price_unit']" position="replace">
+                    <field name="can_edit_price" column_invisible="1"/>
+                    <field name="is_admin" column_invisible="1"/>
+                    <field name="price_unit"
+                           readonly="not can_edit_price"/>
+                </xpath>
+                <!--  Fin no editar precio unitario  -->
+
+                <!--  Ocultar coste en linea y no dejar editarlo a comerciales -->
+                <xpath expr="//field[@name='order_line']/list//field[@name='purchase_price']" position="replace">
+                    <field name="purchase_price" groups="sylonuba_administration.show_cost_price"
+                           readonly="not is_admin"/>
+                </xpath>
+
+                <!--   Abrir:Lineas del pedido   -->
+                <xpath expr="//page[@name='order_lines']//field[@name='purchase_price']" position="attributes">
+                    <attribute name="groups">sylonuba_administration.show_cost_price</attribute>
+                </xpath>
+                <!--   Fin Abrir.Lineas del pedido   -->
+
+                <!--  No editar IVA  -->
+                <xpath expr="//field[@name='order_line']/list//field[@name='tax_ids']" position="replace">
+                    <field name="can_edit_tax" column_invisible="1"/>
+                    <field name="tax_ids" widget="many2many_tags" options="{'no_create': True}"
+                           domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]"
+                           readonly="not can_edit_tax"/>
+                </xpath>
+
+                <xpath expr="//page[@name='order_lines']//field[@name='tax_ids']" position="replace">
+                    <field name="can_edit_tax" column_invisible="1"/>
+                    <field name="tax_ids" widget="many2many_tags" options="{'no_create': True}"
+                           domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]"
+                           readonly="not can_edit_tax"/>
+                </xpath>
+                <!--  Fin no editar IVA  -->
+
+                <!--  No editar descuento 1  -->
+                <xpath expr="//field[@name='order_line']/list//field[@name='discount']" position="replace">
+                    <field name="can_edit_discounts" column_invisible="1"/>
+                    <field name="discount"
+                           readonly="not can_edit_discounts"/>
+                </xpath>
+                <xpath expr="//page[@name='order_lines']//field[@name='discount']" position="replace">
+                    <field name="can_edit_discounts" column_invisible="1"/>
+                    <field name="discount"
+                           readonly="not can_edit_discounts"/>
+                </xpath>
+                <!--  Fin no editar descuento 1 -->
+
+                <xpath expr="//field[@name='order_line']/list" position="attributes">
+                    <attribute name="limit">800</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!--  Buscar mas... (ventas)   -->
+       <record id="product_template_tree_view_inherit" model="ir.ui.view" >
+           <field name="name">product.template.tree.view.inherit</field>
+           <field name="model">product.product</field>
+           <field name="inherit_id" ref="product.product_product_tree_view"/>
+           <field name="arch" type="xml">
+               <xpath expr="//field[@name='standard_price']" position="attributes">
+                   <attribute name="groups">sylonuba_administration.show_cost_price</attribute>
+               </xpath>
+           </field>
+       </record>
+        <!--    Fin buscar mas... (ventas)    -->
+
+        <!-- Tipo en vista de pedidos -->
+       <record id="view_order_list" model="ir.ui.view">
+            <field name="name">sale.order.type.view.list</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                    <field name="is_picking_state_done" optional="hide"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

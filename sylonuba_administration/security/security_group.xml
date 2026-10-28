@@ -1,0 +1,332 @@
+<odoo>
+    <data>
+        <!-- Grupo Administration-->
+        <record model="ir.module.category" id="group_administration_security">
+            <field name="name">Permisos de Administración</field>
+            <field name="description">Administrators Group:
+                * Permission to edit in products:
+                - Name
+                - Category
+                - Type
+                - Company
+                - Internal Notes
+                - Sale ok
+                - Purchase ok
+                - Barcode
+                - Default code
+            </field>
+            <field name="sequence">60</field>
+        </record>
+        <!--Grupo Administration-->
+        <!-- Grupo Facturacion-->
+        <record model="ir.module.category" id="group_invoice_security">
+            <field name="name">Permisos de Facturación</field>
+            <field name="description">Permisos especiales para el módulo de Facturación</field>
+            <field name="sequence">60</field>
+        </record>
+        <!--Grupo Facturacion-->
+        <!-- Grupo Producto-->
+        <record model="ir.module.category" id="group_product_security">
+            <field name="name">Permisos en productos</field>
+            <field name="description">Permisos especiales para el módulo de productos</field>
+            <field name="sequence">60</field>
+        </record>
+        <!--Grupo Product-->
+        <!-- Grupo Otros-->
+        <record model="ir.module.category" id="group_others_security">
+            <field name="name">Otros permisos especiales</field>
+            <field name="description">Permisos especiales varios</field>
+            <field name="sequence">60</field>
+        </record>
+        <!--Grupo Otros-->
+        <!-- res.groups.category_id (-> ir.module.category) se sustituyó por
+             res.groups.privilege_id (-> res.groups.privilege) en 19.0; el
+             propio res.groups.privilege sigue enlazando a ir.module.category
+             vía su campo category_id, así que las 4 categorías de arriba se
+             mantienen sin cambios y solo se añade el nivel intermedio. -->
+        <record model="res.groups.privilege" id="privilege_administration_security">
+            <field name="name">Permisos de Administración</field>
+            <field name="category_id" ref="group_administration_security"/>
+            <field name="sequence">60</field>
+        </record>
+        <record model="res.groups.privilege" id="privilege_invoice_security">
+            <field name="name">Permisos de Facturación</field>
+            <field name="category_id" ref="group_invoice_security"/>
+            <field name="sequence">60</field>
+        </record>
+        <record model="res.groups.privilege" id="privilege_product_security">
+            <field name="name">Permisos en productos</field>
+            <field name="category_id" ref="group_product_security"/>
+            <field name="sequence">60</field>
+        </record>
+        <record model="res.groups.privilege" id="privilege_others_security">
+            <field name="name">Otros permisos especiales</field>
+            <field name="category_id" ref="group_others_security"/>
+            <field name="sequence">60</field>
+        </record>
+        <record id="commercial_group" model="res.groups">
+            <field name="name">Comerciales</field>
+            <field name="privilege_id" ref="privilege_administration_security"/>
+            <field name="comment">Grupo de comerciales</field>
+        </record>
+
+        <record id="website.menu_website_configuration" model="ir.ui.menu">
+            <field name="group_ids" eval="[(3,ref('base.group_user'))]"/>
+        </record>
+
+        <record id="crm.crm_menu_root" model="ir.ui.menu">
+            <field name="group_ids" eval="[(3,ref('sales_team.group_sale_salesman'))]"/>
+        </record>
+
+        <record id="account.account_invoicing_menu" model="ir.ui.menu">
+            <field name="group_ids" eval="[(3,ref('account.group_account_invoice'))]"/>
+        </record>
+
+        <record id="account.account_reports_management_menu" model="ir.ui.menu">
+            <field name="group_ids" eval="[(3,ref('account.group_account_invoice'))]"/>
+        </record>
+
+        <!--        <record id="account.menu_action_account_invoice_bank_journal_form" model="ir.ui.menu">-->
+        <!--            <field name="group_ids" eval="[(3,ref('account.group_account_invoice'))]"/>-->
+        <!--        </record>-->
+
+        <!--  Grupo de admins  -->
+        <record id="administration_group" model="res.groups">
+            <field name="name">Administrators</field>
+            <field name="privilege_id" ref="privilege_administration_security"/>
+            <field name="comment">Administrators Group:
+                * Permission to edit in products:
+                - Name
+                - Category
+                - Type
+                - Company
+                - Internal Notes
+                - Sale ok
+                - Purchase ok
+                - Barcode
+                - Default code
+            </field>
+        </record>
+        <!--  Fin Grupo de admins  -->
+        <!-- Registrar pagos -->
+<record id="register_payments" model="res.groups">
+            <field name="name">Register Payments</field>
+            <field name="privilege_id" ref="privilege_invoice_security"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+        <!-- Odoo 19: res.groups.menu_access ya no existe; el acceso de este grupo a los menús se da desde el menú (group_ids).
+             De los 5 menús de la 13 siguen existiendo 3 (los otros 2, account.menu_action_move_out_receipt_type y
+             account.menu_action_account_invoice_bank_journal_form, desaparecieron del core 19). -->
+        <record id="account.product_product_menu_sellable" model="ir.ui.menu">
+            <field name="group_ids" eval="[(4, ref('sylonuba_administration.register_payments'))]"/>
+        </record>
+        <record id="account_banking_mandate.mandate_menu" model="ir.ui.menu">
+            <field name="group_ids" eval="[(4, ref('sylonuba_administration.register_payments'))]"/>
+        </record>
+        <record id="account.menu_action_account_payments_receivable" model="ir.ui.menu">
+            <field name="group_ids" eval="[(4, ref('sylonuba_administration.register_payments'))]"/>
+        </record>
+        <!-- Fin Registrar pagos -->
+          Margen
+        <record id="show_margins" model="res.groups">
+            <field name="privilege_id" ref="privilege_others_security"/>
+            <field name="name">Show Margins</field>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to view margins</field>
+        </record>
+          Fin Margen
+        <!--  Coste  -->
+        <record id="show_cost_price" model="res.groups">
+            <field name="privilege_id" ref="privilege_others_security"/>
+            <field name="name">Show cost price</field>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to view costs</field>
+        </record>
+        <!--  Fin Coste  -->
+        <!--  Pvp  -->
+        <record id="edit_sale_price" model="res.groups">
+            <field name="privilege_id" ref="privilege_others_security"/>
+            <field name="name">Edit sale price</field>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to edit sale price</field>
+        </record>
+        <!--  Fin Pvp  -->
+        <!--  Editar impuesto -->
+        <record id="edit_tax" model="res.groups">
+            <field name="privilege_id" ref="privilege_others_security"/>
+            <field name="name">Edit tax</field>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to edit taxes</field>
+        </record>
+        <!--  Fin editar impuesto -->
+        <!--  Editar descuento -->
+        <record id="edit_discounts" model="res.groups">
+            <field name="privilege_id" ref="privilege_others_security"/>
+            <field name="name">Edit discounts</field>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to edit discounts</field>
+        </record>
+        <!--  Fin editar descuento -->
+        <!--  Editar cuenta en factura -->
+        <record id="edit_account" model="res.groups">
+            <field name="privilege_id" ref="privilege_invoice_security"/>
+            <field name="name">Edit accounts invoice</field>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to edit account in invoice</field>
+        </record>
+        <!--  Fin editar cuenta en factura -->
+        <!--  Editar cantidad en factura -->
+        <record id="edit_quantity" model="res.groups">
+            <field name="privilege_id" ref="privilege_invoice_security"/>
+            <field name="name">Edit quantity invoice</field>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to edit quantity in invoice</field>
+        </record>
+        <!--  Fin editar cantidad en factura -->
+        <!--  Editar descripcion de producto en factura -->
+        <record id="edit_product_desc" model="res.groups">
+            <field name="privilege_id" ref="privilege_invoice_security"/>
+            <field name="name">Edit product description in invoice</field>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to edit product description in invoice</field>
+        </record>
+        <!--  Fin editar descripcion de producto en factura -->
+        <!--  Editar producto en factura -->
+        <record id="edit_product_id" model="res.groups">
+            <field name="privilege_id" ref="privilege_invoice_security"/>
+            <field name="name">Edit product in invoice</field>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to edit product in invoice</field>
+        </record>
+        <!--  Fin editar producto en factura -->
+        <!--  Cancelar en factura -->
+        <record id="cancel_invoice" model="res.groups">
+            <field name="name">Cancel invoice</field>
+            <field name="privilege_id" ref="privilege_invoice_security"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to cancel invoices</field>
+        </record>
+        <!--  Fin cancelar factura -->
+        <!--  Crear en factura -->
+        <record id="create_invoice" model="res.groups">
+            <field name="name">Create invoice</field>
+            <field name="privilege_id" ref="privilege_invoice_security"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to create invoices</field>
+        </record>
+        <!--  Fin Crear factura -->
+        <!--  Crear Factura rectificativa en factura -->
+        <record id="create_refund_invoice" model="res.groups">
+            <field name="name">Create refund invoice</field>
+            <field name="privilege_id" ref="privilege_invoice_security"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to create refund invoices</field>
+        </record>
+        <!--  Fin crear Factura rectificativa factura -->
+        <!--   Purchase Page   -->
+        <record id="show_purchase_page" model="res.groups">
+            <field name="privilege_id" ref="privilege_product_security"/>
+            <field name="name">Show Purcahse Page</field>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to view purchase page</field>
+        </record>
+        <!--   Fin Purchase Page   -->
+        <!--   Inventory Page   -->
+        <record id="show_inventory_page" model="res.groups">
+            <field name="privilege_id" ref="privilege_product_security"/>
+            <field name="name">Show Inventory Page</field>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to view inventory page</field>
+        </record>
+        <!--   Fin Inventory Page   -->
+        <!--   Accounting Page   -->
+        <record id="show_accounting_page" model="res.groups">
+            <field name="privilege_id" ref="privilege_product_security"/>
+            <field name="name">Show Accounting Page</field>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to view accounting page</field>
+        </record>
+        <!--   Fin Accounting Page   -->
+        <!--   Sale Page   -->
+        <record id="show_sale_page" model="res.groups">
+            <field name="privilege_id" ref="privilege_product_security"/>
+            <field name="name">Show Sale Page</field>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to view sale page</field>
+        </record>
+        <!--   Fin Sale Page   -->
+        <!--   E-Commerce Page   -->
+        <record id="show_ecommerce_page" model="res.groups">
+            <field name="privilege_id" ref="privilege_product_security"/>
+            <field name="name">Show E-Commerce Page</field>
+            <field name="user_ids" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">Permission to view E-Commerce page</field>
+        </record>
+        <!--   Fin E-Commerce Page   -->
+        <record id="commercials_no_create_invoices" model="ir.rule">
+            <field name="name">No crear facturas a comerciales</field>
+            <field name="model_id" ref="account.model_account_move"/>
+<field name="domain_force">[('move_type', '=', 'entry')]</field>
+            <field name="groups" eval="[(4, ref('sylonuba_administration.commercial_group'))]"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_read" eval="False"/>
+        </record>
+
+       <record id="own_invoices" model="ir.rule">
+           <field name="name">Facturas Propias</field>
+           <field name="model_id" ref="account.model_account_move"/>
+           <field name="domain_force">[('move_type', 'in', ('entry', 'out_invoice', 'out_refund', 'in_invoice',
+               'in_refund')), '|',
+               ('invoice_user_id', '=', user.id), ('invoice_user_id', '=', False)]
+           </field>
+           <field name="groups" eval="[(4, ref('sylonuba_administration.commercial_group'))]"/>
+           <field name="perm_create" eval="False"/>
+           <field name="perm_unlink" eval="False"/>
+           <field name="perm_write" eval="False"/>
+           <field name="perm_read" eval="True"/>
+       </record>
+
+       <record id="own_payment" model="ir.rule">
+           <field name="name">Pagos Propios</field>
+           <field name="model_id" ref="account.model_account_payment"/>
+           <field name="domain_force">['|',('create_uid', '=', user.id),('create_uid', '=', False)]</field>
+           <field name="groups" eval="[(4, ref('sylonuba_administration.commercial_group'))]"/>
+           <field name="perm_create" eval="False"/>
+           <field name="perm_unlink" eval="False"/>
+           <field name="perm_write" eval="False"/>
+           <field name="perm_read" eval="True"/>
+       </record>
+
+        <!-- Facturación / Contabilidad/Clientes/Órdenes de cobro -->
+        <record id="account_payment_order.account_payment_order_inbound_menu" model="ir.ui.menu">
+            <field name="group_ids" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
+        </record>
+
+        <!-- Facturación / Contabilidad/Clientes/Devoluciones de cobros -->
+        <record id="account_payment_return.payment_return_menu" model="ir.ui.menu">
+            <field name="group_ids" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
+        </record>
+
+        <!-- Facturación / Contabilidad/Clientes/Importar devolución de cobros -->
+        <record id="account_payment_return_import.menu_account_payment_return_import" model="ir.ui.menu">
+            <field name="group_ids" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
+        </record>
+
+        <!-- Facturación / Contabilidad/Clientes/Mandatos bancarios -->
+        <record id="account_banking_mandate.mandate_menu" model="ir.ui.menu">
+            <field name="group_ids" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
+        </record>
+
+        <!-- Facturación / Contabilidad/Proveedores -->
+        <record id="account.menu_finance_payables" model="ir.ui.menu">
+            <field name="group_ids" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
+        </record>
+
+        <!-- Facturación / Contabilidad/Activos -->
+        <record id="account_asset_management.menu_finance_assets" model="ir.ui.menu">
+            <field name="group_ids" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
+        </record>
+    </data>
+</odoo>

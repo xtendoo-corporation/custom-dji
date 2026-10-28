@@ -1,0 +1,146 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* xtendoo_web_pivot_computed_measure
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-07-05 12:48+0000\n"
+"Last-Translator: jabelchi <jabelchi@gmail.com>\n"
+"Language-Team: none\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Add"
+msgstr "Afegir"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Can be empty"
+msgstr "Pot estar buit"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Computed Measure"
+msgstr "Mesura calculada"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Custom"
+msgstr "Personalitat"
+
+#. module: xtendoo_web_pivot_computed_measure
+#: model:ir.actions.act_window,name:xtendoo_web_pivot_computed_measure.demo_action_res_partner_report_pivot
+#: model:ir.ui.menu,name:xtendoo_web_pivot_computed_measure.demo_menu_res_partner_report_pivot
+msgid "Demo Pivot"
+msgstr ""
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Div (m1 / m2)"
+msgstr "Div (m1 / m2)"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Float"
+msgstr "Comma flotant"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Format"
+msgstr "Format"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Formula"
+msgstr "Fórmula"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Integer"
+msgstr "Enter"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Measure 1"
+msgstr "Mesura 1"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Measure 2"
+msgstr "Mesura 2"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Mult (m1 * m2)"
+msgstr "Mult (m1 * m2)"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Operation"
+msgstr "Operació"
+
+#. module: xtendoo_web_pivot_computed_measure
+#: model_terms:ir.ui.view,arch_db:xtendoo_web_pivot_computed_measure.demo_view_res_partner_report_pivot
+msgid "Partners Table"
+msgstr ""
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Perc (m1 * 100 / m2)"
+msgstr "Perc (m1 * 100 / m2)"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Percentage"
+msgstr "Percentatge"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Sub (m1 - m2)"
+msgstr "Resta (m1 - m2)"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/dropdown_item_custom_measure/dropdown_item_custom_measure.xml:0
+msgid "Sum (m1 + m2)"
+msgstr "Suma (m1 + m2)"
+
+#. module: xtendoo_web_pivot_computed_measure
+#. odoo-javascript
+#: code:addons/xtendoo_web_pivot_computed_measure/static/src/pivot/pivot_model.esm.js:0
+msgid ""
+"This measure is currently used by a 'computed measure'. Please, disable the "
+"computed measure first."
+msgstr ""
+"Aquesta mesura s'usa actualment per una \"mesura calculada\". Si us plau, "
+"inhabiliteu primer la mesura calculada."

@@ -75,13 +75,17 @@
                                     <strong>Pedido:</strong>
                                     <span class="m-0" t-field="o.invoice_origin"/>
                                 </li>
-<!--                                <li t-if="o.reference_payment" name="reference">-->
-<!--                                    <strong>Referencia:</strong>-->
-<!--                                    <span class="m-0" t-field="o.reference_payment"/>-->
-<!--                                </li>-->
+<li t-if="o.ref" name="reference">
+                                    <strong>Referencia:</strong>
+                                    <span class="m-0" t-field="o.ref"/>
+                                </li>
                                 <li t-if="o.invoice_payment_term_id" name="reference">
                                     <strong>Forma de Pago:</strong>
                                     <span class="m-0" t-field="o.invoice_payment_term_id"/>
+                                </li>
+                                <li t-if="o.invoice_user_id" name="user">
+                                    <strong>Comercial:</strong>
+                                    <span class="m-0" t-field="o.invoice_user_id"/>
                                 </li>
                                 <div class="col-auto mw-100 mb-2"
                                      t-if="o.invoice_date_due and  o.move_type == 'out_invoice' and o.state == 'posted'"
@@ -102,6 +106,9 @@
                                 </li>
                                 <li t-if="o.partner_id.name">
                                     <span t-field="o.partner_id.name"/>
+                                </li>
+                                <li t-if="o.partner_id.comercial">
+                                    (<span t-field="o.partner_id.comercial"/>)
                                 </li>
                                 <li t-if="o.partner_id.street">
                                     <span t-field="o.partner_id.street"/>

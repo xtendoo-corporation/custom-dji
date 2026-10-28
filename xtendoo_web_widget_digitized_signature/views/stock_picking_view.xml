@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="inherited_view_picking_form" model="ir.ui.view">
+        <field name="name">inherited.stock.view.picking.form.digital.signature</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='operations']" position="inside">
+                <group>
+                    <field name="name_receiver"/>
+                    <field name="vat_receiver"/>
+                </group>
+                <group class="oe_center" colspan="2" name="digital_signature">
+                    <label for="digital_signature" string="Digital signature"/>
+                    <h2>
+                        <field
+                            name="digital_signature"
+                            widget="signature"
+                            options="{'full_name': 'name_receiver'}"
+                        />
+                    </h2>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -73,6 +73,12 @@
                     </div>
                 </div>
             </xpath>
+            <!-- En 13 el pie imprimía el registro mercantil de la compañía en una fila propia -->
+            <xpath expr="//div[hasclass('o_footer_content')]" position="after">
+                <div t-if="company.company_registry" class="text-start" style="font-size: 10px;">
+                    <span t-field="company.company_registry"/>
+                </div>
+            </xpath>
 <!--            <xpath expr="//div[@t-attf-class='o_clean_footer']" position="replace">-->
 <!--                <div class="row mt8">-->
 <!--                    <div class="col-10" style="font-size: 0.7em">-->

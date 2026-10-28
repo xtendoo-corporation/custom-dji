@@ -34,22 +34,22 @@
                                 <li>
                                     <h2 class="mt16">
                                         <span
-                                            t-if="o.state == 'out_invoice' and o.state == 'posted'"
-                                        >Factura test:</span>
+                                            t-if="o.move_type == 'out_invoice' and o.state == 'posted'"
+                                        >Factura:</span>
                                         <span
-                                            t-if="o.state == 'out_invoice' and o.state == 'draft'"
+                                            t-if="o.move_type == 'out_invoice' and o.state == 'draft'"
                                         >Factura Borrador:</span>
                                         <span
-                                            t-if="o.state == 'out_invoice' and o.state == 'cancel'"
+                                            t-if="o.move_type == 'out_invoice' and o.state == 'cancel'"
                                         >Factura Cancelada:</span>
                                         <span
-                                            t-if="o.state == 'out_refund'"
+                                            t-if="o.move_type == 'out_refund'"
                                         >Factura Rectificativa:</span>
                                         <span
-                                            t-if="o.state == 'in_refund'"
+                                            t-if="o.move_type == 'in_refund'"
                                         >Factura Rectificativa Proveedor:</span>
                                         <span
-                                            t-if="o.state == 'in_invoice'"
+                                            t-if="o.move_type == 'in_invoice'"
                                         >Factura Proveedor:</span>
                                         <span t-if="o.name != '/'" t-field="o.name" />
                                     </h2>
@@ -62,10 +62,10 @@
                                       <strong>Pedido:</strong>
                                     <span class="m-0" t-field="o.invoice_origin" />
                                 </li>
-<!--                                <li t-if="o.reference_payment" name="reference">-->
-<!--                                    <strong>Referencia:</strong>-->
-<!--                                    <span class="m-0" t-field="o.reference_payment" />-->
-<!--                                </li>-->
+<li t-if="o.ref" name="reference">
+                                    <strong>Referencia:</strong>
+                                    <span class="m-0" t-field="o.ref"/>
+                                </li>
                                 <li t-if="o.invoice_payment_term_id" name="reference">
                                     <strong>Forma de Pago:</strong>
                                     <span class="m-0" t-field="o.invoice_payment_term_id"/>
@@ -76,7 +76,7 @@
                                 </li>
                                 <div
                                     class="col-auto mw-100 mb-2"
-                                    t-if="o.invoice_date_due and o.state == 'out_invoice' and o.state == 'posted'"
+                                    t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'"
                                     name="due_date"
                                     style="display:none;"
                                 >
@@ -95,6 +95,9 @@
                                 </li>
                                 <li t-if="o.partner_id.name">
                                     <span t-field="o.partner_id.name" />
+                                </li>
+                                <li t-if="o.partner_id.comercial">
+                                    (<span t-field="o.partner_id.comercial" />)
                                 </li>
                                 <li t-if="o.partner_id.street">
                                     <span t-field="o.partner_id.street" />

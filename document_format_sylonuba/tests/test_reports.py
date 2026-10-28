@@ -286,3 +286,78 @@ class TestDocumentFormatReports(TransactionCase):
         self.assertTrue(mail.attachment_ids)
         self.assertIn(invoice.name.replace("/", "_"), mail.attachment_ids[0].name)
 
+    def test_delivery_prints_the_receiver_signature(self):
+        """Con xtendoo_web_widget_digitized_signature instalado el albarán imprime la
+        firma, el nombre y el NIF del receptor (como en 13)."""
+        if "digital_signature" not in self.env["stock.picking"]._fields:
+            self.skipTest("xtendoo_web_widget_digitized_signature no está instalado")
+        picking = self._deliver(self.product)
+        picking.write(
+            {
+                "digital_signature": (
+                    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+                ),
+                "name_receiver": "Juan Receptor",
+                "vat_receiver": "12345678Z",
+            }
+        )
+        for report in (
+            "stock.action_report_delivery",
+            "document_format_sylonuba.report_delivery_without_price",
+        ):
+            html = self._render(report, picking)
+            self.assertIn("data:image/png;base64", html, report)
+            self.assertIn("Juan Receptor", html, report)
+            self.assertIn("12345678Z", html, report)
+
+    def test_invoice_prints_title_reference_and_commercial_data(self):
+        """Lo que imprime el 13 de Sylonuba: título, referencia, comercial y nombre comercial."""
+        self.partner.comercial = "Bar El Comercial"
+        invoice = self._invoice(with_orphan_lines=False)
+        invoice.write({"ref": "REF-CLIENTE-77"})
+        for report in (
+            "account.account_invoices",
+            "document_format_sylonuba.report_invoice_not_grouped",
+        ):
+            html = self._render(report, invoice)
+            text = " ".join(html.split())
+            self.assertRegex(text, r"Factura:", report)
+            self.assertIn("REF-CLIENTE-77", html, report)
+            self.assertIn("Bar El Comercial", html, report)
+            self.assertIn("Comercial:", html, report)
+
+    def test_credit_note_prints_its_title(self):
+        invoice = self._invoice(with_orphan_lines=False)
+        credit = invoice._reverse_moves([{"invoice_date": "2026-10-02"}], cancel=False)
+        credit.action_post()
+        for report in (
+            "account.account_invoices",
+            "document_format_sylonuba.report_invoice_not_grouped",
+        ):
+            self.assertIn("Factura Rectificativa:", self._render(report, credit), report)
+
+    def test_delivery_title_falls_back_to_the_picking_name(self):
+        picking = self._deliver(self.product)
+        picking.pic_name = False
+        html = self._render("stock.action_report_delivery", picking)
+        self.assertIn(picking.name, html)
+
+    def test_company_header_footer_and_registry_are_printed(self):
+        """En 13 el pie y la cabecera de la compañía y el registro mercantil salen en los documentos."""
+        company = self.env.company
+        # el diseño de document_format_sylonuba se aplica sobre web.external_layout_bold
+        # (en 13 la compañía usaba external_layout_clean, que no existe en 19)
+        company.external_report_layout_id = self.env.ref("web.external_layout_bold")
+        company.write(
+            {
+                "report_footer": "PIE-LEGAL-XYZ",
+                "report_header": "CABECERA-ABC",
+                "company_registry": "REG-MERC-123",
+            }
+        )
+        invoice = self._invoice(with_orphan_lines=False)
+        for report in ("account.account_invoices", "document_format_sylonuba.report_invoice_not_grouped"):
+            html = self._render(report, invoice)
+            for text in ("PIE-LEGAL-XYZ", "CABECERA-ABC", "REG-MERC-123"):
+                self.assertIn(text, html, f"{report}: falta {text}")
+

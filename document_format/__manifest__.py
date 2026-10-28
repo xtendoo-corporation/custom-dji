@@ -1,7 +1,7 @@
 {
     "name": "Document Format",
     "summary": """Formatos de documentos entregados por Xtendoo""",
-    "version": "19.0.1.0.5",
+    "version": "19.0.1.0.6",
     "description": """Formatos de documentos entregados por Xtendoo""",
     "author": "Manuel Calero, Daniel Dominguez",
     "company": "Xtendoo",
@@ -19,12 +19,20 @@
         "mail",
         "contacts",
         "sale_commission_oca",
+        "purchase",  # views/purchase/purchase.xml hereda purchase.report_purchaseorder
+        "mrp",  # views/manufacture/manufacture_document.xml usa mrp.production
+        "xtendoo_account_invoice_report_due_list",  # get_multi_due_list de las facturas
+        "account_payment_order",  # campo reference_type de las facturas
+        "l10n_es_partner",  # campo comercial del cliente
+        "product_expiry",  # fecha de caducidad del lote en los albaranes
+        "xtendoo_product_classification",  # clasificación en el informe acumulado de pedidos
     ],
     "data": [
         "data/paper_format_label.xml",
         "views/stock_picking/stock_picking_view.xml",
          "views/delivery/delivery_document.xml",
         "views/delivery/delivery_commodity.xml",
+        "views/delivery/delivery_document_without_price.xml",
         "views/invoice/account_tax_template.xml",
         "views/invoice/invoice_document.xml",
         "views/invoice/invoice_dossier.xml",

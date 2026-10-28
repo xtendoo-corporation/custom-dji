@@ -14,5 +14,5 @@ class ProductTemplate(models.Model):
     )
 
     @api.model
-    def _read_group_classification_id(self, classification, domain, order):
+    def _read_group_classification_id(self, classification, domain):
         return classification.search([])

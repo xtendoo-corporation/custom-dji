@@ -1,0 +1,1 @@
+from . import test_xtendoo_product_classification

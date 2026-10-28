@@ -35,7 +35,7 @@
                 </div>
                 <div class="row">
                        <strong>Fecha: </strong>
-                       <span t-field="o.date_planned_start"/>
+                       <span t-field="o.date_start"/>
                 </div>
 
                 <br/>
@@ -63,7 +63,7 @@
                                     <span t-field="o.product_id"/>
                                 </td>
                                 <td class="text-left" style="solid; black; padding: 0px; margin: 0px; width:25%; !important;">
-                                    <span t-field="o.lot_producing_id"/>
+                                    <span t-field="o.lot_producing_ids"/>
                                 </td>
                                 <td class="text-left" style="solid; black; padding: 0px; margin: 0px; width:25%; !important;">
                                     <span t-field="o.product_qty"/>
@@ -99,7 +99,7 @@
                                             <span t-field="ml.lot_id"/>
                                         </td>
                                         <td class="text-left" style="solid; black; padding: 0px; margin: 0px; width:25%; !important;">
-                                            <span t-field="ml.qty_done"/>
+                                            <span t-field="ml.quantity"/>
                                         </td>
                                     </tr>
                                 </t>

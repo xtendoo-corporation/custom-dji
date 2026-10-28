@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <!-- Mail template are declared in a NOUPDATE block
+         so users can freely customize/delete them -->
+    <data noupdate="1">
+        <!--Email template -->
+        <record id="email_template_grouped_invoice" model="mail.template">
+            <field name="name">Not grouped Invoice: Send by email</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="email_from">{{ (object.invoice_user_id.email_formatted or object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="subject">{{ object.company_id.name }} Invoice (Ref {{ object.name or 'n/a' }})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear
+                        <t t-if="object.partner_id.parent_id">
+                            <t t-out="object.partner_id.name or ''"/> (<t t-out="object.partner_id.parent_id.name or ''"/>),
+                        </t>
+                        <t t-else="">
+                            <t t-out="object.partner_id.name or ''"/>,
+                        </t>
+                        <br/>
+                        <br/>
+                        Here is your
+                        <t t-if="object.name">
+                            invoice
+                            <strong t-out="object.name or ''"/>
+                        </t>
+                        <t t-else="">
+                            invoice
+                        </t>
+                        <t t-if="object.invoice_origin">
+                            (with reference: <t t-out="object.invoice_origin or ''"/>)
+                        </t>
+                        amounting in
+                        <strong t-out="format_amount(object.amount_total, object.currency_id) or ''"/>
+                        from <t t-out="object.company_id.name or ''"/>.
+                        <t t-if="object.payment_state in ('paid', 'in_payment')">
+                            This invoice is already paid.
+                        </t>
+                        <t t-else="">
+                            Please remit payment at your earliest convenience.
+                        </t>
+                        <br/>
+                        <br/>
+                        Do not hesitate to contact us if you have any questions.
+                    </p>
+                </div>
+            </field>
+            <!-- report_template (Many2one) ya no existe en mail.template en
+                 Odoo 19, ahora es report_template_ids (Many2many) -->
+            <field name="report_template_ids" eval="[(6, 0, [ref('document_format_sylonuba.report_invoice_without_grouped')])]"/>
+            <!-- report_name (Char) ya no existe en mail.template en Odoo 19;
+                 el nombre del adjunto ahora lo da print_report_name del
+                 propio ir.actions.report enlazado, movido a
+                 document_format_sylonuba.report_invoice_without_grouped en
+                 invoice_document.xml -->
+            <field name="lang">{{ object.partner_id.lang }}</field>
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

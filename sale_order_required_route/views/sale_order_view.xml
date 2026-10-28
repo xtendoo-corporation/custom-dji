@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <!-- En 13 el campo de ruta del pedido lo ve cualquier usuario; el
+             módulo OCA de 19 lo limita a stock.group_adv_location y el que
+             no lo ve no podría confirmar el pedido. -->
+        <record id="saleorder_form_inherit_route_visible" model="ir.ui.view">
+            <field name="name">saleorder.form.inherit.route.visible</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_order_global_stock_route.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="route_ids" position="attributes">
+                    <attribute name="groups" remove="stock.group_adv_location"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

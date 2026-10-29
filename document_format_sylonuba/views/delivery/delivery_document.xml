@@ -21,7 +21,7 @@
                             <div style="width:50%; float:left;">
                                 <ul class="list-unstyled">
                                     <li>
-                                        <h4 class="mt16">
+                                        <h2 class="mt16" style="font-weight:bold;">
                                             <b>Albarán:</b>
                                             <t t-if="o.pic_name">
                                                 <span t-field="o.pic_name"></span>
@@ -29,7 +29,7 @@
                                             <t t-else="">
                                                 <span t-field="o.name"></span>
                                             </t>
-                                        </h4>
+                                        </h2>
                                     </li>
                                     <li t-if="o.date_done">
                                         <b>Fecha:</b>
@@ -102,20 +102,20 @@
                                     <tr>
                                         <th
                                             name="th_code"
-                                            class="text-left"
+                                            class="text-start"
                                             style="solid; black; padding: 0px; margin: 0px; width:13%; font-size:0.8em; !important;"
                                         >
                                             Código
                                         </th>
                                         <th
                                             name="th_description"
-                                            class="text-left"
+                                            class="text-start"
                                             style="solid; black; padding: 0px; margin: 0px; width:35%; font-size:0.8em; !important;"
                                         >
                                             Descripción
                                         </th>
                                         <th
-                                            t-if="has_serial_number"
+                                            groups="stock.group_lot_on_delivery_slip" t-if="has_serial_number"
 
                                             style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                         >
@@ -130,14 +130,14 @@
                                         </th>
                                         <th
                                             name="th_quantity"
-                                            class="text-right"
+                                            class="text-end"
                                             style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                         >
                                             Unds
                                         </th>
                                         <th
                                             name="th_priceunit"
-                                            class="text-right"
+                                            class="text-end"
                                             style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                         >
                                             Importe
@@ -145,21 +145,21 @@
                                         <th
                                             name="th_discount"
                                             t-if="display_discount"
-                                            class="text-right"
+                                            class="text-end"
                                             style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                         >
                                             Dto.%
                                         </th>
                                         <th
                                             name="th_taxes"
-                                            class="text-right"
+                                            class="text-end"
                                             style="solid; black; padding: 0px; margin: 0px; width:5%; font-size:0.8em; !important;"
                                         >
                                             IVA%
                                         </th>
                                         <th
                                             name="th_subtotal"
-                                            class="text-right"
+                                            class="text-end"
                                             style="solid; black; padding: 0px; margin: 0px; width:18%; font-size:0.8em; !important;"
                                         >
                                             Total
@@ -172,7 +172,7 @@
                                     <tr t-foreach="o.move_line_ids" t-as="move_line">
                                         <td
                                             name="td_code"
-                                            class="text-left"
+                                            class="text-start"
                                             style="solid; black; padding: 0px; margin: 0px; width:13%; font-size:0.8em; !important;"
                                         >
                                             <span
@@ -181,12 +181,12 @@
                                         </td>
                                         <td
                                             name="td_name"
-                                            class="text-left"
+                                            class="text-start"
                                             style="solid; black; padding: 0px; margin: 0px; width:35%; font-size:0.8em; !important;"
                                         >
                                             <span t-field="move_line.product_id.name" />
                                             <p
-                                                t-if="move_line.move_id.description_picking != move_line.product_id.name"
+                                                t-if="(move_line.move_id.description_picking or '').strip() not in ((move_line.product_id.name or '').strip(), (move_line.product_id.display_name or '').strip())"
                                             >
                                                 <t
                                                     t-set="productName"
@@ -207,14 +207,14 @@
                                             </p>
                                         </td>
                                         <td
-                                            t-if="has_serial_number and move_line.lot_id.name"
+                                            groups="stock.group_lot_on_delivery_slip" t-if="has_serial_number and move_line.lot_id.name"
 
                                             style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                         >
                                             <span t-field="move_line.lot_id.name" />
                                         </td>
                                         <td
-                                            t-elif="has_serial_number"
+                                            groups="stock.group_lot_on_delivery_slip" t-elif="has_serial_number"
 
                                             style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                         >
@@ -232,26 +232,26 @@
                                             </t>
                                         </td>
                                         <td
-                                            class="text-right"
+                                            class="text-end"
                                             style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                         >
                                             <span t-field="move_line.quantity" />
                                         </td>
                                         <td
-                                            class="text-right"
+                                            class="text-end"
                                             style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                         >
                                             <span t-field="move_line.sale_price_unit" />
                                         </td>
                                         <td
-                                            class="text-right"
+                                            class="text-end"
                                             t-if="display_discount"
                                             style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                         >
                                             <span t-field="move_line.sale_discount" />
                                         </td>
                                         <td
-                                            class="text-right"
+                                            class="text-end"
                                             style="solid; black; padding: 0px; margin: 0px; width:5%; font-size:0.8em; !important;"
                                         >
                                             <span t-esc="', '.join(map(lambda x: (str(x.amount)), move_line.sale_tax_ids))"
@@ -259,14 +259,14 @@
                                         </td>
                                         <td
                                             t-if="move_line.currency_id"
-                                            class="text-right"
+                                            class="text-end"
                                             style="solid; black; padding: 0px; margin: 0px; width:18%; font-size:0.8em; !important;"
                                         >
                                             <span t-field="move_line.sale_price_subtotal" />
                                         </td>
                                        <!-- <td
                                             t-if="not move_line.currency_id"
-                                            class="text-right"
+                                            class="text-end"
                                             style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                         >
                                             0
@@ -279,7 +279,7 @@
                                 <!-- Totales -->
                                 <div id="total" class="row" name="total">
                                     <div
-                                        t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto"
+                                        t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-5'} ms-auto"
                                     >
                                         <table class="table table-sm">
                                             <tr class="border-black o_subtotal">
@@ -291,7 +291,7 @@
                                                 </td>
                                                 <td
                                                     name="td_amount_untaxed"
-                                                    class="text-right"
+                                                    class="text-end"
                                                     style="solid; black; padding: 0px; margin: 0px; !important;"
                                                 >
                                                     <span
@@ -309,7 +309,7 @@
                                                 </td>
                                                 <td
                                                     name="td_amount_tax"
-                                                    class="text-right"
+                                                    class="text-end"
                                                     style="solid; black; padding: 0px; margin: 0px; !important;"
                                                 >
                                                     <span
@@ -327,7 +327,7 @@
                                                 </td>
                                                 <td
                                                     name="td_amount_tax"
-                                                    class="text-right"
+                                                    class="text-end"
                                                     style="solid; black; padding: 0px; margin: 0px; !important;"
                                                 >
                                                     <span

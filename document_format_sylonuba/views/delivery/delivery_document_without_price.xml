@@ -31,7 +31,7 @@
                             <div style="width:50%; float:left;">
                                 <ul class="list-unstyled">
                                     <li>
-                                        <h2 class="mt16">
+                                        <h2 class="mt16" style="font-weight:bold;">
                                             <b>Albarán:</b>
                                              <t t-if="o.pic_name">
                                                  <span t-field="o.pic_name"></span>
@@ -167,7 +167,7 @@
                                         >
                                             <span t-field="move_line.product_id.name" />
                                             <p
-                                                t-if="move_line.move_id.description_picking != move_line.product_id.name"
+                                                t-if="(move_line.move_id.description_picking or '').strip() not in ((move_line.product_id.name or '').strip(), (move_line.product_id.display_name or '').strip())"
                                             >
                                                 <t
                                                     t-set="productName"

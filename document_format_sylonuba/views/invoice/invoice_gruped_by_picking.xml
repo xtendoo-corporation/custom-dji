@@ -32,7 +32,7 @@
                         <div style="width:50%;float:left;clear:both;margin-top:5px;">
                             <ul class="list-unstyled">
                                 <li>
-                                    <h2 class="mt16">
+                                    <h2 class="mt16" style="font-weight:bold;">
                                         <span
                                             t-if="o.move_type == 'out_invoice' and o.state == 'posted'"
                                         >Factura:</span>
@@ -126,7 +126,7 @@
                                     <strong>NIF:</strong>
                                     <span t-field="o.partner_id.vat" />
                                 </li>
-                                <li t-if="o.reference_type == 'none' and o.payment_reference">
+                                <li t-if="o.reference_type == 'none' and o.payment_reference and o.payment_reference != o.name">
                                     <strong>Referencia Pago:</strong>
                                     <span t-field="o.payment_reference"/>
                                 </li>
@@ -147,51 +147,51 @@
                                 <tr>
                                     <th
                                         name="th_code"
-                                        class="text-left"
-                                        style="solid; black; padding: 0px; margin: 0px; width:13%; font-size:0.8em; !important;"
+                                        class="text-start"
+                                        style="font-weight:bold; solid; black; padding: 0px; margin: 0px; width:13%; font-size:0.8em; !important;"
                                     >
                                         Código
                                     </th>
                                     <th
                                         name="th_description"
-                                        class="text-left"
-                                        style="solid; black; padding: 0px; margin: 0px; width:35%; font-size:0.8em; !important;"
+                                        class="text-start"
+                                        style="font-weight:bold; solid; black; padding: 0px; margin: 0px; width:35%; font-size:0.8em; !important;"
                                     >
                                         Descripción
                                     </th>
                                     <th
                                         name="th_quantity"
-                                        class="text-right"
-                                        style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
+                                        class="text-end"
+                                        style="font-weight:bold; solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                     >
                                         Unds
                                     </th>
                                     <th
                                         name="th_priceunit"
-                                        class="text-right"
-                                        style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
+                                        class="text-end"
+                                        style="font-weight:bold; solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                     >
                                         Importe
                                     </th>
                                     <th
                                         name="th_discount"
                                         t-if="display_discount"
-                                        class="text-right"
-                                        style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
+                                        class="text-end"
+                                        style="font-weight:bold; solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                     >
                                         Dto.%
                                     </th>
                                     <th
                                         name="th_taxes"
-                                        class="text-right"
-                                        style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
+                                        class="text-end"
+                                        style="font-weight:bold; solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                     >
                                         IVA%
                                     </th>
                                     <th
                                         name="th_subtotal"
-                                        class="text-right"
-                                        style="solid; black; padding: 0px; margin: 0px; width:12%; font-size:0.8em; !important;"
+                                        class="text-end"
+                                        style="font-weight:bold; solid; black; padding: 0px; margin: 0px; width:12%; font-size:0.8em; !important;"
                                     >
                                         <t t-if="o.company_price_include != 'tax_included'">
                                             Total
@@ -266,7 +266,7 @@
                                         <!-- Lineas impresión-->
                                         <t name="account_invoice_line_accountable">
                                             <td
-                                                class="text-left"
+                                                class="text-start"
                                                 style="solid; black; padding: 0px; margin: 0px; width:13%; font-size:0.8em; !important;"
                                             >
                                                 <span
@@ -295,15 +295,15 @@
                                                 />
                                             </td>
                                             <td
-                                                class="text-right"
+                                                class="text-end"
                                                 style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                             >
-                                                 <t t-if="o.state in ('out_refund','in_refund')">
+                                                 <t t-if="o.move_type in ('out_refund','in_refund')">
                                                     <span>- </span>
                                                 </t>
                                                 <span
                                                     t-esc="lines_group['quantity']"
-                                                    t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'
+                                                    t-options='{"widget": "float", "decimal_precision": "Product Unit"}'
                                                 />
                                                 <span
                                                     t-field="line.product_uom_id"
@@ -311,10 +311,10 @@
                                                 />
                                             </td>
                                             <td
-                                                t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"
+                                                t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"
                                                 style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                             >
-                                                <t t-if="o.state in ('out_refund','in_refund')">
+                                                <t t-if="o.move_type in ('out_refund','in_refund')">
                                                     <span>- </span>
                                                 </t>
                                                 <span
@@ -324,7 +324,7 @@
                                             </td>
                                             <td
                                                 t-if="display_discount"
-                                                t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"
+                                                t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"
                                                 style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                             >
                                                 <span
@@ -333,7 +333,7 @@
                                                 />
                                             </td>
                                             <td
-                                                t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"
+                                                t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"
                                                 style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                             >
                                                 <span
@@ -342,7 +342,7 @@
                                                 />
                                             </td>
                                             <td
-                                                class="text-right o_price_total"
+                                                class="text-end o_price_total"
                                                 style="solid; black; padding: 0px; margin: 0px; width:10%; font-size:0.8em; !important;"
                                             >
                                                 <t
@@ -358,7 +358,7 @@
                                                         t-set="subtotal"
                                                         t-value="(subtotal or 0.0) + line_picking_subtotal"
                                                     />
-                                                    <t t-if="o.state in ('out_refund','in_refund')">
+                                                    <t t-if="o.move_type in ('out_refund','in_refund')">
                                                     <span>- </span>
                                                 </t>
                                                     <span
@@ -371,7 +371,7 @@
                                                         t-set="subtotal"
                                                         t-value="(subtotal or 0.0) + l.price_subtotal"
                                                     />
-                                                    <t t-if="o.state in ('out_refund','in_refund')">
+                                                    <t t-if="o.move_type in ('out_refund','in_refund')">
                                                         <span>- </span>
                                                     </t>
 
@@ -391,12 +391,12 @@
                                             <tr t-if="picking != next_picking[0]">
                                                 <td
                                                     colspan="10"
-                                                    class="text-right"
+                                                    class="text-end"
                                                     style="solid; black; padding: 0px; margin: 0px; width:30%; font-size:0.8em; !important;"
                                                 >
                                                     <strong>Subtotal: </strong>
                                                     <strong>
-                                                        <t t-if="o.state in ('out_refund','in_refund')">
+                                                        <t t-if="o.move_type in ('out_refund','in_refund')">
                                                             <span>- </span>
                                                         </t>
                                                     </strong>
@@ -418,30 +418,55 @@
                             <!-- Totales documento -->
                             <div id="total" class="row">
                                 <div
-                                    t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto"
+                                    t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto"
                                 >
                                     <table
                                         class="table table-sm"
                                         style="page-break-inside: avoid;"
                                     >
-                                        <!-- o.tax_totals_json (Char/JSON) ya no existe en Odoo 19,
-                                             ahora es o.tax_totals (Binary, ya deserializado) -->
-                                    <!-- document_format_sylonuba.document_tax_totals reimplementaba a mano la
-                                         estructura antigua de tax_totals y ya no es compatible con
-                                         Odoo 19; se usa directamente el widget generico del core -->
-                                    <t t-call="account.document_tax_totals">
-                                        <t t-set="tax_totals" t-value="o.tax_totals"/>
-                                        <t t-set="currency" t-value="o.currency_id"/>
-                                    </t>
+                                        <!-- Totales como en el 13: Subtotal, un renglon por grupo de impuestos y Total, con el signo
+                                             menos en las rectificativas (el core 19 imprime una caja distinta) -->
+                                        <t t-set="is_refund" t-value="o.move_type in ('out_refund', 'in_refund')"/>
+                                        <tr class="border-black o_subtotal">
+                                            <td style="solid; black; padding: 0px; margin: 0px; !important;">
+                                                <strong>Subtotal</strong>
+                                            </td>
+                                            <td class="text-end" style="solid; black; padding: 0px; margin: 0px; !important;">
+                                                <t t-if="is_refund"><span>- </span></t>
+                                                <span t-field="o.amount_untaxed"/>
+                                            </td>
+                                        </tr>
+                                        <t t-foreach="o.tax_totals.get('subtotals', [])" t-as="tax_subtotal">
+                                            <tr t-foreach="tax_subtotal.get('tax_groups', [])" t-as="tax_group" style="solid; black; padding: 0px; margin: 0px; !important;">
+                                                <td style="solid; black; padding: 0px; margin: 0px; !important;">
+                                                    <span class="text-nowrap" t-esc="tax_group['group_name']"/>
+                                                </td>
+                                                <td class="text-end o_price_total" style="solid; black; padding: 0px; margin: 0px; !important;">
+                                                    <t t-if="is_refund"><span>- </span></t>
+                                                    <span class="text-nowrap" t-esc="tax_group['tax_amount_currency']" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <tr class="border-black o_total">
+                                            <td style="solid; black; padding: 0px; margin: 0px; !important;">
+                                                <strong>Total</strong>
+                                            </td>
+                                            <td class="text-end" style="solid; black; padding: 0px; margin: 0px; !important;">
+                                                <strong>
+                                                    <t t-if="is_refund"><span>- </span></t>
+                                                    <span class="text-nowrap" t-field="o.amount_total"/>
+                                                </strong>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
                             <!-- Fin totales documento -->
                             <!-- Desglose de vencimientos -->
-                            <t t-set="due_list" t-value="o.get_multi_due_list()" />
-                            <div id="duelist" class="row">
+                            <t t-set="due_list" t-value="[d for d in o.get_multi_due_list() if d[2] and o.move_type not in ('out_refund', 'in_refund')]" />
+                            <div id="duelist" class="row" t-if="due_list">
                                 <div
-                                    t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto"
+                                    t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto"
                                 >
                                     <table
                                         class="table table-sm"
@@ -455,7 +480,7 @@
                                             </td>
                                             <td
                                                 style="solid; black; padding: 0px; margin: 0px; !important;"
-                                                class="text-right"
+                                                class="text-end"
                                             >
                                                 <b>Importe</b>
                                             </td>
@@ -470,7 +495,7 @@
                                                 />
                                             </td>
                                             <td
-                                                class="text-right"
+                                                class="text-end"
                                                 style="solid; black; padding: 0px; margin: 0px; !important;"
                                             >
                                                 <span

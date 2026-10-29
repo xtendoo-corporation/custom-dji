@@ -16,7 +16,7 @@
                             <tr style="line-height:10px; margin: 0px 0px 0px 0px;">
                                 <th style="width: 10%"></th>
                                 <th style="width: 30%">Producto</th>
-                                <th style="width: 30%" class="text-right">Unidades</th>
+                                <th style="width: 30%" class="text-end">Unidades</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,6 +69,10 @@
         <field name="report_name">document_format_sylonuba.report_saleorder_line</field>
         <field name="report_file">document_format_sylonuba.report_saleorder_line</field>
         <field name="print_report_name">(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)</field>
+        <!-- En el 13 estaba en el menu Imprimir del pedido de venta -->
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+        <field name="binding_view_types">list,form</field>
     </record>
 
 </odoo>

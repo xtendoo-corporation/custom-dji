@@ -5,8 +5,15 @@ class StockMoveLine(models.Model):
     _inherit = "stock.move.line"
 
     def _compute_expiration_date(self):
-        super()._compute_expiration_date()
-        self.expiration_date = False
+        # Con lote, la linea muestra la caducidad del lote (el core ya lo
+        # hace). Sin lote (recepcion) solo se conserva lo que escriba el
+        # usuario, sin el valor por defecto "hoy + vida util" del core.
+        for line in self:
+            lot = line.quant_id.lot_id or line.lot_id
+            if lot:
+                line.expiration_date = lot.expiration_date
+            else:
+                line.expiration_date = line.expiration_date or False
 
     def _compute_removal_date(self):
         super()._compute_removal_date()

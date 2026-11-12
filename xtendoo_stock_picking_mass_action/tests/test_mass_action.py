@@ -135,3 +135,11 @@ class TestMassAction(BaseCommon):
         self.picking.move_ids[0].quantity = 30
         res = wiz_tranfer.mass_action()
         self.assertEqual(res["res_model"], "stock.backorder.confirmation")
+
+    def test_default_picking_ids_from_context(self):
+        wiz = (
+            self.env["stock.picking.mass.action"]
+            .with_context(active_ids=self.picking.ids)
+            .create({})
+        )
+        self.assertEqual(wiz.picking_ids, self.picking)

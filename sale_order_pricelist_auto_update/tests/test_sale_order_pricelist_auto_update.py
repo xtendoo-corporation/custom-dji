@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 from odoo.exceptions import UserError
 from odoo.tests import Form, tagged
 from odoo.tests.common import TransactionCase
@@ -74,3 +76,34 @@ class TestSaleOrderPricelistAutoUpdate(TransactionCase):
             )
         order.action_confirm()
         self.assertEqual(order.state, "sale")
+
+    def test_price_unit_is_valid_branches(self):
+        order = self._order()
+        line = order.order_line
+        line.price_unit = 1.0
+        self.assertIn("Producto tarifa", line.compute_price_unit_is_valid())
+        line.price_unit = 0.0
+        self.assertIsNone(line.compute_price_unit_is_valid())
+        line.price_unit = 5.0
+        self.assertIsNone(line.compute_price_unit_is_valid())
+        note = self.env["sale.order.line"].create(
+            {"order_id": order.id, "display_type": "line_note", "name": "Nota"}
+        )
+        self.assertIsNone(note.compute_price_unit_is_valid())
+        self.assertFalse(note.is_pricelist_change)
+        self.assertFalse(note._compute_is_pricelist_change_line(3.0))
+
+    def test_pricelist_change_line(self):
+        line = self._order().order_line
+        self.assertTrue(line._compute_is_pricelist_change_line(12.0))
+        self.assertFalse(line._compute_is_pricelist_change_line(10.0))
+
+    def test_pricelist_change_errors_are_ignored(self):
+        line = self._order().order_line
+        with patch.object(
+            type(line), "_get_display_price", side_effect=Exception("boom")
+        ):
+            line.price_unit = 15.0
+            line.flush_recordset()
+            self.assertFalse(line.is_pricelist_change)
+            self.assertFalse(line._compute_is_pricelist_change_line(15.0))

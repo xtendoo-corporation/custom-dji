@@ -1,1 +1,1 @@
-from . import test_sale_order_pricelist_auto_update
+from . import test_sale_order_pricelist_auto_update  # noqa: F401

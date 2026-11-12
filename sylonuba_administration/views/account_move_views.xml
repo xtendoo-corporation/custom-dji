@@ -16,19 +16,6 @@
         </record>
 
 
-        <record id="sylonuba_administration.invoice_form_ihnerit_margin" model="ir.ui.view">
-            <field name="name">account.invoice.form.inherit.margin</field>
-            <field name="model">account.move</field>
-            <field name="inherit_id" ref="account_invoice_margin.invoice_margin_form_tree"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='margin'][1]" position="attributes">
-                    <attribute name="groups">sylonuba_administration.show_margins</attribute>
-                </xpath>
-                <xpath expr="//field[@name='margin_percent'][1]" position="attributes">
-                    <attribute name="groups">sylonuba_administration.show_margins</attribute>
-                </xpath>
-            </field>
-        </record>
         <record id="sylonuba_administration.invoice_form_ihnerit" model="ir.ui.view">
             <field name="name">account.invoice.form.inherit</field>
             <field name="model">account.move</field>

@@ -1,4 +1,4 @@
-from odoo.exceptions import AccessError
+from odoo.exceptions import AccessError  # noqa: F401
 from odoo.tests import TransactionCase, tagged
 
 
@@ -18,7 +18,11 @@ class TestAdministration(TransactionCase):
             }
         )
         cls.otro = cls.env["res.users"].create(
-            {"name": "Otro comercial", "login": "otro_comercial", "group_ids": [(6, 0, [cls.group_user.id, cls.group_invoice.id])]}
+            {
+                "name": "Otro comercial",
+                "login": "otro_comercial",
+                "group_ids": [(6, 0, [cls.group_user.id, cls.group_invoice.id])],
+            }
         )
         cls.partner = cls.env["res.partner"].create({"name": "Cliente"})
 
@@ -52,14 +56,23 @@ class TestAdministration(TransactionCase):
         propias = self.env.ref("sylonuba_administration.own_invoices")
         self.assertEqual(propias.model_id.model, "account.move")
         self.assertIn("invoice_user_id", propias.domain_force)
-        self.assertEqual((propias.perm_read, propias.perm_write, propias.perm_create, propias.perm_unlink), (True, False, False, False))
+        self.assertEqual(
+            (propias.perm_read, propias.perm_write, propias.perm_create, propias.perm_unlink),
+            (True, False, False, False),
+        )
         pagos = self.env.ref("sylonuba_administration.own_payment")
         self.assertEqual(pagos.model_id.model, "account.payment")
         self.assertIn("create_uid", pagos.domain_force)
-        self.assertEqual((pagos.perm_read, pagos.perm_write, pagos.perm_create, pagos.perm_unlink), (True, False, False, False))
+        self.assertEqual(
+            (pagos.perm_read, pagos.perm_write, pagos.perm_create, pagos.perm_unlink),
+            (True, False, False, False),
+        )
         no_crear = self.env.ref("sylonuba_administration.commercials_no_create_invoices")
         self.assertEqual(no_crear.model_id.model, "account.move")
-        self.assertEqual((no_crear.perm_read, no_crear.perm_write, no_crear.perm_create, no_crear.perm_unlink), (False, True, True, True))
+        self.assertEqual(
+            (no_crear.perm_read, no_crear.perm_write, no_crear.perm_create, no_crear.perm_unlink),
+            (False, True, True, True),
+        )
 
     def test_comercial_en_grupo_de_facturacion_ve_todo(self):
         # igual que en la 13: account_move_see_all (grupo de facturación) prevalece sobre Facturas Propias

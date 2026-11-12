@@ -309,11 +309,6 @@
             <field name="group_ids" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
         </record>
 
-        <!-- Facturación / Contabilidad/Clientes/Importar devolución de cobros -->
-        <record id="account_payment_return_import.menu_account_payment_return_import" model="ir.ui.menu">
-            <field name="group_ids" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
-        </record>
-
         <!-- Facturación / Contabilidad/Clientes/Mandatos bancarios -->
         <record id="account_banking_mandate.mandate_menu" model="ir.ui.menu">
             <field name="group_ids" eval="[(6, 0, [ref('account.group_account_manager')])]"/>

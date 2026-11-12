@@ -19,10 +19,8 @@
         'website_sale',
         'account_banking_mandate',
         'account_payment_return',
-        'account_payment_return_import',
         'account_asset_management',
         'sale_commission_oca',
-        'account_invoice_margin',
         # dependencia real, no declarada hasta ahora: sale_order_views.xml
         # hereda una vista de sale_margin sin tenerlo como depends - ha
         # funcionado "por suerte" (orden de carga) hasta que en el salto

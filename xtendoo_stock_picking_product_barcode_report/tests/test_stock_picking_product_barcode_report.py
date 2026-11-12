@@ -1,12 +1,14 @@
 # Copyright 2020 Carlos Roca <carlos.roca@tecnativa.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from unittest.mock import MagicMock, call
+from unittest.mock import MagicMock, call, patch
 
 from odoo import Command
 
 from odoo.addons.base.tests.common import BaseCommon
+from odoo.addons.web.controllers.report import ReportController as WebReportController
 
+from ..controllers import main
 from ..controllers.main import SVGWitoutTextWriter
 
 
@@ -140,3 +142,102 @@ class TestStockPickingProductBarcodeReport(BaseCommon):
             any_order=False,
         )
         writer._group.appendChild.assert_called_once_with(element)
+
+    def test_create_text_is_ignored(self):
+        writer = SVGWitoutTextWriter()
+        writer._group = MagicMock()
+        self.assertIsNone(writer._create_text(1, 2))
+        writer._group.appendChild.assert_not_called()
+
+    def test_report_barcode_gs1_128(self):
+        fake_request = MagicMock()
+        with patch.object(main, "request", fake_request):
+            main.ReportController.report_barcode.original_endpoint(
+                main.ReportController(), "gs1_128", "0101234567890128"
+            )
+        image = fake_request.make_response.call_args.args[0]
+        headers = fake_request.make_response.call_args.kwargs["headers"]
+        self.assertIn(b"<svg", image if isinstance(image, bytes) else image.encode())
+        self.assertEqual(headers, [("Content-Type", "image/svg+xml")])
+
+    def test_report_barcode_other_types_use_core(self):
+        with patch.object(
+            WebReportController, "report_barcode", return_value="core"
+        ) as core_barcode:
+            result = main.ReportController.report_barcode.original_endpoint(
+                main.ReportController(), "EAN13", "1234567890128"
+            )
+        self.assertEqual(result, "core")
+        core_barcode.assert_called_once()
+
+    def test_lang_selection(self):
+        langs = self.env["stock.picking.print"]._get_lang()
+        self.assertIn("en_US", [code for code, _name in langs])
+
+    def test_wizard_from_move_lines(self):
+        move_lines = self.picking.move_line_ids
+        wizard = (
+            self.env["stock.picking.print"]
+            .with_context(active_ids=move_lines.ids, active_model="stock.move.line")
+            .create({})
+        )
+        self.assertEqual(wizard.stock_move_line_ids, move_lines)
+        wizard._onchange_picking_ids()
+        self.assertEqual(len(wizard.product_print_moves), 2)
+
+    def test_wizard_from_lots(self):
+        product = self.env["product.product"].create(
+            {"name": "Lote", "is_storable": True, "tracking": "lot"}
+        )
+        lot = self.env["stock.lot"].create({"name": "L-1", "product_id": product.id})
+        wizard = (
+            self.env["stock.picking.print"]
+            .with_context(active_ids=lot.ids, active_model="stock.lot")
+            .create({})
+        )
+        self.assertEqual(wizard.product_print_moves.lot_id, lot)
+        self.assertEqual(wizard.product_print_moves.product_id, product)
+
+    def test_move_line_to_print_from_context(self):
+        move_line = self.picking.move_line_ids[:1]
+        lines = (
+            self.env["stock.picking.print"]
+            .with_context(stock_move_line_to_print=move_line.id)
+            ._get_move_lines(self.picking)
+        )
+        self.assertEqual(lines, move_line)
+
+    def test_other_report_returns_all_move_lines(self):
+        self.wizard.barcode_report = self.env["ir.actions.report"].search(
+            [("model", "=", "stock.picking")], limit=1
+        )
+        self.assertEqual(
+            self.wizard._get_move_lines(self.picking), self.picking.move_line_ids
+        )
+
+    def test_print_custom_label(self):
+        report = self.env.ref(
+            "xtendoo_stock_picking_product_barcode_report.action_label_barcode_report"
+        )
+        report.is_custom_label = True
+        self.wizard.barcode_report = report
+        self.assertTrue(self.wizard.is_custom_label)
+        action = self.wizard.with_context(discard_logo_check=True).print_labels()
+        self.assertEqual(action["report_name"], report.report_name)
+
+    def test_create_label_print_wiz_from_move_line(self):
+        report = self.env.ref(
+            "xtendoo_stock_picking_product_barcode_report.action_label_barcode_report"
+        )
+        wizard_model = self.env["stock.picking.print"].with_context(
+            force_quantity_line=3.0
+        )
+        wizard = wizard_model.create_label_print_wiz_from_move_line(
+            report.id, self.picking.move_line_ids.ids
+        )
+        self.assertEqual(len(wizard.product_print_moves), 2)
+        self.assertEqual(set(wizard.product_print_moves.mapped("quantity")), {3.0})
+        wizard = wizard_model.create_label_print_wiz_from_move_line(
+            report.id, self.picking.move_line_ids[:1]
+        )
+        self.assertEqual(len(wizard.product_print_moves), 1)

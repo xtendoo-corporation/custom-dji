@@ -46,3 +46,17 @@ class TestStockMoveLine(BaseCommon):
     def test_action_done_with_locked_lot(self):
         with self.assertRaises(exceptions.ValidationError):
             self.move_line._action_done()
+
+    def test_action_done_allowed_location(self):
+        self.location_dest.allow_locked = True
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.location_src, 10, lot_id=self.lot
+        )
+        self.move_line.quantity = 10
+        self.move_line._action_done()
+        self.assertEqual(
+            self.env["stock.quant"]._get_available_quantity(
+                self.product, self.location_dest, lot_id=self.lot, allow_negative=True
+            ),
+            10,
+        )

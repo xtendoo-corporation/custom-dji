@@ -83,3 +83,15 @@ class TestStockLockLot(BaseCommon):
         init_values = {"locked": True}
         subtype = lot._track_subtype(init_values)
         self.assertEqual(subtype, self.env.ref("xtendoo_stock_lock_lot.mt_unlock_lot"))
+
+    def test_locked_by_parent_category(self):
+        child = self.env["product.category"].create(
+            {"name": "Child", "parent_id": self.category.id, "lot_default_locked": False}
+        )
+        self.product.categ_id = child
+        lot = self.env["stock.lot"].create(self._get_lot_default_vals())
+        self.assertTrue(lot.locked)
+
+    def test_track_subtype_other_fields(self):
+        lot = self.env["stock.lot"].create(self._get_lot_default_vals())
+        self.assertFalse(lot._track_subtype({"name": "Old"}))

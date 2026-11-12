@@ -90,3 +90,32 @@ class TestStockPickingScrapQuick(TransactionCase):
         wiz = self._create_scrap_wizard()
         scraps = wiz.create_scrap()
         self.assertEqual(len(scraps), 1)
+
+    def test_button_whole_scrap_action(self):
+        action = self.picking.button_whole_scrap()
+        self.assertEqual(action["res_model"], "wiz.stock.picking.scrap")
+        self.assertEqual(action["context"]["default_picking_id"], self.picking.id)
+
+    def test_scrap_several_pickings_not_allowed(self):
+        wizard_model = self.env["wiz.stock.picking.scrap"].with_context(
+            active_ids=[self.picking.id, self.picking.id + 1]
+        )
+        with self.assertRaises(UserError):
+            wizard_model.default_get(["line_ids"])
+
+    def test_default_scrap_location_and_skip_scrapped_lines(self):
+        self.picking.action_assign()
+        self.picking.move_line_ids.quantity = 2.0
+        self.picking.button_validate()
+        scraps = self._create_scrap_wizard().create_scrap()
+        scraps.move_ids.move_line_ids.picking_id = self.picking
+        defaults = (
+            self.env["wiz.stock.picking.scrap"]
+            .with_context(active_id=self.picking.id)
+            .default_get(["line_ids", "scrap_location_id"])
+        )
+        self.assertTrue(defaults["scrap_location_id"])
+        scrapped_lines = self.picking.move_line_ids.filtered("move_id.scrap_id")
+        self.assertTrue(scrapped_lines)
+        line_ids = [vals[2]["move_line_id"] for vals in defaults["line_ids"]]
+        self.assertFalse(set(scrapped_lines.ids) & set(line_ids))

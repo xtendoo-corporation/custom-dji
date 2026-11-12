@@ -1,7 +1,7 @@
 {
     'name': 'Sale order delivery and invoice',
     'summary': """Sale order delivery and invoice""",
-    'version': '18.0.1.0.0',
+    'version': '19.0.1.0.0',
     'description': """Sale order delivery and invoice""",
     'author': 'Camilo',
     'company': 'Xtendoo',
@@ -10,6 +10,7 @@
     'depends': [
         'base',
         'sale_management',
+        'sale_stock',
     ],
     'license': 'AGPL-3',
     'data': [

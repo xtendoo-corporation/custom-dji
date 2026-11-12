@@ -119,3 +119,23 @@ class TestCostMethodLast(TestStockValuationCommon):
         self._make_in_move(self.product_last, 10, unit_cost=5.0)
         self._make_in_move(self.product_last, 10, unit_cost=8.0)
         self.assertAlmostEqual(self.product_last._run_fifo(4), 32.0)
+
+    def test_delivery_without_move_at_date(self):
+        now = fields.Datetime.now()
+        move = self._make_in_move(self.product_last, 10, unit_cost=5.0)
+        self._set_date(move, fields.Datetime.subtract(now, days=2))
+        self._make_in_move(self.product_last, 10, unit_cost=8.0)
+        at_date = fields.Datetime.subtract(now, days=1)
+        self.assertAlmostEqual(self.product_last._run_fifo(4, at_date=at_date), 20.0)
+        before_any = fields.Datetime.subtract(now, days=5)
+        self.assertAlmostEqual(
+            self.product_last._run_fifo(4, at_date=before_any),
+            4 * self.product_last.standard_price,
+        )
+
+    def test_moves_without_valued_quantity_are_skipped(self):
+        move = self._make_in_move(self.product_last, 10, unit_cost=5.0)
+        move.product_id.standard_price = 2.0
+        move.quantity = 0.0
+        move._update_standard_price_last()
+        self.assertAlmostEqual(self.product_last.standard_price, 2.0)

@@ -19,11 +19,9 @@ class StockPicking(models.Model):
                     picking.pic_name = alb_ids.name
 
                 else:
-                    i = 0
-                    for pic_id in pic_ids:
+                    for index, pic_id in enumerate(pic_ids[: len(alb_ids)]):
                         if pic_id.name == picking.name:
-                            picking.pic_name = alb_ids[i].name
-                    i += 1
+                            picking.pic_name = alb_ids[index].name
             if not picking.pic_name:
                 picking.pic_name = picking.name
 

@@ -1,7 +1,7 @@
 # Copyright 2020 Xtendoo - Manuel Calero
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class StockReturnPicking(models.TransientModel):
@@ -10,8 +10,8 @@ class StockReturnPicking(models.TransientModel):
     @api.model
     def _prepare_stock_return_picking_line_vals_from_move(self, stock_move):
         val = super()._prepare_stock_return_picking_line_vals_from_move(stock_move)
-        if len(stock_move.move_line_ids) == 1 and stock_move.move_line_ids[:1].lot_id:
-            val["lot_id"] = stock_move.move_line_ids[:1].lot_id
+        if len(stock_move.move_line_ids) == 1 and stock_move.move_line_ids.lot_id:
+            val["lot_id"] = stock_move.move_line_ids.lot_id.id
         # v18+ propone 0 por defecto; DJI quiere la cantidad pendiente de
         # devolver, como en v15 (mismo calculo que action_create_returns_all)
         if stock_move.state != "cancel" and stock_move.location_dest_usage != "inventory":
@@ -22,39 +22,27 @@ class StockReturnPicking(models.TransientModel):
             val["quantity"] = max(stock_move.product_uom.round(quantity), 0)
         return val
 
-    def _create_returns(self):
-        res = super()._create_returns()
-        stock_moves = self.env['stock.move']
-        stock_move_line = self.env['stock.move.line']
-        pick_id = self.env['stock.picking'].browse(res[0])
-        for move in pick_id.mapped('move_lines').filtered(
-            lambda x: x.state == 'assigned' and x.origin_returned_move_id and x.product_id.tracking == 'lot'):
-            if len(move.origin_returned_move_id.move_line_ids) == 1:
-                move.move_line_ids.unlink()
-                qty = move.product_uom_qty
-                line = move.origin_returned_move_id.move_line_ids
-                qty_todo = min(qty, line.qty_done)
-                vals = move._prepare_move_line_vals(qty_todo)
-                val = {'picking_id': vals['picking_id'],
-                       'product_id': vals['product_id'],
-                       'move_id': move.id,
-                       'location_id': vals['location_id'],
-                       'location_dest_id': vals['location_dest_id'],
-                       'qty_done': qty_todo,
-                       'product_uom_id': vals['product_uom_id'],
-                       'lot_id': line.lot_id and line.lot_id.id or False,
-                       'lot_name': line.lot_id and line.lot_id.name or False}
-                stock_move_line.create(val)
-            stock_moves |= move
-        if stock_moves:
-            stock_moves.write({'state': 'assigned'})
-        pick_id.action_assign()
-        return res
+    def _create_return(self):
+        """Reserve the returned lot on lot-tracked moves that come from a
+        single lot, so the return is ready to validate."""
+        new_picking = super()._create_return()
+        moves = new_picking.move_ids.filtered(
+            lambda move: move.state == "assigned"
+            and move.product_id.tracking == "lot"
+            and len(move.origin_returned_move_id.move_line_ids) == 1
+        )
+        for move in moves:
+            origin_line = move.origin_returned_move_id.move_line_ids
+            move.move_line_ids.unlink()
+            vals = move._prepare_move_line_vals(
+                quantity=min(move.product_uom_qty, origin_line.quantity)
+            )
+            vals["lot_id"] = origin_line.lot_id.id
+            self.env["stock.move.line"].create(vals)
+        return new_picking
 
 
 class ReturnPickingLine(models.TransientModel):
     _inherit = "stock.return.picking.line"
 
-    lot_id = fields.Many2one(
-        comodel_name="stock.lot"
-    )
+    lot_id = fields.Many2one(comodel_name="stock.lot")

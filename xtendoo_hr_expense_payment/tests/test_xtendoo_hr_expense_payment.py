@@ -230,3 +230,12 @@ class TestHrExpensePayment(TestExpenseCommon):
         if payment:
             self.assertFalse(payment.reconciled_expense_ids)
             self.assertIn(expense, payment.expense_ids)
+
+    def test_search_unsupported_operator(self):
+        self.assertIs(
+            self.env["hr.expense"]._search_payment_ids("ilike", "x"), NotImplemented
+        )
+        self.assertIs(
+            self.env["account.payment"]._search_reconciled_expense_ids("ilike", "x"),
+            NotImplemented,
+        )

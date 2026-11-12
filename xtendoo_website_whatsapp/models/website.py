@@ -29,8 +29,6 @@ class Website(models.Model):
         url = f"{base_url} {httprequest_full_path}"
         parsed_url = urlparse(url)
         cleaned_url = urlunparse(parsed_url._replace(query=""))
-        if self.whatsapp_track_url:
-            whatsapp_track_url_text = (
-                f"{self.whatsapp_text} %0A%0A*{sent_from} {cleaned_url}*"
-            )
-        return whatsapp_track_url_text
+        if not self.whatsapp_track_url:
+            return self.whatsapp_text
+        return f"{self.whatsapp_text} %0A%0A*{sent_from} {cleaned_url}*"

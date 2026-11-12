@@ -4,18 +4,8 @@
 import {registry} from "@web/core/registry";
 
 registry.category("web_tour.tours").add("web_pivot_computed_measure_tour", {
-    url: "/odoo",
-    test: true,
+    url: "/odoo/action-xtendoo_web_pivot_computed_measure.demo_action_res_partner_report_pivot",
     steps: () => [
-        {
-            trigger: ".o_navbar_apps_menu button",
-            run: "click",
-        },
-        {
-            trigger:
-                '.o_app[data-menu-xmlid="xtendoo_web_pivot_computed_measure.demo_menu_res_partner_report_pivot"]:visible',
-            run: "click",
-        },
         {
             trigger: '.o_pivot_buttons div[aria-label="Main actions"] button',
             run: "click",
@@ -26,27 +16,19 @@ registry.category("web_tour.tours").add("web_pivot_computed_measure_tour", {
         },
         {
             trigger: "select#computed_measure_field_1",
-            run() {
-                this.anchor.value = "partner_latitude";
-            },
+            run: "select partner_latitude",
         },
         {
             trigger: "select#computed_measure_field_2",
-            run() {
-                this.anchor.value = "partner_longitude";
-            },
+            run: "select partner_longitude",
         },
         {
             trigger: "select#computed_measure_operation",
-            run() {
-                this.anchor.value = "m1+m2";
-            },
+            run: "select m1+m2",
         },
         {
             trigger: "select#computed_measure_format",
-            run() {
-                this.anchor.value = "float";
-            },
+            run: "select float",
         },
         {
             trigger: "button.o_add_computed_measure",

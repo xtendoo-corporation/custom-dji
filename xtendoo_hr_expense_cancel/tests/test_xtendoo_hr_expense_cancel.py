@@ -20,13 +20,15 @@ class TestHrExpenseCancel(TestExpenseCommon):
         if cls.expense.state == "submitted":
             cls.expense.action_approve()
 
-    def _get_payment_wizard(self):
+    def _get_payment_wizard(self, amount=None):
         action = self.expense.action_pay()
         wizard_form = Form(
             self.env[action["res_model"]].with_context(**action["context"])
         )
         wizard_form.journal_id = self.company_data["default_journal_bank"]
-        wizard_form.amount = self.expense.total_amount
+        wizard_form.amount = amount or self.expense.total_amount
+        if amount:
+            wizard_form.payment_difference_handling = "open"
         return wizard_form.save()
 
     def test_action_reset_unposted(self):
@@ -53,6 +55,28 @@ class TestHrExpenseCancel(TestExpenseCommon):
         wizard.action_create_payments()
         payments = self.expense.account_move_id.reconciled_payment_ids
         self.assertTrue(payments)
+        self.expense.action_reset()
+        self.assertEqual(set(payments.mapped("state")), {"canceled"})
+        self.assertEqual(self.expense.state, "draft")
+
+    def test_action_reset_unreconciles_payment_with_move(self):
+        """With an outstanding account a partial payment has a journal entry
+        partially reconciled with the expense move; reset unreconciles it."""
+        outstanding = self.env["account.account"].create(
+            {
+                "name": "Pagos pendientes",
+                "code": "572999",
+                "account_type": "asset_current",
+                "reconcile": True,
+            }
+        )
+        bank = self.company_data["default_journal_bank"]
+        bank.outbound_payment_method_line_ids.payment_account_id = outstanding
+        self.post_expenses_with_wizard(self.expense)
+        self._get_payment_wizard(self.expense.total_amount / 2).action_create_payments()
+        payments = self.expense.account_move_id.reconciled_payment_ids
+        self.assertTrue(payments.move_id)
+        self.assertFalse(self.expense.account_move_id.line_ids.full_reconcile_id)
         self.expense.action_reset()
         self.assertEqual(set(payments.mapped("state")), {"canceled"})
         self.assertEqual(self.expense.state, "draft")

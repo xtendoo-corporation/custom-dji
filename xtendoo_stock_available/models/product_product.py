@@ -18,11 +18,11 @@ class ProductProduct(models.Model):
 
     def _compute_available_quantities_dict(self):
         stock_dict = self._compute_quantities_dict(
-            self._context.get("lot_id"),
-            self._context.get("owner_id"),
-            self._context.get("package_id"),
-            self._context.get("from_date"),
-            self._context.get("to_date"),
+            self.env.context.get("lot_id"),
+            self.env.context.get("owner_id"),
+            self.env.context.get("package_id"),
+            self.env.context.get("from_date"),
+            self.env.context.get("to_date"),
         )
         res = {}
         for product in self:
@@ -68,7 +68,7 @@ class ProductProduct(models.Model):
     )
 
     def _get_search_immediately_usable_qty_domain(self):
-        return [("type", "=", "product")]
+        return [("is_storable", "=", True)]
 
     @api.model
     def _search_immediately_usable_qty(self, operator, value):

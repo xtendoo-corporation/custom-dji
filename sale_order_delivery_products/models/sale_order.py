@@ -26,10 +26,7 @@ class SaleOrder(models.Model):
         # choose the view_mode accordingly
         res = self.env.ref("stock.view_picking_form", False)
         form_view = [(res and res.id or False, "form")]
-        if "views" in result:
-            result["views"] = form_view + [
-                (state, view) for state, view in result["views"] if view != "form"
-            ]
-        else:
-            result["views"] = form_view
+        result["views"] = form_view + [
+            (state, view) for state, view in result.get("views", []) if view != "form"
+        ]
         return result

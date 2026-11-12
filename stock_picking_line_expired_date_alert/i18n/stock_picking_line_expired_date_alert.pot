@@ -16,11 +16,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_picking_line_expired_date_alert
-#: model:ir.model.fields,field_description:stock_picking_line_expired_date_alert.field_stock_move_line__is_expired
-msgid "Is expired"
-msgstr ""
-
-#. module: stock_picking_line_expired_date_alert
 #: code:addons/stock_picking_line_expired_date_alert/models/stock_picking.py:0
 #, python-format
 msgid "Product %s with lot %s is expired.\n"

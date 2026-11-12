@@ -62,3 +62,8 @@ class TestProductFormMoveWaitingLink(TransactionCase):
         for model in ("product.product", "product.template"):
             arch = self.env[model].get_view(view_type="form")["arch"]
             self.assertIn("move_product_qty", arch)
+
+    def test_new_product_without_id_has_zero_quantity(self):
+        product = self.env["product.product"].new({"name": "Nuevo"})
+        product._compute_picking_waiting_product_qty()
+        self.assertEqual(product.move_product_qty, 0.0)

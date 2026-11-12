@@ -7,7 +7,7 @@
     "company": "Xtendoo",
     "website": "https://xtendoo.es",
     "category": "Extra Tools",
-    "depends": ["sale",],
+    "depends": ["sale_stock"],
     "license": "AGPL-3",
     "data": [
         "views/stock_picking.xml",

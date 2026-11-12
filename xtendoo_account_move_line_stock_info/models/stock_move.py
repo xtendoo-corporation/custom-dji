@@ -13,12 +13,8 @@ class StockMove(models.Model):
         copy=False,
     )
 
-    def _prepare_account_move_line(
-        self, qty, cost, credit_account_id, debit_account_id, svl_id, description
-    ):
-        res = super()._prepare_account_move_line(
-            qty, cost, credit_account_id, debit_account_id, svl_id, description
-        )
-        for line in res:
-            line[2]["stock_move_id"] = self.id
-        return res
+    def _get_account_move_line_vals(self):
+        vals_list = super()._get_account_move_line_vals()
+        for vals in vals_list:
+            vals["stock_move_id"] = self.id
+        return vals_list

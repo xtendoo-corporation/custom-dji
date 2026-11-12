@@ -21,9 +21,8 @@ class ProductProduct(models.Model):
 
     @api.onchange('standard_price')
     def onchange_standard_price(self):
-        product_template = self.env['product.template'].search([('id', '=', self.id)])
-        if product_template.standard_price != self.standard_price:
-            product_template._set_standard_price_template()
+        if self.product_tmpl_id.standard_price != self.standard_price:
+            self._set_standard_price_template()
 
 
     def _set_standard_price_template(self):
